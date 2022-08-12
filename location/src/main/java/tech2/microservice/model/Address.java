@@ -15,6 +15,7 @@ import java.io.Serializable;
 @ToString(onlyExplicitlyIncluded = true)
 public class Address {
     @EmbeddedId
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private AddressKey id;
 
     @ManyToOne(fetch = FetchType.LAZY)
