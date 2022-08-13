@@ -113,8 +113,8 @@ public final class LocationOuterClass {
       "dressRequest\032&.tech2.microservice.getAdd" +
       "ressResponse\"\000\022f\n\rupdateAddress\022(.tech2." +
       "microservice.updateAddressRequest\032).tech" +
-      "2.microservice.updateAddressResponse\"\000B\002" +
-      "P\001b\006proto3"
+      "2.microservice.updateAddressResponse\"\000B\021" +
+      "P\001Z\r./internal/pbb\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
