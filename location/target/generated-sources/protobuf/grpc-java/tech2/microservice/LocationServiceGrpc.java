@@ -155,6 +155,38 @@ public final class LocationServiceGrpc {
      return getUpdateAddressMethod;
   }
 
+  private static volatile io.grpc.MethodDescriptor<tech2.microservice.updateLocationRequest,
+      tech2.microservice.updateLocationResponse> getUpdateLocationMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "updateLocation",
+      requestType = tech2.microservice.updateLocationRequest.class,
+      responseType = tech2.microservice.updateLocationResponse.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<tech2.microservice.updateLocationRequest,
+      tech2.microservice.updateLocationResponse> getUpdateLocationMethod() {
+    io.grpc.MethodDescriptor<tech2.microservice.updateLocationRequest, tech2.microservice.updateLocationResponse> getUpdateLocationMethod;
+    if ((getUpdateLocationMethod = LocationServiceGrpc.getUpdateLocationMethod) == null) {
+      synchronized (LocationServiceGrpc.class) {
+        if ((getUpdateLocationMethod = LocationServiceGrpc.getUpdateLocationMethod) == null) {
+          LocationServiceGrpc.getUpdateLocationMethod = getUpdateLocationMethod = 
+              io.grpc.MethodDescriptor.<tech2.microservice.updateLocationRequest, tech2.microservice.updateLocationResponse>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(
+                  "tech2.microservice.LocationService", "updateLocation"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  tech2.microservice.updateLocationRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  tech2.microservice.updateLocationResponse.getDefaultInstance()))
+                  .setSchemaDescriptor(new LocationServiceMethodDescriptorSupplier("updateLocation"))
+                  .build();
+          }
+        }
+     }
+     return getUpdateLocationMethod;
+  }
+
   /**
    * Creates a new async stub that supports all call types for the service
    */
@@ -213,6 +245,13 @@ public final class LocationServiceGrpc {
       asyncUnimplementedUnaryCall(getUpdateAddressMethod(), responseObserver);
     }
 
+    /**
+     */
+    public void updateLocation(tech2.microservice.updateLocationRequest request,
+        io.grpc.stub.StreamObserver<tech2.microservice.updateLocationResponse> responseObserver) {
+      asyncUnimplementedUnaryCall(getUpdateLocationMethod(), responseObserver);
+    }
+
     @java.lang.Override public final io.grpc.ServerServiceDefinition bindService() {
       return io.grpc.ServerServiceDefinition.builder(getServiceDescriptor())
           .addMethod(
@@ -243,6 +282,13 @@ public final class LocationServiceGrpc {
                 tech2.microservice.updateAddressRequest,
                 tech2.microservice.updateAddressResponse>(
                   this, METHODID_UPDATE_ADDRESS)))
+          .addMethod(
+            getUpdateLocationMethod(),
+            asyncUnaryCall(
+              new MethodHandlers<
+                tech2.microservice.updateLocationRequest,
+                tech2.microservice.updateLocationResponse>(
+                  this, METHODID_UPDATE_LOCATION)))
           .build();
     }
   }
@@ -299,6 +345,14 @@ public final class LocationServiceGrpc {
       asyncUnaryCall(
           getChannel().newCall(getUpdateAddressMethod(), getCallOptions()), request, responseObserver);
     }
+
+    /**
+     */
+    public void updateLocation(tech2.microservice.updateLocationRequest request,
+        io.grpc.stub.StreamObserver<tech2.microservice.updateLocationResponse> responseObserver) {
+      asyncUnaryCall(
+          getChannel().newCall(getUpdateLocationMethod(), getCallOptions()), request, responseObserver);
+    }
   }
 
   /**
@@ -348,6 +402,13 @@ public final class LocationServiceGrpc {
     public tech2.microservice.updateAddressResponse updateAddress(tech2.microservice.updateAddressRequest request) {
       return blockingUnaryCall(
           getChannel(), getUpdateAddressMethod(), getCallOptions(), request);
+    }
+
+    /**
+     */
+    public tech2.microservice.updateLocationResponse updateLocation(tech2.microservice.updateLocationRequest request) {
+      return blockingUnaryCall(
+          getChannel(), getUpdateLocationMethod(), getCallOptions(), request);
     }
   }
 
@@ -403,12 +464,21 @@ public final class LocationServiceGrpc {
       return futureUnaryCall(
           getChannel().newCall(getUpdateAddressMethod(), getCallOptions()), request);
     }
+
+    /**
+     */
+    public com.google.common.util.concurrent.ListenableFuture<tech2.microservice.updateLocationResponse> updateLocation(
+        tech2.microservice.updateLocationRequest request) {
+      return futureUnaryCall(
+          getChannel().newCall(getUpdateLocationMethod(), getCallOptions()), request);
+    }
   }
 
   private static final int METHODID_GET_ADDRESS = 0;
   private static final int METHODID_GET_ADDRESS_LIST = 1;
   private static final int METHODID_CREATE_ADDRESS = 2;
   private static final int METHODID_UPDATE_ADDRESS = 3;
+  private static final int METHODID_UPDATE_LOCATION = 4;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -442,6 +512,10 @@ public final class LocationServiceGrpc {
         case METHODID_UPDATE_ADDRESS:
           serviceImpl.updateAddress((tech2.microservice.updateAddressRequest) request,
               (io.grpc.stub.StreamObserver<tech2.microservice.updateAddressResponse>) responseObserver);
+          break;
+        case METHODID_UPDATE_LOCATION:
+          serviceImpl.updateLocation((tech2.microservice.updateLocationRequest) request,
+              (io.grpc.stub.StreamObserver<tech2.microservice.updateLocationResponse>) responseObserver);
           break;
         default:
           throw new AssertionError();
@@ -508,6 +582,7 @@ public final class LocationServiceGrpc {
               .addMethod(getGetAddressListMethod())
               .addMethod(getCreateAddressMethod())
               .addMethod(getUpdateAddressMethod())
+              .addMethod(getUpdateLocationMethod())
               .build();
         }
       }

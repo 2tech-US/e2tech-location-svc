@@ -1,6 +1,5 @@
 package tech2.microservice.ultis;
 
-import org.springframework.stereotype.Component;
 import tech2.microservice.Address;
 import tech2.microservice.Location;
 import tech2.microservice.LocationKey;
@@ -19,7 +18,7 @@ public class ProtobufModelMapping {
 
     public static Location grpcLocationMapping(tech2.microservice.model.Location location) {
         return Location.newBuilder().setLatitude(location.getId().getLatitude()).setLongitude(
-                location.getId().getLongitude()).build();
+                location.getId().getLongitude()).setCount(location.getCount()).build();
     }
 
     public static Address grpcAddressMapping(tech2.microservice.model.Address address) {

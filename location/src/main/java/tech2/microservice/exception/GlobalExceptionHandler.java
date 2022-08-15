@@ -13,6 +13,6 @@ public class GlobalExceptionHandler {
 
     @GrpcExceptionHandler
     public Status handleDuplicateResourceException(DuplicateResourceException e) {
-        return Status.NOT_FOUND.withDescription("Not Found " + e.getMessage());
+        return Status.ALREADY_EXISTS.withDescription("Not Found " + e.getMessage());
     }
 }

@@ -4,21 +4,20 @@
 package tech2.microservice;
 
 /**
- * Protobuf type {@code tech2.microservice.getListAddressResponse}
+ * Protobuf type {@code tech2.microservice.updateLocationResponse}
  */
-public  final class getListAddressResponse extends
+public  final class updateLocationResponse extends
     com.google.protobuf.GeneratedMessageV3 implements
-    // @@protoc_insertion_point(message_implements:tech2.microservice.getListAddressResponse)
-    getListAddressResponseOrBuilder {
+    // @@protoc_insertion_point(message_implements:tech2.microservice.updateLocationResponse)
+    updateLocationResponseOrBuilder {
 private static final long serialVersionUID = 0L;
-  // Use getListAddressResponse.newBuilder() to construct.
-  private getListAddressResponse(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+  // Use updateLocationResponse.newBuilder() to construct.
+  private updateLocationResponse(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
     super(builder);
   }
-  private getListAddressResponse() {
+  private updateLocationResponse() {
     status_ = 0L;
     error_ = "";
-    result_ = com.google.protobuf.LazyStringArrayList.EMPTY;
   }
 
   @java.lang.Override
@@ -26,7 +25,7 @@ private static final long serialVersionUID = 0L;
   getUnknownFields() {
     return this.unknownFields;
   }
-  private getListAddressResponse(
+  private updateLocationResponse(
       com.google.protobuf.CodedInputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
@@ -57,12 +56,16 @@ private static final long serialVersionUID = 0L;
             break;
           }
           case 26: {
-            java.lang.String s = input.readStringRequireUtf8();
-            if (!((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
-              result_ = new com.google.protobuf.LazyStringArrayList();
-              mutable_bitField0_ |= 0x00000004;
+            tech2.microservice.Location.Builder subBuilder = null;
+            if (location_ != null) {
+              subBuilder = location_.toBuilder();
             }
-            result_.add(s);
+            location_ = input.readMessage(tech2.microservice.Location.parser(), extensionRegistry);
+            if (subBuilder != null) {
+              subBuilder.mergeFrom(location_);
+              location_ = subBuilder.buildPartial();
+            }
+
             break;
           }
           default: {
@@ -80,27 +83,23 @@ private static final long serialVersionUID = 0L;
       throw new com.google.protobuf.InvalidProtocolBufferException(
           e).setUnfinishedMessage(this);
     } finally {
-      if (((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
-        result_ = result_.getUnmodifiableView();
-      }
       this.unknownFields = unknownFields.build();
       makeExtensionsImmutable();
     }
   }
   public static final com.google.protobuf.Descriptors.Descriptor
       getDescriptor() {
-    return tech2.microservice.LocationOuterClass.internal_static_tech2_microservice_getListAddressResponse_descriptor;
+    return tech2.microservice.LocationOuterClass.internal_static_tech2_microservice_updateLocationResponse_descriptor;
   }
 
   @java.lang.Override
   protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internalGetFieldAccessorTable() {
-    return tech2.microservice.LocationOuterClass.internal_static_tech2_microservice_getListAddressResponse_fieldAccessorTable
+    return tech2.microservice.LocationOuterClass.internal_static_tech2_microservice_updateLocationResponse_fieldAccessorTable
         .ensureFieldAccessorsInitialized(
-            tech2.microservice.getListAddressResponse.class, tech2.microservice.getListAddressResponse.Builder.class);
+            tech2.microservice.updateLocationResponse.class, tech2.microservice.updateLocationResponse.Builder.class);
   }
 
-  private int bitField0_;
   public static final int STATUS_FIELD_NUMBER = 1;
   private long status_;
   /**
@@ -144,33 +143,25 @@ private static final long serialVersionUID = 0L;
     }
   }
 
-  public static final int RESULT_FIELD_NUMBER = 3;
-  private com.google.protobuf.LazyStringList result_;
+  public static final int LOCATION_FIELD_NUMBER = 3;
+  private tech2.microservice.Location location_;
   /**
-   * <code>repeated string result = 3;</code>
+   * <code>.tech2.microservice.Location location = 3;</code>
    */
-  public com.google.protobuf.ProtocolStringList
-      getResultList() {
-    return result_;
+  public boolean hasLocation() {
+    return location_ != null;
   }
   /**
-   * <code>repeated string result = 3;</code>
+   * <code>.tech2.microservice.Location location = 3;</code>
    */
-  public int getResultCount() {
-    return result_.size();
+  public tech2.microservice.Location getLocation() {
+    return location_ == null ? tech2.microservice.Location.getDefaultInstance() : location_;
   }
   /**
-   * <code>repeated string result = 3;</code>
+   * <code>.tech2.microservice.Location location = 3;</code>
    */
-  public java.lang.String getResult(int index) {
-    return result_.get(index);
-  }
-  /**
-   * <code>repeated string result = 3;</code>
-   */
-  public com.google.protobuf.ByteString
-      getResultBytes(int index) {
-    return result_.getByteString(index);
+  public tech2.microservice.LocationOrBuilder getLocationOrBuilder() {
+    return getLocation();
   }
 
   private byte memoizedIsInitialized = -1;
@@ -193,8 +184,8 @@ private static final long serialVersionUID = 0L;
     if (!getErrorBytes().isEmpty()) {
       com.google.protobuf.GeneratedMessageV3.writeString(output, 2, error_);
     }
-    for (int i = 0; i < result_.size(); i++) {
-      com.google.protobuf.GeneratedMessageV3.writeString(output, 3, result_.getRaw(i));
+    if (location_ != null) {
+      output.writeMessage(3, getLocation());
     }
     unknownFields.writeTo(output);
   }
@@ -212,13 +203,9 @@ private static final long serialVersionUID = 0L;
     if (!getErrorBytes().isEmpty()) {
       size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, error_);
     }
-    {
-      int dataSize = 0;
-      for (int i = 0; i < result_.size(); i++) {
-        dataSize += computeStringSizeNoTag(result_.getRaw(i));
-      }
-      size += dataSize;
-      size += 1 * getResultList().size();
+    if (location_ != null) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeMessageSize(3, getLocation());
     }
     size += unknownFields.getSerializedSize();
     memoizedSize = size;
@@ -230,18 +217,21 @@ private static final long serialVersionUID = 0L;
     if (obj == this) {
      return true;
     }
-    if (!(obj instanceof tech2.microservice.getListAddressResponse)) {
+    if (!(obj instanceof tech2.microservice.updateLocationResponse)) {
       return super.equals(obj);
     }
-    tech2.microservice.getListAddressResponse other = (tech2.microservice.getListAddressResponse) obj;
+    tech2.microservice.updateLocationResponse other = (tech2.microservice.updateLocationResponse) obj;
 
     boolean result = true;
     result = result && (getStatus()
         == other.getStatus());
     result = result && getError()
         .equals(other.getError());
-    result = result && getResultList()
-        .equals(other.getResultList());
+    result = result && (hasLocation() == other.hasLocation());
+    if (hasLocation()) {
+      result = result && getLocation()
+          .equals(other.getLocation());
+    }
     result = result && unknownFields.equals(other.unknownFields);
     return result;
   }
@@ -258,78 +248,78 @@ private static final long serialVersionUID = 0L;
         getStatus());
     hash = (37 * hash) + ERROR_FIELD_NUMBER;
     hash = (53 * hash) + getError().hashCode();
-    if (getResultCount() > 0) {
-      hash = (37 * hash) + RESULT_FIELD_NUMBER;
-      hash = (53 * hash) + getResultList().hashCode();
+    if (hasLocation()) {
+      hash = (37 * hash) + LOCATION_FIELD_NUMBER;
+      hash = (53 * hash) + getLocation().hashCode();
     }
     hash = (29 * hash) + unknownFields.hashCode();
     memoizedHashCode = hash;
     return hash;
   }
 
-  public static tech2.microservice.getListAddressResponse parseFrom(
+  public static tech2.microservice.updateLocationResponse parseFrom(
       java.nio.ByteBuffer data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static tech2.microservice.getListAddressResponse parseFrom(
+  public static tech2.microservice.updateLocationResponse parseFrom(
       java.nio.ByteBuffer data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static tech2.microservice.getListAddressResponse parseFrom(
+  public static tech2.microservice.updateLocationResponse parseFrom(
       com.google.protobuf.ByteString data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static tech2.microservice.getListAddressResponse parseFrom(
+  public static tech2.microservice.updateLocationResponse parseFrom(
       com.google.protobuf.ByteString data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static tech2.microservice.getListAddressResponse parseFrom(byte[] data)
+  public static tech2.microservice.updateLocationResponse parseFrom(byte[] data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static tech2.microservice.getListAddressResponse parseFrom(
+  public static tech2.microservice.updateLocationResponse parseFrom(
       byte[] data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static tech2.microservice.getListAddressResponse parseFrom(java.io.InputStream input)
+  public static tech2.microservice.updateLocationResponse parseFrom(java.io.InputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseWithIOException(PARSER, input);
   }
-  public static tech2.microservice.getListAddressResponse parseFrom(
+  public static tech2.microservice.updateLocationResponse parseFrom(
       java.io.InputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseWithIOException(PARSER, input, extensionRegistry);
   }
-  public static tech2.microservice.getListAddressResponse parseDelimitedFrom(java.io.InputStream input)
+  public static tech2.microservice.updateLocationResponse parseDelimitedFrom(java.io.InputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseDelimitedWithIOException(PARSER, input);
   }
-  public static tech2.microservice.getListAddressResponse parseDelimitedFrom(
+  public static tech2.microservice.updateLocationResponse parseDelimitedFrom(
       java.io.InputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
   }
-  public static tech2.microservice.getListAddressResponse parseFrom(
+  public static tech2.microservice.updateLocationResponse parseFrom(
       com.google.protobuf.CodedInputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseWithIOException(PARSER, input);
   }
-  public static tech2.microservice.getListAddressResponse parseFrom(
+  public static tech2.microservice.updateLocationResponse parseFrom(
       com.google.protobuf.CodedInputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
@@ -342,7 +332,7 @@ private static final long serialVersionUID = 0L;
   public static Builder newBuilder() {
     return DEFAULT_INSTANCE.toBuilder();
   }
-  public static Builder newBuilder(tech2.microservice.getListAddressResponse prototype) {
+  public static Builder newBuilder(tech2.microservice.updateLocationResponse prototype) {
     return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
   }
   @java.lang.Override
@@ -358,26 +348,26 @@ private static final long serialVersionUID = 0L;
     return builder;
   }
   /**
-   * Protobuf type {@code tech2.microservice.getListAddressResponse}
+   * Protobuf type {@code tech2.microservice.updateLocationResponse}
    */
   public static final class Builder extends
       com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-      // @@protoc_insertion_point(builder_implements:tech2.microservice.getListAddressResponse)
-      tech2.microservice.getListAddressResponseOrBuilder {
+      // @@protoc_insertion_point(builder_implements:tech2.microservice.updateLocationResponse)
+      tech2.microservice.updateLocationResponseOrBuilder {
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return tech2.microservice.LocationOuterClass.internal_static_tech2_microservice_getListAddressResponse_descriptor;
+      return tech2.microservice.LocationOuterClass.internal_static_tech2_microservice_updateLocationResponse_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return tech2.microservice.LocationOuterClass.internal_static_tech2_microservice_getListAddressResponse_fieldAccessorTable
+      return tech2.microservice.LocationOuterClass.internal_static_tech2_microservice_updateLocationResponse_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              tech2.microservice.getListAddressResponse.class, tech2.microservice.getListAddressResponse.Builder.class);
+              tech2.microservice.updateLocationResponse.class, tech2.microservice.updateLocationResponse.Builder.class);
     }
 
-    // Construct using tech2.microservice.getListAddressResponse.newBuilder()
+    // Construct using tech2.microservice.updateLocationResponse.newBuilder()
     private Builder() {
       maybeForceBuilderInitialization();
     }
@@ -399,25 +389,29 @@ private static final long serialVersionUID = 0L;
 
       error_ = "";
 
-      result_ = com.google.protobuf.LazyStringArrayList.EMPTY;
-      bitField0_ = (bitField0_ & ~0x00000004);
+      if (locationBuilder_ == null) {
+        location_ = null;
+      } else {
+        location_ = null;
+        locationBuilder_ = null;
+      }
       return this;
     }
 
     @java.lang.Override
     public com.google.protobuf.Descriptors.Descriptor
         getDescriptorForType() {
-      return tech2.microservice.LocationOuterClass.internal_static_tech2_microservice_getListAddressResponse_descriptor;
+      return tech2.microservice.LocationOuterClass.internal_static_tech2_microservice_updateLocationResponse_descriptor;
     }
 
     @java.lang.Override
-    public tech2.microservice.getListAddressResponse getDefaultInstanceForType() {
-      return tech2.microservice.getListAddressResponse.getDefaultInstance();
+    public tech2.microservice.updateLocationResponse getDefaultInstanceForType() {
+      return tech2.microservice.updateLocationResponse.getDefaultInstance();
     }
 
     @java.lang.Override
-    public tech2.microservice.getListAddressResponse build() {
-      tech2.microservice.getListAddressResponse result = buildPartial();
+    public tech2.microservice.updateLocationResponse build() {
+      tech2.microservice.updateLocationResponse result = buildPartial();
       if (!result.isInitialized()) {
         throw newUninitializedMessageException(result);
       }
@@ -425,18 +419,15 @@ private static final long serialVersionUID = 0L;
     }
 
     @java.lang.Override
-    public tech2.microservice.getListAddressResponse buildPartial() {
-      tech2.microservice.getListAddressResponse result = new tech2.microservice.getListAddressResponse(this);
-      int from_bitField0_ = bitField0_;
-      int to_bitField0_ = 0;
+    public tech2.microservice.updateLocationResponse buildPartial() {
+      tech2.microservice.updateLocationResponse result = new tech2.microservice.updateLocationResponse(this);
       result.status_ = status_;
       result.error_ = error_;
-      if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        result_ = result_.getUnmodifiableView();
-        bitField0_ = (bitField0_ & ~0x00000004);
+      if (locationBuilder_ == null) {
+        result.location_ = location_;
+      } else {
+        result.location_ = locationBuilder_.build();
       }
-      result.result_ = result_;
-      result.bitField0_ = to_bitField0_;
       onBuilt();
       return result;
     }
@@ -475,16 +466,16 @@ private static final long serialVersionUID = 0L;
     }
     @java.lang.Override
     public Builder mergeFrom(com.google.protobuf.Message other) {
-      if (other instanceof tech2.microservice.getListAddressResponse) {
-        return mergeFrom((tech2.microservice.getListAddressResponse)other);
+      if (other instanceof tech2.microservice.updateLocationResponse) {
+        return mergeFrom((tech2.microservice.updateLocationResponse)other);
       } else {
         super.mergeFrom(other);
         return this;
       }
     }
 
-    public Builder mergeFrom(tech2.microservice.getListAddressResponse other) {
-      if (other == tech2.microservice.getListAddressResponse.getDefaultInstance()) return this;
+    public Builder mergeFrom(tech2.microservice.updateLocationResponse other) {
+      if (other == tech2.microservice.updateLocationResponse.getDefaultInstance()) return this;
       if (other.getStatus() != 0L) {
         setStatus(other.getStatus());
       }
@@ -492,15 +483,8 @@ private static final long serialVersionUID = 0L;
         error_ = other.error_;
         onChanged();
       }
-      if (!other.result_.isEmpty()) {
-        if (result_.isEmpty()) {
-          result_ = other.result_;
-          bitField0_ = (bitField0_ & ~0x00000004);
-        } else {
-          ensureResultIsMutable();
-          result_.addAll(other.result_);
-        }
-        onChanged();
+      if (other.hasLocation()) {
+        mergeLocation(other.getLocation());
       }
       this.mergeUnknownFields(other.unknownFields);
       onChanged();
@@ -517,11 +501,11 @@ private static final long serialVersionUID = 0L;
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      tech2.microservice.getListAddressResponse parsedMessage = null;
+      tech2.microservice.updateLocationResponse parsedMessage = null;
       try {
         parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        parsedMessage = (tech2.microservice.getListAddressResponse) e.getUnfinishedMessage();
+        parsedMessage = (tech2.microservice.updateLocationResponse) e.getUnfinishedMessage();
         throw e.unwrapIOException();
       } finally {
         if (parsedMessage != null) {
@@ -530,7 +514,6 @@ private static final long serialVersionUID = 0L;
       }
       return this;
     }
-    private int bitField0_;
 
     private long status_ ;
     /**
@@ -627,98 +610,121 @@ private static final long serialVersionUID = 0L;
       return this;
     }
 
-    private com.google.protobuf.LazyStringList result_ = com.google.protobuf.LazyStringArrayList.EMPTY;
-    private void ensureResultIsMutable() {
-      if (!((bitField0_ & 0x00000004) == 0x00000004)) {
-        result_ = new com.google.protobuf.LazyStringArrayList(result_);
-        bitField0_ |= 0x00000004;
-       }
+    private tech2.microservice.Location location_ = null;
+    private com.google.protobuf.SingleFieldBuilderV3<
+        tech2.microservice.Location, tech2.microservice.Location.Builder, tech2.microservice.LocationOrBuilder> locationBuilder_;
+    /**
+     * <code>.tech2.microservice.Location location = 3;</code>
+     */
+    public boolean hasLocation() {
+      return locationBuilder_ != null || location_ != null;
     }
     /**
-     * <code>repeated string result = 3;</code>
+     * <code>.tech2.microservice.Location location = 3;</code>
      */
-    public com.google.protobuf.ProtocolStringList
-        getResultList() {
-      return result_.getUnmodifiableView();
+    public tech2.microservice.Location getLocation() {
+      if (locationBuilder_ == null) {
+        return location_ == null ? tech2.microservice.Location.getDefaultInstance() : location_;
+      } else {
+        return locationBuilder_.getMessage();
+      }
     }
     /**
-     * <code>repeated string result = 3;</code>
+     * <code>.tech2.microservice.Location location = 3;</code>
      */
-    public int getResultCount() {
-      return result_.size();
-    }
-    /**
-     * <code>repeated string result = 3;</code>
-     */
-    public java.lang.String getResult(int index) {
-      return result_.get(index);
-    }
-    /**
-     * <code>repeated string result = 3;</code>
-     */
-    public com.google.protobuf.ByteString
-        getResultBytes(int index) {
-      return result_.getByteString(index);
-    }
-    /**
-     * <code>repeated string result = 3;</code>
-     */
-    public Builder setResult(
-        int index, java.lang.String value) {
-      if (value == null) {
-    throw new NullPointerException();
-  }
-  ensureResultIsMutable();
-      result_.set(index, value);
-      onChanged();
+    public Builder setLocation(tech2.microservice.Location value) {
+      if (locationBuilder_ == null) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        location_ = value;
+        onChanged();
+      } else {
+        locationBuilder_.setMessage(value);
+      }
+
       return this;
     }
     /**
-     * <code>repeated string result = 3;</code>
+     * <code>.tech2.microservice.Location location = 3;</code>
      */
-    public Builder addResult(
-        java.lang.String value) {
-      if (value == null) {
-    throw new NullPointerException();
-  }
-  ensureResultIsMutable();
-      result_.add(value);
-      onChanged();
+    public Builder setLocation(
+        tech2.microservice.Location.Builder builderForValue) {
+      if (locationBuilder_ == null) {
+        location_ = builderForValue.build();
+        onChanged();
+      } else {
+        locationBuilder_.setMessage(builderForValue.build());
+      }
+
       return this;
     }
     /**
-     * <code>repeated string result = 3;</code>
+     * <code>.tech2.microservice.Location location = 3;</code>
      */
-    public Builder addAllResult(
-        java.lang.Iterable<java.lang.String> values) {
-      ensureResultIsMutable();
-      com.google.protobuf.AbstractMessageLite.Builder.addAll(
-          values, result_);
-      onChanged();
+    public Builder mergeLocation(tech2.microservice.Location value) {
+      if (locationBuilder_ == null) {
+        if (location_ != null) {
+          location_ =
+            tech2.microservice.Location.newBuilder(location_).mergeFrom(value).buildPartial();
+        } else {
+          location_ = value;
+        }
+        onChanged();
+      } else {
+        locationBuilder_.mergeFrom(value);
+      }
+
       return this;
     }
     /**
-     * <code>repeated string result = 3;</code>
+     * <code>.tech2.microservice.Location location = 3;</code>
      */
-    public Builder clearResult() {
-      result_ = com.google.protobuf.LazyStringArrayList.EMPTY;
-      bitField0_ = (bitField0_ & ~0x00000004);
-      onChanged();
+    public Builder clearLocation() {
+      if (locationBuilder_ == null) {
+        location_ = null;
+        onChanged();
+      } else {
+        location_ = null;
+        locationBuilder_ = null;
+      }
+
       return this;
     }
     /**
-     * <code>repeated string result = 3;</code>
+     * <code>.tech2.microservice.Location location = 3;</code>
      */
-    public Builder addResultBytes(
-        com.google.protobuf.ByteString value) {
-      if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-      ensureResultIsMutable();
-      result_.add(value);
+    public tech2.microservice.Location.Builder getLocationBuilder() {
+      
       onChanged();
-      return this;
+      return getLocationFieldBuilder().getBuilder();
+    }
+    /**
+     * <code>.tech2.microservice.Location location = 3;</code>
+     */
+    public tech2.microservice.LocationOrBuilder getLocationOrBuilder() {
+      if (locationBuilder_ != null) {
+        return locationBuilder_.getMessageOrBuilder();
+      } else {
+        return location_ == null ?
+            tech2.microservice.Location.getDefaultInstance() : location_;
+      }
+    }
+    /**
+     * <code>.tech2.microservice.Location location = 3;</code>
+     */
+    private com.google.protobuf.SingleFieldBuilderV3<
+        tech2.microservice.Location, tech2.microservice.Location.Builder, tech2.microservice.LocationOrBuilder> 
+        getLocationFieldBuilder() {
+      if (locationBuilder_ == null) {
+        locationBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+            tech2.microservice.Location, tech2.microservice.Location.Builder, tech2.microservice.LocationOrBuilder>(
+                getLocation(),
+                getParentForChildren(),
+                isClean());
+        location_ = null;
+      }
+      return locationBuilder_;
     }
     @java.lang.Override
     public final Builder setUnknownFields(
@@ -733,41 +739,41 @@ private static final long serialVersionUID = 0L;
     }
 
 
-    // @@protoc_insertion_point(builder_scope:tech2.microservice.getListAddressResponse)
+    // @@protoc_insertion_point(builder_scope:tech2.microservice.updateLocationResponse)
   }
 
-  // @@protoc_insertion_point(class_scope:tech2.microservice.getListAddressResponse)
-  private static final tech2.microservice.getListAddressResponse DEFAULT_INSTANCE;
+  // @@protoc_insertion_point(class_scope:tech2.microservice.updateLocationResponse)
+  private static final tech2.microservice.updateLocationResponse DEFAULT_INSTANCE;
   static {
-    DEFAULT_INSTANCE = new tech2.microservice.getListAddressResponse();
+    DEFAULT_INSTANCE = new tech2.microservice.updateLocationResponse();
   }
 
-  public static tech2.microservice.getListAddressResponse getDefaultInstance() {
+  public static tech2.microservice.updateLocationResponse getDefaultInstance() {
     return DEFAULT_INSTANCE;
   }
 
-  private static final com.google.protobuf.Parser<getListAddressResponse>
-      PARSER = new com.google.protobuf.AbstractParser<getListAddressResponse>() {
+  private static final com.google.protobuf.Parser<updateLocationResponse>
+      PARSER = new com.google.protobuf.AbstractParser<updateLocationResponse>() {
     @java.lang.Override
-    public getListAddressResponse parsePartialFrom(
+    public updateLocationResponse parsePartialFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return new getListAddressResponse(input, extensionRegistry);
+      return new updateLocationResponse(input, extensionRegistry);
     }
   };
 
-  public static com.google.protobuf.Parser<getListAddressResponse> parser() {
+  public static com.google.protobuf.Parser<updateLocationResponse> parser() {
     return PARSER;
   }
 
   @java.lang.Override
-  public com.google.protobuf.Parser<getListAddressResponse> getParserForType() {
+  public com.google.protobuf.Parser<updateLocationResponse> getParserForType() {
     return PARSER;
   }
 
   @java.lang.Override
-  public tech2.microservice.getListAddressResponse getDefaultInstanceForType() {
+  public tech2.microservice.updateLocationResponse getDefaultInstanceForType() {
     return DEFAULT_INSTANCE;
   }
 

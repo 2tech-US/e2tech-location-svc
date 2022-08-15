@@ -50,12 +50,13 @@ message getAddressResponse{
 message getListAddressRequest{
   int32 offset =1;
   int32 limit =2;
+  string searchAddress = 3;
 }
 
 message getListAddressResponse{
   int64 status =1;
   string error = 2;
-  repeated Address address = 3;
+  repeated string result = 3;
 }
 
 message updateAddressRequest{
@@ -69,12 +70,23 @@ message updateAddressResponse{
   Address address = 3;
 }
 
+message updateLocationRequest{
+  LocationKey location =1;
+}
+
+message updateLocationResponse{
+  int64 status =1;
+  string error = 2;
+  Location location = 3;
+}
+
 service LocationService {
   // unary - synchronous
   rpc getAddress(getAddressRequest) returns (getAddressResponse) {}
   rpc getAddressList(getListAddressRequest) returns (getListAddressResponse) {}
   rpc createAddress(createAddressRequest) returns (getAddressResponse) {}
   rpc updateAddress(updateAddressRequest) returns (updateAddressResponse) {}
+  rpc updateLocation(updateLocationRequest) returns (updateLocationResponse) {}
 
   // server-streaming - asynchronous
   //  rpc getAddressList(getListAddressRequest) returns (stream getListAddressResponse) {}

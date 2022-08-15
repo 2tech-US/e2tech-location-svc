@@ -69,6 +69,16 @@ public final class LocationOuterClass {
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_tech2_microservice_updateAddressResponse_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_tech2_microservice_updateLocationRequest_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_tech2_microservice_updateLocationRequest_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_tech2_microservice_updateLocationResponse_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_tech2_microservice_updateLocationResponse_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -93,28 +103,35 @@ public final class LocationOuterClass {
       "ddressKey\030\001 \001(\0132\036.tech2.microservice.Add" +
       "ressKey\"a\n\022getAddressResponse\022\016\n\006status\030" +
       "\001 \001(\003\022\r\n\005error\030\002 \001(\t\022,\n\007address\030\003 \001(\0132\033." +
-      "tech2.microservice.Address\"6\n\025getListAdd" +
+      "tech2.microservice.Address\"M\n\025getListAdd" +
       "ressRequest\022\016\n\006offset\030\001 \001(\005\022\r\n\005limit\030\002 \001" +
-      "(\005\"e\n\026getListAddressResponse\022\016\n\006status\030\001" +
-      " \001(\003\022\r\n\005error\030\002 \001(\t\022,\n\007address\030\003 \003(\0132\033.t" +
-      "ech2.microservice.Address\"z\n\024updateAddre" +
-      "ssRequest\022/\n\007address\030\001 \001(\0132\036.tech2.micro" +
-      "service.AddressKey\0221\n\010location\030\002 \001(\0132\037.t" +
-      "ech2.microservice.LocationKey\"d\n\025updateA" +
-      "ddressResponse\022\016\n\006status\030\001 \001(\003\022\r\n\005error\030" +
-      "\002 \001(\t\022,\n\007address\030\003 \001(\0132\033.tech2.microserv" +
-      "ice.Address2\250\003\n\017LocationService\022]\n\ngetAd" +
-      "dress\022%.tech2.microservice.getAddressReq" +
-      "uest\032&.tech2.microservice.getAddressResp" +
-      "onse\"\000\022i\n\016getAddressList\022).tech2.microse" +
-      "rvice.getListAddressRequest\032*.tech2.micr" +
-      "oservice.getListAddressResponse\"\000\022c\n\rcre" +
-      "ateAddress\022(.tech2.microservice.createAd" +
-      "dressRequest\032&.tech2.microservice.getAdd" +
-      "ressResponse\"\000\022f\n\rupdateAddress\022(.tech2." +
-      "microservice.updateAddressRequest\032).tech" +
-      "2.microservice.updateAddressResponse\"\000B\021" +
-      "P\001Z\r./internal/pbb\006proto3"
+      "(\005\022\025\n\rsearchAddress\030\003 \001(\t\"G\n\026getListAddr" +
+      "essResponse\022\016\n\006status\030\001 \001(\003\022\r\n\005error\030\002 \001" +
+      "(\t\022\016\n\006result\030\003 \003(\t\"z\n\024updateAddressReque" +
+      "st\022/\n\007address\030\001 \001(\0132\036.tech2.microservice" +
+      ".AddressKey\0221\n\010location\030\002 \001(\0132\037.tech2.mi" +
+      "croservice.LocationKey\"d\n\025updateAddressR" +
+      "esponse\022\016\n\006status\030\001 \001(\003\022\r\n\005error\030\002 \001(\t\022," +
+      "\n\007address\030\003 \001(\0132\033.tech2.microservice.Add" +
+      "ress\"J\n\025updateLocationRequest\0221\n\010locatio" +
+      "n\030\001 \001(\0132\037.tech2.microservice.LocationKey" +
+      "\"g\n\026updateLocationResponse\022\016\n\006status\030\001 \001" +
+      "(\003\022\r\n\005error\030\002 \001(\t\022.\n\010location\030\003 \001(\0132\034.te" +
+      "ch2.microservice.Location2\223\004\n\017LocationSe" +
+      "rvice\022]\n\ngetAddress\022%.tech2.microservice" +
+      ".getAddressRequest\032&.tech2.microservice." +
+      "getAddressResponse\"\000\022i\n\016getAddressList\022)" +
+      ".tech2.microservice.getListAddressReques" +
+      "t\032*.tech2.microservice.getListAddressRes" +
+      "ponse\"\000\022c\n\rcreateAddress\022(.tech2.microse" +
+      "rvice.createAddressRequest\032&.tech2.micro" +
+      "service.getAddressResponse\"\000\022f\n\rupdateAd" +
+      "dress\022(.tech2.microservice.updateAddress" +
+      "Request\032).tech2.microservice.updateAddre" +
+      "ssResponse\"\000\022i\n\016updateLocation\022).tech2.m" +
+      "icroservice.updateLocationRequest\032*.tech" +
+      "2.microservice.updateLocationResponse\"\000B" +
+      "\021P\001Z\r./internal/pbb\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -175,13 +192,13 @@ public final class LocationOuterClass {
     internal_static_tech2_microservice_getListAddressRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_tech2_microservice_getListAddressRequest_descriptor,
-        new java.lang.String[] { "Offset", "Limit", });
+        new java.lang.String[] { "Offset", "Limit", "SearchAddress", });
     internal_static_tech2_microservice_getListAddressResponse_descriptor =
       getDescriptor().getMessageTypes().get(8);
     internal_static_tech2_microservice_getListAddressResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_tech2_microservice_getListAddressResponse_descriptor,
-        new java.lang.String[] { "Status", "Error", "Address", });
+        new java.lang.String[] { "Status", "Error", "Result", });
     internal_static_tech2_microservice_updateAddressRequest_descriptor =
       getDescriptor().getMessageTypes().get(9);
     internal_static_tech2_microservice_updateAddressRequest_fieldAccessorTable = new
@@ -194,6 +211,18 @@ public final class LocationOuterClass {
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_tech2_microservice_updateAddressResponse_descriptor,
         new java.lang.String[] { "Status", "Error", "Address", });
+    internal_static_tech2_microservice_updateLocationRequest_descriptor =
+      getDescriptor().getMessageTypes().get(11);
+    internal_static_tech2_microservice_updateLocationRequest_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_tech2_microservice_updateLocationRequest_descriptor,
+        new java.lang.String[] { "Location", });
+    internal_static_tech2_microservice_updateLocationResponse_descriptor =
+      getDescriptor().getMessageTypes().get(12);
+    internal_static_tech2_microservice_updateLocationResponse_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_tech2_microservice_updateLocationResponse_descriptor,
+        new java.lang.String[] { "Status", "Error", "Location", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)

@@ -16,4 +16,14 @@ public interface getListAddressRequestOrBuilder extends
    * <code>int32 limit = 2;</code>
    */
   int getLimit();
+
+  /**
+   * <code>string searchAddress = 3;</code>
+   */
+  java.lang.String getSearchAddress();
+  /**
+   * <code>string searchAddress = 3;</code>
+   */
+  com.google.protobuf.ByteString
+      getSearchAddressBytes();
 }

@@ -23,26 +23,21 @@ public interface getListAddressResponseOrBuilder extends
       getErrorBytes();
 
   /**
-   * <code>repeated .tech2.microservice.Address address = 3;</code>
+   * <code>repeated string result = 3;</code>
    */
-  java.util.List<tech2.microservice.Address> 
-      getAddressList();
+  java.util.List<java.lang.String>
+      getResultList();
   /**
-   * <code>repeated .tech2.microservice.Address address = 3;</code>
+   * <code>repeated string result = 3;</code>
    */
-  tech2.microservice.Address getAddress(int index);
+  int getResultCount();
   /**
-   * <code>repeated .tech2.microservice.Address address = 3;</code>
+   * <code>repeated string result = 3;</code>
    */
-  int getAddressCount();
+  java.lang.String getResult(int index);
   /**
-   * <code>repeated .tech2.microservice.Address address = 3;</code>
+   * <code>repeated string result = 3;</code>
    */
-  java.util.List<? extends tech2.microservice.AddressOrBuilder> 
-      getAddressOrBuilderList();
-  /**
-   * <code>repeated .tech2.microservice.Address address = 3;</code>
-   */
-  tech2.microservice.AddressOrBuilder getAddressOrBuilder(
-      int index);
+  com.google.protobuf.ByteString
+      getResultBytes(int index);
 }
