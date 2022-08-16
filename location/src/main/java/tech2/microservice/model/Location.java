@@ -19,5 +19,6 @@ public class Location {
     @EmbeddedId
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private LocationKey id;
+    @Builder.Default
     private long count = 0;
 }

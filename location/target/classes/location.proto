@@ -5,6 +5,8 @@ package tech2.microservice;
 option java_multiple_files = true;
 option go_package = "./internal/pb";
 
+import "google/protobuf/timestamp.proto";
+
 message Location {
   double latitude = 1;
   double longitude = 2;
@@ -17,7 +19,7 @@ message Address {
   string ward = 3;
   string street = 4;
   string home = 5;
-  Location location =6;
+  Location location = 6;
 }
 
 message LocationKey {
@@ -39,46 +41,98 @@ message createAddressRequest{
 
 
 message getAddressRequest{
-  AddressKey addressKey =1;
+  AddressKey addressKey = 1;
 }
 message getAddressResponse{
-  int64 status =1;
+  int64 status = 1;
   string error = 2;
   Address address = 3;
 }
 
 message getListAddressRequest{
-  int32 offset =1;
-  int32 limit =2;
+  int32 offset = 1;
+  int32 limit = 2;
   string searchAddress = 3;
 }
 
 message getListAddressResponse{
-  int64 status =1;
+  int64 status = 1;
   string error = 2;
   repeated string result = 3;
 }
 
 message updateAddressRequest{
-  AddressKey address= 1;
-  LocationKey location =2;
+  AddressKey address = 1;
+  LocationKey location = 2;
 }
 
 message updateAddressResponse{
-  int64 status =1;
+  int64 status = 1;
   string error = 2;
   Address address = 3;
 }
 
 message updateLocationRequest{
-  LocationKey location =1;
+  LocationKey location = 1;
 }
 
 message updateLocationResponse{
-  int64 status =1;
+  int64 status = 1;
   string error = 2;
   Location location = 3;
 }
+
+// CALL CENTER REQUEST
+
+message CallCenterRequest {
+  int64 id = 1;
+  string phone = 2 ;
+  string employeeId = 3;
+  string  pickingAddress = 4;
+  string arrivingAddress = 5;
+  bool sending = 6;
+  LocationKey picking = 7;
+  LocationKey arriving = 8;
+  google.protobuf.Timestamp createAt = 9;
+}
+
+message createCallCenterRequest{
+  CallCenterRequest request = 1;
+}
+
+message createCallCenterRequestResponse {
+  int64 status = 1;
+  string error = 2;
+  CallCenterRequest request = 3;
+}
+
+message getCallCenterRequest {
+  int64 requestId = 1;
+}
+
+message getCallCenterRequestResponse {
+  int64 status = 1;
+  string error = 2;
+  CallCenterRequest request = 3;
+}
+
+message getListCallCenterRequest {
+  int32 offset = 1;
+  int32 limit = 2;
+}
+
+message getListCallCenterRequestByPhone {
+  int64 phone = 1;
+  int32 offset = 2;
+  int32 limit = 3;
+}
+
+message getListRequestResponse {
+  int64 status = 1;
+  string error = 2;
+  repeated CallCenterRequest requests = 3;
+}
+
 
 service LocationService {
   // unary - synchronous
@@ -87,6 +141,14 @@ service LocationService {
   rpc createAddress(createAddressRequest) returns (getAddressResponse) {}
   rpc updateAddress(updateAddressRequest) returns (updateAddressResponse) {}
   rpc updateLocation(updateLocationRequest) returns (updateLocationResponse) {}
+
+  rpc createRequest(createCallCenterRequest) returns (createCallCenterRequestResponse) {}
+  rpc getRequest(getCallCenterRequest) returns (getCallCenterRequestResponse) {}
+  rpc getListRequest(getListCallCenterRequest) returns (getListRequestResponse) {}
+  rpc getListRequestByPhone(getListCallCenterRequestByPhone) returns (getListRequestResponse) {}
+
+
+
 
   // server-streaming - asynchronous
   //  rpc getAddressList(getListAddressRequest) returns (stream getListAddressResponse) {}

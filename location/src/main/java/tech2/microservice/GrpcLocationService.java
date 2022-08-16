@@ -3,17 +3,21 @@ package tech2.microservice;
 import io.grpc.stub.StreamObserver;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import tech2.microservice.model.Address;
 import tech2.microservice.model.AddressKey;
+import tech2.microservice.model.CallCenterRequest;
 import tech2.microservice.model.Location;
 import tech2.microservice.service.AddressLocationService;
+import tech2.microservice.service.RequestService;
 import tech2.microservice.ultis.ProtobufModelMapping;
 
 import java.util.List;
 
 @net.devh.boot.grpc.server.service.GrpcService
 @RequiredArgsConstructor
-public class GrpcService extends LocationServiceGrpc.LocationServiceImplBase {
+public class GrpcLocationService extends LocationServiceGrpc.LocationServiceImplBase {
     private final AddressLocationService addressLocationService;
+    private final RequestService requestService;
 
     @Override
     public void createAddress(createAddressRequest request,
@@ -50,8 +54,8 @@ public class GrpcService extends LocationServiceGrpc.LocationServiceImplBase {
                                StreamObserver<getListAddressResponse> responseObserver) {
         String searchAddress = request.getSearchAddress();
         Iterable<String> iterable = addressLocationService.getListAddress(searchAddress,
-                                                                     request.getOffset(),
-                                                                     request.getLimit());
+                                                                          request.getOffset(),
+                                                                          request.getLimit());
         responseObserver.onNext(getListAddressResponse.newBuilder()
                                         .addAllResult(iterable)
                                         .setStatus(HttpStatus.OK.value())
@@ -85,5 +89,43 @@ public class GrpcService extends LocationServiceGrpc.LocationServiceImplBase {
                                         .setStatus(HttpStatus.OK.value())
                                         .build());
         responseObserver.onCompleted();
+    }
+
+    @Override
+    public void createRequest(createCallCenterRequest request,
+                              StreamObserver<createCallCenterRequestResponse> responseObserver) {
+        CallCenterRequest callCenterRequest = requestService.createRequest(
+                ProtobufModelMapping.requestMapping(request.getRequest()));
+
+        Address pickingAddress = addressLocationService.createAddressFromString(callCenterRequest.getPickingAddress());
+        Address arrivingAddress = addressLocationService.createAddressFromString(callCenterRequest.getArrivingAddress());
+
+
+        responseObserver.onNext(createCallCenterRequestResponse.newBuilder()
+                                        .setRequest(
+                                                ProtobufModelMapping.grpcRequestMapping(callCenterRequest,
+                                                                                        pickingAddress.getLocation().getId(),
+                                                                                        arrivingAddress.getLocation().getId()))
+                                        .setStatus(HttpStatus.OK.value())
+                                        .build());
+        super.createRequest(request, responseObserver);
+    }
+
+    @Override
+    public void getRequest(getCallCenterRequest request,
+                           StreamObserver<getCallCenterRequestResponse> responseObserver) {
+
+    }
+
+    @Override
+    public void getListRequest(getListCallCenterRequest request,
+                               StreamObserver<getListRequestResponse> responseObserver) {
+
+    }
+
+    @Override
+    public void getListRequestByPhone(getListCallCenterRequestByPhone request,
+                                      StreamObserver<getListRequestResponse> responseObserver) {
+        super.getListRequestByPhone(request, responseObserver);
     }
 }

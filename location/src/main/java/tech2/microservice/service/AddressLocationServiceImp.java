@@ -14,7 +14,6 @@ import tech2.microservice.repository.AddressRepository;
 import tech2.microservice.repository.LocationRepository;
 
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -38,11 +37,18 @@ public class AddressLocationServiceImp implements AddressLocationService {
     }
 
     @Override
+    public Address getAddressFromString(String strAddress) {
+        SearchAddress searchAddressKey = SearchAddress.parseSearchAddressFromString(strAddress);
+        return this.getAddress(searchAddressKey.getAddressKey());
+    }
+
+    @Override
     public List<String> getListAddress(String searchAddress,
                                        int page,
                                        int limit) {
         SearchAddress searchAddressKey = SearchAddress.parseSearchAddressFromString(searchAddress);
-        return searchAddressKey.getSearchResult(addressRepository, limit, page);
+        Pageable pageable = PageRequest.of(page,limit);
+        return searchAddressKey.getSearchResult(addressRepository, pageable);
     }
 
     @Override
@@ -51,6 +57,17 @@ public class AddressLocationServiceImp implements AddressLocationService {
             throw new DuplicateResourceException("This Address Already Exist");
         }
         return addressRepository.save(address);
+    }
+
+    @Override
+    public Address createAddressFromString(String strAddress) {
+        SearchAddress searchAddressKey = SearchAddress.parseSearchAddressFromString(strAddress);
+        Optional<Address> optional = addressRepository.findById(searchAddressKey.getAddressKey());
+        if(optional.isEmpty())
+            return addressRepository.save(new Address(searchAddressKey.getAddressKey(),null));
+        else {
+            return optional.get();
+        }
     }
 
     @Override
@@ -110,9 +127,7 @@ class SearchAddress {
     private SearchAddressStrategy strategy;
 
     public List<String> getSearchResult(AddressRepository repository,
-                                        int limit,
-                                        int offset) {
-        Pageable pageable = PageRequest.of(offset, limit);
+                                        Pageable pageable) {
         log.info(addressKey.toString());
         return strategy.search(repository, pageable, addressKey);
     }

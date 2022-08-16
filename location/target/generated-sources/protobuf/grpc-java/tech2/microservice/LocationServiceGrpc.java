@@ -187,6 +187,134 @@ public final class LocationServiceGrpc {
      return getUpdateLocationMethod;
   }
 
+  private static volatile io.grpc.MethodDescriptor<tech2.microservice.createCallCenterRequest,
+      tech2.microservice.createCallCenterRequestResponse> getCreateRequestMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "createRequest",
+      requestType = tech2.microservice.createCallCenterRequest.class,
+      responseType = tech2.microservice.createCallCenterRequestResponse.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<tech2.microservice.createCallCenterRequest,
+      tech2.microservice.createCallCenterRequestResponse> getCreateRequestMethod() {
+    io.grpc.MethodDescriptor<tech2.microservice.createCallCenterRequest, tech2.microservice.createCallCenterRequestResponse> getCreateRequestMethod;
+    if ((getCreateRequestMethod = LocationServiceGrpc.getCreateRequestMethod) == null) {
+      synchronized (LocationServiceGrpc.class) {
+        if ((getCreateRequestMethod = LocationServiceGrpc.getCreateRequestMethod) == null) {
+          LocationServiceGrpc.getCreateRequestMethod = getCreateRequestMethod = 
+              io.grpc.MethodDescriptor.<tech2.microservice.createCallCenterRequest, tech2.microservice.createCallCenterRequestResponse>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(
+                  "tech2.microservice.LocationService", "createRequest"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  tech2.microservice.createCallCenterRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  tech2.microservice.createCallCenterRequestResponse.getDefaultInstance()))
+                  .setSchemaDescriptor(new LocationServiceMethodDescriptorSupplier("createRequest"))
+                  .build();
+          }
+        }
+     }
+     return getCreateRequestMethod;
+  }
+
+  private static volatile io.grpc.MethodDescriptor<tech2.microservice.getCallCenterRequest,
+      tech2.microservice.getCallCenterRequestResponse> getGetRequestMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "getRequest",
+      requestType = tech2.microservice.getCallCenterRequest.class,
+      responseType = tech2.microservice.getCallCenterRequestResponse.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<tech2.microservice.getCallCenterRequest,
+      tech2.microservice.getCallCenterRequestResponse> getGetRequestMethod() {
+    io.grpc.MethodDescriptor<tech2.microservice.getCallCenterRequest, tech2.microservice.getCallCenterRequestResponse> getGetRequestMethod;
+    if ((getGetRequestMethod = LocationServiceGrpc.getGetRequestMethod) == null) {
+      synchronized (LocationServiceGrpc.class) {
+        if ((getGetRequestMethod = LocationServiceGrpc.getGetRequestMethod) == null) {
+          LocationServiceGrpc.getGetRequestMethod = getGetRequestMethod = 
+              io.grpc.MethodDescriptor.<tech2.microservice.getCallCenterRequest, tech2.microservice.getCallCenterRequestResponse>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(
+                  "tech2.microservice.LocationService", "getRequest"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  tech2.microservice.getCallCenterRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  tech2.microservice.getCallCenterRequestResponse.getDefaultInstance()))
+                  .setSchemaDescriptor(new LocationServiceMethodDescriptorSupplier("getRequest"))
+                  .build();
+          }
+        }
+     }
+     return getGetRequestMethod;
+  }
+
+  private static volatile io.grpc.MethodDescriptor<tech2.microservice.getListCallCenterRequest,
+      tech2.microservice.getListRequestResponse> getGetListRequestMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "getListRequest",
+      requestType = tech2.microservice.getListCallCenterRequest.class,
+      responseType = tech2.microservice.getListRequestResponse.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<tech2.microservice.getListCallCenterRequest,
+      tech2.microservice.getListRequestResponse> getGetListRequestMethod() {
+    io.grpc.MethodDescriptor<tech2.microservice.getListCallCenterRequest, tech2.microservice.getListRequestResponse> getGetListRequestMethod;
+    if ((getGetListRequestMethod = LocationServiceGrpc.getGetListRequestMethod) == null) {
+      synchronized (LocationServiceGrpc.class) {
+        if ((getGetListRequestMethod = LocationServiceGrpc.getGetListRequestMethod) == null) {
+          LocationServiceGrpc.getGetListRequestMethod = getGetListRequestMethod = 
+              io.grpc.MethodDescriptor.<tech2.microservice.getListCallCenterRequest, tech2.microservice.getListRequestResponse>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(
+                  "tech2.microservice.LocationService", "getListRequest"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  tech2.microservice.getListCallCenterRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  tech2.microservice.getListRequestResponse.getDefaultInstance()))
+                  .setSchemaDescriptor(new LocationServiceMethodDescriptorSupplier("getListRequest"))
+                  .build();
+          }
+        }
+     }
+     return getGetListRequestMethod;
+  }
+
+  private static volatile io.grpc.MethodDescriptor<tech2.microservice.getListCallCenterRequestByPhone,
+      tech2.microservice.getListRequestResponse> getGetListRequestByPhoneMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "getListRequestByPhone",
+      requestType = tech2.microservice.getListCallCenterRequestByPhone.class,
+      responseType = tech2.microservice.getListRequestResponse.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<tech2.microservice.getListCallCenterRequestByPhone,
+      tech2.microservice.getListRequestResponse> getGetListRequestByPhoneMethod() {
+    io.grpc.MethodDescriptor<tech2.microservice.getListCallCenterRequestByPhone, tech2.microservice.getListRequestResponse> getGetListRequestByPhoneMethod;
+    if ((getGetListRequestByPhoneMethod = LocationServiceGrpc.getGetListRequestByPhoneMethod) == null) {
+      synchronized (LocationServiceGrpc.class) {
+        if ((getGetListRequestByPhoneMethod = LocationServiceGrpc.getGetListRequestByPhoneMethod) == null) {
+          LocationServiceGrpc.getGetListRequestByPhoneMethod = getGetListRequestByPhoneMethod = 
+              io.grpc.MethodDescriptor.<tech2.microservice.getListCallCenterRequestByPhone, tech2.microservice.getListRequestResponse>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(
+                  "tech2.microservice.LocationService", "getListRequestByPhone"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  tech2.microservice.getListCallCenterRequestByPhone.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  tech2.microservice.getListRequestResponse.getDefaultInstance()))
+                  .setSchemaDescriptor(new LocationServiceMethodDescriptorSupplier("getListRequestByPhone"))
+                  .build();
+          }
+        }
+     }
+     return getGetListRequestByPhoneMethod;
+  }
+
   /**
    * Creates a new async stub that supports all call types for the service
    */
@@ -252,6 +380,34 @@ public final class LocationServiceGrpc {
       asyncUnimplementedUnaryCall(getUpdateLocationMethod(), responseObserver);
     }
 
+    /**
+     */
+    public void createRequest(tech2.microservice.createCallCenterRequest request,
+        io.grpc.stub.StreamObserver<tech2.microservice.createCallCenterRequestResponse> responseObserver) {
+      asyncUnimplementedUnaryCall(getCreateRequestMethod(), responseObserver);
+    }
+
+    /**
+     */
+    public void getRequest(tech2.microservice.getCallCenterRequest request,
+        io.grpc.stub.StreamObserver<tech2.microservice.getCallCenterRequestResponse> responseObserver) {
+      asyncUnimplementedUnaryCall(getGetRequestMethod(), responseObserver);
+    }
+
+    /**
+     */
+    public void getListRequest(tech2.microservice.getListCallCenterRequest request,
+        io.grpc.stub.StreamObserver<tech2.microservice.getListRequestResponse> responseObserver) {
+      asyncUnimplementedUnaryCall(getGetListRequestMethod(), responseObserver);
+    }
+
+    /**
+     */
+    public void getListRequestByPhone(tech2.microservice.getListCallCenterRequestByPhone request,
+        io.grpc.stub.StreamObserver<tech2.microservice.getListRequestResponse> responseObserver) {
+      asyncUnimplementedUnaryCall(getGetListRequestByPhoneMethod(), responseObserver);
+    }
+
     @java.lang.Override public final io.grpc.ServerServiceDefinition bindService() {
       return io.grpc.ServerServiceDefinition.builder(getServiceDescriptor())
           .addMethod(
@@ -289,6 +445,34 @@ public final class LocationServiceGrpc {
                 tech2.microservice.updateLocationRequest,
                 tech2.microservice.updateLocationResponse>(
                   this, METHODID_UPDATE_LOCATION)))
+          .addMethod(
+            getCreateRequestMethod(),
+            asyncUnaryCall(
+              new MethodHandlers<
+                tech2.microservice.createCallCenterRequest,
+                tech2.microservice.createCallCenterRequestResponse>(
+                  this, METHODID_CREATE_REQUEST)))
+          .addMethod(
+            getGetRequestMethod(),
+            asyncUnaryCall(
+              new MethodHandlers<
+                tech2.microservice.getCallCenterRequest,
+                tech2.microservice.getCallCenterRequestResponse>(
+                  this, METHODID_GET_REQUEST)))
+          .addMethod(
+            getGetListRequestMethod(),
+            asyncUnaryCall(
+              new MethodHandlers<
+                tech2.microservice.getListCallCenterRequest,
+                tech2.microservice.getListRequestResponse>(
+                  this, METHODID_GET_LIST_REQUEST)))
+          .addMethod(
+            getGetListRequestByPhoneMethod(),
+            asyncUnaryCall(
+              new MethodHandlers<
+                tech2.microservice.getListCallCenterRequestByPhone,
+                tech2.microservice.getListRequestResponse>(
+                  this, METHODID_GET_LIST_REQUEST_BY_PHONE)))
           .build();
     }
   }
@@ -353,6 +537,38 @@ public final class LocationServiceGrpc {
       asyncUnaryCall(
           getChannel().newCall(getUpdateLocationMethod(), getCallOptions()), request, responseObserver);
     }
+
+    /**
+     */
+    public void createRequest(tech2.microservice.createCallCenterRequest request,
+        io.grpc.stub.StreamObserver<tech2.microservice.createCallCenterRequestResponse> responseObserver) {
+      asyncUnaryCall(
+          getChannel().newCall(getCreateRequestMethod(), getCallOptions()), request, responseObserver);
+    }
+
+    /**
+     */
+    public void getRequest(tech2.microservice.getCallCenterRequest request,
+        io.grpc.stub.StreamObserver<tech2.microservice.getCallCenterRequestResponse> responseObserver) {
+      asyncUnaryCall(
+          getChannel().newCall(getGetRequestMethod(), getCallOptions()), request, responseObserver);
+    }
+
+    /**
+     */
+    public void getListRequest(tech2.microservice.getListCallCenterRequest request,
+        io.grpc.stub.StreamObserver<tech2.microservice.getListRequestResponse> responseObserver) {
+      asyncUnaryCall(
+          getChannel().newCall(getGetListRequestMethod(), getCallOptions()), request, responseObserver);
+    }
+
+    /**
+     */
+    public void getListRequestByPhone(tech2.microservice.getListCallCenterRequestByPhone request,
+        io.grpc.stub.StreamObserver<tech2.microservice.getListRequestResponse> responseObserver) {
+      asyncUnaryCall(
+          getChannel().newCall(getGetListRequestByPhoneMethod(), getCallOptions()), request, responseObserver);
+    }
   }
 
   /**
@@ -409,6 +625,34 @@ public final class LocationServiceGrpc {
     public tech2.microservice.updateLocationResponse updateLocation(tech2.microservice.updateLocationRequest request) {
       return blockingUnaryCall(
           getChannel(), getUpdateLocationMethod(), getCallOptions(), request);
+    }
+
+    /**
+     */
+    public tech2.microservice.createCallCenterRequestResponse createRequest(tech2.microservice.createCallCenterRequest request) {
+      return blockingUnaryCall(
+          getChannel(), getCreateRequestMethod(), getCallOptions(), request);
+    }
+
+    /**
+     */
+    public tech2.microservice.getCallCenterRequestResponse getRequest(tech2.microservice.getCallCenterRequest request) {
+      return blockingUnaryCall(
+          getChannel(), getGetRequestMethod(), getCallOptions(), request);
+    }
+
+    /**
+     */
+    public tech2.microservice.getListRequestResponse getListRequest(tech2.microservice.getListCallCenterRequest request) {
+      return blockingUnaryCall(
+          getChannel(), getGetListRequestMethod(), getCallOptions(), request);
+    }
+
+    /**
+     */
+    public tech2.microservice.getListRequestResponse getListRequestByPhone(tech2.microservice.getListCallCenterRequestByPhone request) {
+      return blockingUnaryCall(
+          getChannel(), getGetListRequestByPhoneMethod(), getCallOptions(), request);
     }
   }
 
@@ -472,6 +716,38 @@ public final class LocationServiceGrpc {
       return futureUnaryCall(
           getChannel().newCall(getUpdateLocationMethod(), getCallOptions()), request);
     }
+
+    /**
+     */
+    public com.google.common.util.concurrent.ListenableFuture<tech2.microservice.createCallCenterRequestResponse> createRequest(
+        tech2.microservice.createCallCenterRequest request) {
+      return futureUnaryCall(
+          getChannel().newCall(getCreateRequestMethod(), getCallOptions()), request);
+    }
+
+    /**
+     */
+    public com.google.common.util.concurrent.ListenableFuture<tech2.microservice.getCallCenterRequestResponse> getRequest(
+        tech2.microservice.getCallCenterRequest request) {
+      return futureUnaryCall(
+          getChannel().newCall(getGetRequestMethod(), getCallOptions()), request);
+    }
+
+    /**
+     */
+    public com.google.common.util.concurrent.ListenableFuture<tech2.microservice.getListRequestResponse> getListRequest(
+        tech2.microservice.getListCallCenterRequest request) {
+      return futureUnaryCall(
+          getChannel().newCall(getGetListRequestMethod(), getCallOptions()), request);
+    }
+
+    /**
+     */
+    public com.google.common.util.concurrent.ListenableFuture<tech2.microservice.getListRequestResponse> getListRequestByPhone(
+        tech2.microservice.getListCallCenterRequestByPhone request) {
+      return futureUnaryCall(
+          getChannel().newCall(getGetListRequestByPhoneMethod(), getCallOptions()), request);
+    }
   }
 
   private static final int METHODID_GET_ADDRESS = 0;
@@ -479,6 +755,10 @@ public final class LocationServiceGrpc {
   private static final int METHODID_CREATE_ADDRESS = 2;
   private static final int METHODID_UPDATE_ADDRESS = 3;
   private static final int METHODID_UPDATE_LOCATION = 4;
+  private static final int METHODID_CREATE_REQUEST = 5;
+  private static final int METHODID_GET_REQUEST = 6;
+  private static final int METHODID_GET_LIST_REQUEST = 7;
+  private static final int METHODID_GET_LIST_REQUEST_BY_PHONE = 8;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -516,6 +796,22 @@ public final class LocationServiceGrpc {
         case METHODID_UPDATE_LOCATION:
           serviceImpl.updateLocation((tech2.microservice.updateLocationRequest) request,
               (io.grpc.stub.StreamObserver<tech2.microservice.updateLocationResponse>) responseObserver);
+          break;
+        case METHODID_CREATE_REQUEST:
+          serviceImpl.createRequest((tech2.microservice.createCallCenterRequest) request,
+              (io.grpc.stub.StreamObserver<tech2.microservice.createCallCenterRequestResponse>) responseObserver);
+          break;
+        case METHODID_GET_REQUEST:
+          serviceImpl.getRequest((tech2.microservice.getCallCenterRequest) request,
+              (io.grpc.stub.StreamObserver<tech2.microservice.getCallCenterRequestResponse>) responseObserver);
+          break;
+        case METHODID_GET_LIST_REQUEST:
+          serviceImpl.getListRequest((tech2.microservice.getListCallCenterRequest) request,
+              (io.grpc.stub.StreamObserver<tech2.microservice.getListRequestResponse>) responseObserver);
+          break;
+        case METHODID_GET_LIST_REQUEST_BY_PHONE:
+          serviceImpl.getListRequestByPhone((tech2.microservice.getListCallCenterRequestByPhone) request,
+              (io.grpc.stub.StreamObserver<tech2.microservice.getListRequestResponse>) responseObserver);
           break;
         default:
           throw new AssertionError();
@@ -583,6 +879,10 @@ public final class LocationServiceGrpc {
               .addMethod(getCreateAddressMethod())
               .addMethod(getUpdateAddressMethod())
               .addMethod(getUpdateLocationMethod())
+              .addMethod(getCreateRequestMethod())
+              .addMethod(getGetRequestMethod())
+              .addMethod(getGetListRequestMethod())
+              .addMethod(getGetListRequestByPhoneMethod())
               .build();
         }
       }

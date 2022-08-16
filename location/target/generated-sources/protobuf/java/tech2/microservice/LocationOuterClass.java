@@ -79,6 +79,46 @@ public final class LocationOuterClass {
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_tech2_microservice_updateLocationResponse_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_tech2_microservice_CallCenterRequest_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_tech2_microservice_CallCenterRequest_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_tech2_microservice_createCallCenterRequest_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_tech2_microservice_createCallCenterRequest_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_tech2_microservice_createCallCenterRequestResponse_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_tech2_microservice_createCallCenterRequestResponse_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_tech2_microservice_getCallCenterRequest_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_tech2_microservice_getCallCenterRequest_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_tech2_microservice_getCallCenterRequestResponse_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_tech2_microservice_getCallCenterRequestResponse_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_tech2_microservice_getListCallCenterRequest_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_tech2_microservice_getListCallCenterRequest_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_tech2_microservice_getListCallCenterRequestByPhone_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_tech2_microservice_getListCallCenterRequestByPhone_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_tech2_microservice_getListRequestResponse_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_tech2_microservice_getListRequestResponse_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -88,50 +128,85 @@ public final class LocationOuterClass {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\016location.proto\022\022tech2.microservice\">\n\010" +
-      "Location\022\020\n\010latitude\030\001 \001(\001\022\021\n\tlongitude\030" +
-      "\002 \001(\001\022\r\n\005count\030\003 \001(\003\"\205\001\n\007Address\022\014\n\004city" +
-      "\030\001 \001(\t\022\020\n\010district\030\002 \001(\t\022\014\n\004ward\030\003 \001(\t\022\016" +
-      "\n\006street\030\004 \001(\t\022\014\n\004home\030\005 \001(\t\022.\n\010location" +
-      "\030\006 \001(\0132\034.tech2.microservice.Location\"2\n\013" +
-      "LocationKey\022\020\n\010latitude\030\001 \001(\001\022\021\n\tlongitu" +
-      "de\030\002 \001(\001\"X\n\nAddressKey\022\014\n\004city\030\001 \001(\t\022\020\n\010" +
-      "district\030\002 \001(\t\022\014\n\004ward\030\003 \001(\t\022\016\n\006street\030\004" +
-      " \001(\t\022\014\n\004home\030\005 \001(\t\"J\n\024createAddressReque" +
-      "st\0222\n\naddressKey\030\001 \001(\0132\036.tech2.microserv" +
-      "ice.AddressKey\"G\n\021getAddressRequest\0222\n\na" +
+      "\n\016location.proto\022\022tech2.microservice\032\037go" +
+      "ogle/protobuf/timestamp.proto\">\n\010Locatio" +
+      "n\022\020\n\010latitude\030\001 \001(\001\022\021\n\tlongitude\030\002 \001(\001\022\r" +
+      "\n\005count\030\003 \001(\003\"\205\001\n\007Address\022\014\n\004city\030\001 \001(\t\022" +
+      "\020\n\010district\030\002 \001(\t\022\014\n\004ward\030\003 \001(\t\022\016\n\006stree" +
+      "t\030\004 \001(\t\022\014\n\004home\030\005 \001(\t\022.\n\010location\030\006 \001(\0132" +
+      "\034.tech2.microservice.Location\"2\n\013Locatio" +
+      "nKey\022\020\n\010latitude\030\001 \001(\001\022\021\n\tlongitude\030\002 \001(" +
+      "\001\"X\n\nAddressKey\022\014\n\004city\030\001 \001(\t\022\020\n\010distric" +
+      "t\030\002 \001(\t\022\014\n\004ward\030\003 \001(\t\022\016\n\006street\030\004 \001(\t\022\014\n" +
+      "\004home\030\005 \001(\t\"J\n\024createAddressRequest\0222\n\na" +
       "ddressKey\030\001 \001(\0132\036.tech2.microservice.Add" +
-      "ressKey\"a\n\022getAddressResponse\022\016\n\006status\030" +
-      "\001 \001(\003\022\r\n\005error\030\002 \001(\t\022,\n\007address\030\003 \001(\0132\033." +
-      "tech2.microservice.Address\"M\n\025getListAdd" +
-      "ressRequest\022\016\n\006offset\030\001 \001(\005\022\r\n\005limit\030\002 \001" +
-      "(\005\022\025\n\rsearchAddress\030\003 \001(\t\"G\n\026getListAddr" +
-      "essResponse\022\016\n\006status\030\001 \001(\003\022\r\n\005error\030\002 \001" +
-      "(\t\022\016\n\006result\030\003 \003(\t\"z\n\024updateAddressReque" +
-      "st\022/\n\007address\030\001 \001(\0132\036.tech2.microservice" +
-      ".AddressKey\0221\n\010location\030\002 \001(\0132\037.tech2.mi" +
-      "croservice.LocationKey\"d\n\025updateAddressR" +
-      "esponse\022\016\n\006status\030\001 \001(\003\022\r\n\005error\030\002 \001(\t\022," +
-      "\n\007address\030\003 \001(\0132\033.tech2.microservice.Add" +
-      "ress\"J\n\025updateLocationRequest\0221\n\010locatio" +
-      "n\030\001 \001(\0132\037.tech2.microservice.LocationKey" +
-      "\"g\n\026updateLocationResponse\022\016\n\006status\030\001 \001" +
-      "(\003\022\r\n\005error\030\002 \001(\t\022.\n\010location\030\003 \001(\0132\034.te" +
-      "ch2.microservice.Location2\223\004\n\017LocationSe" +
-      "rvice\022]\n\ngetAddress\022%.tech2.microservice" +
-      ".getAddressRequest\032&.tech2.microservice." +
-      "getAddressResponse\"\000\022i\n\016getAddressList\022)" +
-      ".tech2.microservice.getListAddressReques" +
-      "t\032*.tech2.microservice.getListAddressRes" +
-      "ponse\"\000\022c\n\rcreateAddress\022(.tech2.microse" +
-      "rvice.createAddressRequest\032&.tech2.micro" +
-      "service.getAddressResponse\"\000\022f\n\rupdateAd" +
-      "dress\022(.tech2.microservice.updateAddress" +
-      "Request\032).tech2.microservice.updateAddre" +
-      "ssResponse\"\000\022i\n\016updateLocation\022).tech2.m" +
-      "icroservice.updateLocationRequest\032*.tech" +
-      "2.microservice.updateLocationResponse\"\000B" +
-      "\021P\001Z\r./internal/pbb\006proto3"
+      "ressKey\"G\n\021getAddressRequest\0222\n\naddressK" +
+      "ey\030\001 \001(\0132\036.tech2.microservice.AddressKey" +
+      "\"a\n\022getAddressResponse\022\016\n\006status\030\001 \001(\003\022\r" +
+      "\n\005error\030\002 \001(\t\022,\n\007address\030\003 \001(\0132\033.tech2.m" +
+      "icroservice.Address\"M\n\025getListAddressReq" +
+      "uest\022\016\n\006offset\030\001 \001(\005\022\r\n\005limit\030\002 \001(\005\022\025\n\rs" +
+      "earchAddress\030\003 \001(\t\"G\n\026getListAddressResp" +
+      "onse\022\016\n\006status\030\001 \001(\003\022\r\n\005error\030\002 \001(\t\022\016\n\006r" +
+      "esult\030\003 \003(\t\"z\n\024updateAddressRequest\022/\n\007a" +
+      "ddress\030\001 \001(\0132\036.tech2.microservice.Addres" +
+      "sKey\0221\n\010location\030\002 \001(\0132\037.tech2.microserv" +
+      "ice.LocationKey\"d\n\025updateAddressResponse" +
+      "\022\016\n\006status\030\001 \001(\003\022\r\n\005error\030\002 \001(\t\022,\n\007addre" +
+      "ss\030\003 \001(\0132\033.tech2.microservice.Address\"J\n" +
+      "\025updateLocationRequest\0221\n\010location\030\001 \001(\013" +
+      "2\037.tech2.microservice.LocationKey\"g\n\026upd" +
+      "ateLocationResponse\022\016\n\006status\030\001 \001(\003\022\r\n\005e" +
+      "rror\030\002 \001(\t\022.\n\010location\030\003 \001(\0132\034.tech2.mic" +
+      "roservice.Location\"\227\002\n\021CallCenterRequest" +
+      "\022\n\n\002id\030\001 \001(\003\022\r\n\005phone\030\002 \001(\t\022\022\n\nemployeeI" +
+      "d\030\003 \001(\t\022\026\n\016pickingAddress\030\004 \001(\t\022\027\n\017arriv" +
+      "ingAddress\030\005 \001(\t\022\017\n\007sending\030\006 \001(\010\0220\n\007pic" +
+      "king\030\007 \001(\0132\037.tech2.microservice.Location" +
+      "Key\0221\n\010arriving\030\010 \001(\0132\037.tech2.microservi" +
+      "ce.LocationKey\022,\n\010createAt\030\t \001(\0132\032.googl" +
+      "e.protobuf.Timestamp\"Q\n\027createCallCenter" +
+      "Request\0226\n\007request\030\001 \001(\0132%.tech2.microse" +
+      "rvice.CallCenterRequest\"x\n\037createCallCen" +
+      "terRequestResponse\022\016\n\006status\030\001 \001(\003\022\r\n\005er" +
+      "ror\030\002 \001(\t\0226\n\007request\030\003 \001(\0132%.tech2.micro" +
+      "service.CallCenterRequest\")\n\024getCallCent" +
+      "erRequest\022\021\n\trequestId\030\001 \001(\003\"u\n\034getCallC" +
+      "enterRequestResponse\022\016\n\006status\030\001 \001(\003\022\r\n\005" +
+      "error\030\002 \001(\t\0226\n\007request\030\003 \001(\0132%.tech2.mic" +
+      "roservice.CallCenterRequest\"9\n\030getListCa" +
+      "llCenterRequest\022\016\n\006offset\030\001 \001(\005\022\r\n\005limit" +
+      "\030\002 \001(\005\"O\n\037getListCallCenterRequestByPhon" +
+      "e\022\r\n\005phone\030\001 \001(\003\022\016\n\006offset\030\002 \001(\005\022\r\n\005limi" +
+      "t\030\003 \001(\005\"p\n\026getListRequestResponse\022\016\n\006sta" +
+      "tus\030\001 \001(\003\022\r\n\005error\030\002 \001(\t\0227\n\010requests\030\003 \003" +
+      "(\0132%.tech2.microservice.CallCenterReques" +
+      "t2\336\007\n\017LocationService\022]\n\ngetAddress\022%.te" +
+      "ch2.microservice.getAddressRequest\032&.tec" +
+      "h2.microservice.getAddressResponse\"\000\022i\n\016" +
+      "getAddressList\022).tech2.microservice.getL" +
+      "istAddressRequest\032*.tech2.microservice.g" +
+      "etListAddressResponse\"\000\022c\n\rcreateAddress" +
+      "\022(.tech2.microservice.createAddressReque" +
+      "st\032&.tech2.microservice.getAddressRespon" +
+      "se\"\000\022f\n\rupdateAddress\022(.tech2.microservi" +
+      "ce.updateAddressRequest\032).tech2.microser" +
+      "vice.updateAddressResponse\"\000\022i\n\016updateLo" +
+      "cation\022).tech2.microservice.updateLocati" +
+      "onRequest\032*.tech2.microservice.updateLoc" +
+      "ationResponse\"\000\022s\n\rcreateRequest\022+.tech2" +
+      ".microservice.createCallCenterRequest\0323." +
+      "tech2.microservice.createCallCenterReque" +
+      "stResponse\"\000\022j\n\ngetRequest\022(.tech2.micro" +
+      "service.getCallCenterRequest\0320.tech2.mic" +
+      "roservice.getCallCenterRequestResponse\"\000" +
+      "\022l\n\016getListRequest\022,.tech2.microservice." +
+      "getListCallCenterRequest\032*.tech2.microse" +
+      "rvice.getListRequestResponse\"\000\022z\n\025getLis" +
+      "tRequestByPhone\0223.tech2.microservice.get" +
+      "ListCallCenterRequestByPhone\032*.tech2.mic" +
+      "roservice.getListRequestResponse\"\000B\021P\001Z\r" +
+      "./internal/pbb\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -144,6 +219,7 @@ public final class LocationOuterClass {
     com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
+          com.google.protobuf.TimestampProto.getDescriptor(),
         }, assigner);
     internal_static_tech2_microservice_Location_descriptor =
       getDescriptor().getMessageTypes().get(0);
@@ -223,6 +299,55 @@ public final class LocationOuterClass {
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_tech2_microservice_updateLocationResponse_descriptor,
         new java.lang.String[] { "Status", "Error", "Location", });
+    internal_static_tech2_microservice_CallCenterRequest_descriptor =
+      getDescriptor().getMessageTypes().get(13);
+    internal_static_tech2_microservice_CallCenterRequest_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_tech2_microservice_CallCenterRequest_descriptor,
+        new java.lang.String[] { "Id", "Phone", "EmployeeId", "PickingAddress", "ArrivingAddress", "Sending", "Picking", "Arriving", "CreateAt", });
+    internal_static_tech2_microservice_createCallCenterRequest_descriptor =
+      getDescriptor().getMessageTypes().get(14);
+    internal_static_tech2_microservice_createCallCenterRequest_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_tech2_microservice_createCallCenterRequest_descriptor,
+        new java.lang.String[] { "Request", });
+    internal_static_tech2_microservice_createCallCenterRequestResponse_descriptor =
+      getDescriptor().getMessageTypes().get(15);
+    internal_static_tech2_microservice_createCallCenterRequestResponse_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_tech2_microservice_createCallCenterRequestResponse_descriptor,
+        new java.lang.String[] { "Status", "Error", "Request", });
+    internal_static_tech2_microservice_getCallCenterRequest_descriptor =
+      getDescriptor().getMessageTypes().get(16);
+    internal_static_tech2_microservice_getCallCenterRequest_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_tech2_microservice_getCallCenterRequest_descriptor,
+        new java.lang.String[] { "RequestId", });
+    internal_static_tech2_microservice_getCallCenterRequestResponse_descriptor =
+      getDescriptor().getMessageTypes().get(17);
+    internal_static_tech2_microservice_getCallCenterRequestResponse_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_tech2_microservice_getCallCenterRequestResponse_descriptor,
+        new java.lang.String[] { "Status", "Error", "Request", });
+    internal_static_tech2_microservice_getListCallCenterRequest_descriptor =
+      getDescriptor().getMessageTypes().get(18);
+    internal_static_tech2_microservice_getListCallCenterRequest_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_tech2_microservice_getListCallCenterRequest_descriptor,
+        new java.lang.String[] { "Offset", "Limit", });
+    internal_static_tech2_microservice_getListCallCenterRequestByPhone_descriptor =
+      getDescriptor().getMessageTypes().get(19);
+    internal_static_tech2_microservice_getListCallCenterRequestByPhone_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_tech2_microservice_getListCallCenterRequestByPhone_descriptor,
+        new java.lang.String[] { "Phone", "Offset", "Limit", });
+    internal_static_tech2_microservice_getListRequestResponse_descriptor =
+      getDescriptor().getMessageTypes().get(20);
+    internal_static_tech2_microservice_getListRequestResponse_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_tech2_microservice_getListRequestResponse_descriptor,
+        new java.lang.String[] { "Status", "Error", "Requests", });
+    com.google.protobuf.TimestampProto.getDescriptor();
   }
 
   // @@protoc_insertion_point(outer_class_scope)
