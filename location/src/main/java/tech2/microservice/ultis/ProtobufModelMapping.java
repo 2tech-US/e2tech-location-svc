@@ -1,23 +1,29 @@
 package tech2.microservice.ultis;
 
+import lombok.extern.slf4j.Slf4j;
+import org.hibernate.LazyInitializationException;
 import tech2.microservice.Address;
 import tech2.microservice.Location;
 import tech2.microservice.LocationKey;
-import tech2.microservice.model.AddressKey;
 import tech2.microservice.model.CallCenterRequest;
 
+@Slf4j
 public class ProtobufModelMapping {
     public static tech2.microservice.model.LocationKey locationKeyMapping(LocationKey locationKey) {
         return new tech2.microservice.model.LocationKey(locationKey.getLatitude(), locationKey.getLongitude());
     }
 
-    public static tech2.microservice.LocationKey grpcLocationKeyMapping(tech2.microservice.model.LocationKey locationKey) {
-        if (locationKey == null) return null;
-        return LocationKey.newBuilder()
-                .setLatitude(locationKey.getLatitude())
-                .setLongitude(locationKey.getLongitude())
-                .build();
+    public static Location grpcLocationMapping(tech2.microservice.model.Location location) {
+        Location result = Location.newBuilder().setLatitude(location.getId().getLatitude()).setLongitude(
+                location.getId().getLongitude()).build();
+        try {
+            result =  result.toBuilder().setCount(location.getCount()).build();
+        } catch (LazyInitializationException ignored) {
+
+        }
+        return  result;
     }
+
 
     public static tech2.microservice.model.AddressKey addressKeyMapping(tech2.microservice.AddressKey addressKey) {
         return new tech2.microservice.model.AddressKey(addressKey.getCity(), addressKey.getDistrict(),
@@ -25,16 +31,11 @@ public class ProtobufModelMapping {
                                                        addressKey.getHome());
     }
 
-    public static Location grpcLocationMapping(tech2.microservice.model.Location location) {
-        return Location.newBuilder().setLatitude(location.getId().getLatitude()).setLongitude(
-                location.getId().getLongitude()).setCount(location.getCount()).build();
-    }
 
     public static Address grpcAddressMapping(tech2.microservice.model.Address address) {
-        AddressKey addressKey = address.getId();
-        Address grpcAddress = Address.newBuilder().setCity(addressKey.getCity()).setDistrict(
-                addressKey.getDistrict()).setWard(addressKey.getWard()).setStreet(addressKey.getStreet()).setHome(
-                addressKey.getHome()).build();
+        Address grpcAddress = Address.newBuilder().setCity(address.getCity()).setDistrict(
+                address.getDistrict()).setWard(address.getWard()).setStreet(address.getStreet()).setHome(
+                address.getHome()).build();
         tech2.microservice.model.Location location = address.getLocation();
         if (location != null) {
             grpcAddress = grpcAddress.toBuilder().setLocation(grpcLocationMapping(location)).build();
@@ -42,31 +43,28 @@ public class ProtobufModelMapping {
         return grpcAddress;
     }
 
-    public static CallCenterRequest requestMapping(tech2.microservice.CallCenterRequest grpcRequest) {
+    public static CallCenterRequest requestMapping(tech2.microservice.CallCenterRequestCreation grpcRequest) {
         return CallCenterRequest.builder()
                 .phone(grpcRequest.getPhone())
                 .employeeId(grpcRequest.getEmployeeId())
-                .arrivingAddress(grpcRequest.getArrivingAddress())
-                .pickingAddress(grpcRequest.getPickingAddress())
+                .arrivingAddress(null)
+                .pickingAddress(null)
                 .build();
     }
 
-    public static tech2.microservice.CallCenterRequest grpcRequestMapping(CallCenterRequest request,
-                                                                          tech2.microservice.model.LocationKey picking,
-                                                                          tech2.microservice.model.LocationKey arriving) {
-        return tech2.microservice.CallCenterRequest.newBuilder()
+    public static tech2.microservice.CallCenterRequestResponse grpcRequestMapping(CallCenterRequest request) {
+        log.info(request.toString());
+        return tech2.microservice.CallCenterRequestResponse.newBuilder()
                 .setId(request.getId())
                 .setPhone(request.getPhone())
                 .setEmployeeId(request.getEmployeeId())
-                .setArrivingAddress(request.getArrivingAddress())
-                .setPickingAddress(request.getPickingAddress())
+                .setArrivingAddress(grpcAddressMapping(request.getArrivingAddress()))
+                .setPickingAddress(grpcAddressMapping(request.getPickingAddress()))
                 .setCreateAt(
                         com.google.protobuf.Timestamp.newBuilder()
                                 .setSeconds(request.getCreatedAt().getEpochSecond())
                                 .setNanos(request.getCreatedAt().getNano())
                 )
-                .setPicking(grpcLocationKeyMapping(picking))
-                .setArriving(grpcLocationKeyMapping(arriving))
                 .build();
     }
 }

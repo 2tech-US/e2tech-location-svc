@@ -22,6 +22,7 @@ message Address {
   Location location = 6;
 }
 
+
 message LocationKey {
   double latitude = 1;
   double longitude = 2;
@@ -84,26 +85,33 @@ message updateLocationResponse{
 
 // CALL CENTER REQUEST
 
-message CallCenterRequest {
+message CallCenterRequestCreation {
   int64 id = 1;
   string phone = 2 ;
   string employeeId = 3;
-  string  pickingAddress = 4;
-  string arrivingAddress = 5;
-  bool sending = 6;
-  LocationKey picking = 7;
-  LocationKey arriving = 8;
-  google.protobuf.Timestamp createAt = 9;
+  AddressKey  pickingAddress = 4;
+  AddressKey arrivingAddress = 5;
 }
 
+message CallCenterRequestResponse {
+  int64 id = 1;
+  string phone = 2 ;
+  string employeeId = 3;
+  Address  pickingAddress = 4;
+  Address arrivingAddress = 5;
+  google.protobuf.Timestamp createAt = 6;
+  bool sending = 7;
+}
+
+
 message createCallCenterRequest{
-  CallCenterRequest request = 1;
+  CallCenterRequestCreation request = 1;
 }
 
 message createCallCenterRequestResponse {
   int64 status = 1;
   string error = 2;
-  CallCenterRequest request = 3;
+  CallCenterRequestResponse request = 3;
 }
 
 message getCallCenterRequest {
@@ -113,7 +121,7 @@ message getCallCenterRequest {
 message getCallCenterRequestResponse {
   int64 status = 1;
   string error = 2;
-  CallCenterRequest request = 3;
+  CallCenterRequestResponse request = 3;
 }
 
 message getListCallCenterRequest {
@@ -122,7 +130,7 @@ message getListCallCenterRequest {
 }
 
 message getListCallCenterRequestByPhone {
-  int64 phone = 1;
+  string phone = 1;
   int32 offset = 2;
   int32 limit = 3;
 }
@@ -130,7 +138,7 @@ message getListCallCenterRequestByPhone {
 message getListRequestResponse {
   int64 status = 1;
   string error = 2;
-  repeated CallCenterRequest requests = 3;
+  repeated CallCenterRequestResponse requests = 3;
 }
 
 

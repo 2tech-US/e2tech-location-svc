@@ -3,7 +3,7 @@ package tech2.microservice;
 import io.grpc.stub.StreamObserver;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
-import tech2.microservice.model.Address;
+import tech2.microservice.exception.NotFoundException;
 import tech2.microservice.model.AddressKey;
 import tech2.microservice.model.CallCenterRequest;
 import tech2.microservice.model.Location;
@@ -23,11 +23,7 @@ public class GrpcLocationService extends LocationServiceGrpc.LocationServiceImpl
     public void createAddress(createAddressRequest request,
                               StreamObserver<getAddressResponse> responseObserver) {
         AddressKey addressKey = ProtobufModelMapping.addressKeyMapping(request.getAddressKey());
-        tech2.microservice.model.Address address = addressLocationService.createAddress(
-                tech2.microservice.model.Address.builder()
-                        .id(addressKey)
-                        .location(null)
-                        .build());
+        tech2.microservice.model.Address address = addressLocationService.createAddress(addressKey);
         responseObserver.onNext(
                 getAddressResponse.newBuilder()
                         .setStatus(HttpStatus.OK.value())
@@ -42,6 +38,8 @@ public class GrpcLocationService extends LocationServiceGrpc.LocationServiceImpl
                            StreamObserver<getAddressResponse> responseObserver) {
         AddressKey addressKey = ProtobufModelMapping.addressKeyMapping(request.getAddressKey());
         tech2.microservice.model.Address address = addressLocationService.getAddress(addressKey);
+        if(address == null)
+            throw  new NotFoundException("Not Found Address " + addressKey);
         responseObserver.onNext(getAddressResponse.newBuilder()
                                         .setStatus(HttpStatus.OK.value())
                                         .setAddress(ProtobufModelMapping.grpcAddressMapping(address))
@@ -94,38 +92,55 @@ public class GrpcLocationService extends LocationServiceGrpc.LocationServiceImpl
     @Override
     public void createRequest(createCallCenterRequest request,
                               StreamObserver<createCallCenterRequestResponse> responseObserver) {
-        CallCenterRequest callCenterRequest = requestService.createRequest(
-                ProtobufModelMapping.requestMapping(request.getRequest()));
 
-        Address pickingAddress = addressLocationService.createAddressFromString(callCenterRequest.getPickingAddress());
-        Address arrivingAddress = addressLocationService.createAddressFromString(callCenterRequest.getArrivingAddress());
-
+        CallCenterRequestCreation requestCreation = request.getRequest();
+        CallCenterRequest result = requestService.createRequest(ProtobufModelMapping.requestMapping(requestCreation),
+                                     ProtobufModelMapping.addressKeyMapping(requestCreation.getArrivingAddress()),
+                                     ProtobufModelMapping.addressKeyMapping(requestCreation.getPickingAddress()));
 
         responseObserver.onNext(createCallCenterRequestResponse.newBuilder()
-                                        .setRequest(
-                                                ProtobufModelMapping.grpcRequestMapping(callCenterRequest,
-                                                                                        pickingAddress.getLocation().getId(),
-                                                                                        arrivingAddress.getLocation().getId()))
+                                        .setRequest(ProtobufModelMapping.grpcRequestMapping(result))
                                         .setStatus(HttpStatus.OK.value())
                                         .build());
-        super.createRequest(request, responseObserver);
+        responseObserver.onCompleted();
     }
 
     @Override
     public void getRequest(getCallCenterRequest request,
                            StreamObserver<getCallCenterRequestResponse> responseObserver) {
+        CallCenterRequest result = requestService.getRequest(request.getRequestId());
+        responseObserver.onNext(getCallCenterRequestResponse.newBuilder()
+                                        .setRequest(ProtobufModelMapping.grpcRequestMapping(result))
+                                        .setStatus(HttpStatus.OK.value())
+                                        .build());
+        responseObserver.onCompleted();
 
     }
 
     @Override
     public void getListRequest(getListCallCenterRequest request,
                                StreamObserver<getListRequestResponse> responseObserver) {
+        List<CallCenterRequest> listRequest = requestService.getRequests(request.getOffset(), request.getLimit());
 
+        Iterable<CallCenterRequestResponse>  listRequestResponse = listRequest.stream().map(
+                ProtobufModelMapping::grpcRequestMapping).toList();
+        responseObserver.onNext(getListRequestResponse.newBuilder()
+                                        .addAllRequests(listRequestResponse)
+                                        .setStatus(HttpStatus.OK.value())
+                                        .build());
+        responseObserver.onCompleted();
     }
 
     @Override
     public void getListRequestByPhone(getListCallCenterRequestByPhone request,
                                       StreamObserver<getListRequestResponse> responseObserver) {
-        super.getListRequestByPhone(request, responseObserver);
+        List<CallCenterRequest> listRequest = requestService.getRequestByPhone(request.getPhone(),request.getOffset(), request.getLimit());
+        Iterable<CallCenterRequestResponse>  listRequestResponse = listRequest.stream().map(
+                ProtobufModelMapping::grpcRequestMapping).toList();
+        responseObserver.onNext(getListRequestResponse.newBuilder()
+                                        .addAllRequests(listRequestResponse)
+                                        .setStatus(HttpStatus.OK.value())
+                                        .build());
+        responseObserver.onCompleted();
     }
 }

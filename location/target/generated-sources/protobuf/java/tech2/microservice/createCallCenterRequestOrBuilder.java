@@ -8,15 +8,15 @@ public interface createCallCenterRequestOrBuilder extends
     com.google.protobuf.MessageOrBuilder {
 
   /**
-   * <code>.tech2.microservice.CallCenterRequest request = 1;</code>
+   * <code>.tech2.microservice.CallCenterRequestCreation request = 1;</code>
    */
   boolean hasRequest();
   /**
-   * <code>.tech2.microservice.CallCenterRequest request = 1;</code>
+   * <code>.tech2.microservice.CallCenterRequestCreation request = 1;</code>
    */
-  tech2.microservice.CallCenterRequest getRequest();
+  tech2.microservice.CallCenterRequestCreation getRequest();
   /**
-   * <code>.tech2.microservice.CallCenterRequest request = 1;</code>
+   * <code>.tech2.microservice.CallCenterRequestCreation request = 1;</code>
    */
-  tech2.microservice.CallCenterRequestOrBuilder getRequestOrBuilder();
+  tech2.microservice.CallCenterRequestCreationOrBuilder getRequestOrBuilder();
 }

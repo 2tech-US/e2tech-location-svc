@@ -8,9 +8,14 @@ public interface getListCallCenterRequestByPhoneOrBuilder extends
     com.google.protobuf.MessageOrBuilder {
 
   /**
-   * <code>int64 phone = 1;</code>
+   * <code>string phone = 1;</code>
    */
-  long getPhone();
+  java.lang.String getPhone();
+  /**
+   * <code>string phone = 1;</code>
+   */
+  com.google.protobuf.ByteString
+      getPhoneBytes();
 
   /**
    * <code>int32 offset = 2;</code>

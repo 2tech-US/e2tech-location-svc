@@ -9,23 +9,56 @@ import tech2.microservice.model.AddressKey;
 import java.util.List;
 
 @Repository
-public interface AddressRepository extends PagingAndSortingRepository<Address, AddressKey> {
+public interface AddressRepository extends PagingAndSortingRepository<Address, Long> {
+    //// Composite primary key address
 
-    List<Address> findAllByIdCity(String city,
+//    List<Address> findAllByIdCity(String city,
+//                               Pageable pageable);
+//
+//    List<Address> findAllByIdCityAndIdDistrict(String city,
+//                                            String district,
+//                                            Pageable pageable);
+//
+//
+//
+//    List<Address> findAllByIdCityAndIdDistrictAndIdWard(String city,
+//                                                   String district,
+//                                                   String ward,
+//                                                   Pageable pageable);
+//
+//    List<Address> findAllByIdCityAndIdDistrictAndIdWardAndIdStreet(String city,
+//                                                            String district,
+//                                                            String ward,
+//                                                            String street,
+//                                                            Pageable pageable);
+
+    Boolean existsByCityAndDistrictAndWardAndStreetAndHome(String city,
+                                                         String district,
+                                                         String ward,
+                                                         String street,
+                                                         String home);
+
+    Address findByCityAndDistrictAndWardAndStreetAndHome(String city,
+                                                         String district,
+                                                         String ward,
+                                                         String street,
+                                                         String home);
+
+    List<Address> findAllByCity(String city,
                                Pageable pageable);
 
-    List<Address> findAllByIdCityAndIdDistrict(String city,
+    List<Address> findAllByCityAndDistrict(String city,
                                             String district,
                                             Pageable pageable);
 
 
 
-    List<Address> findAllByIdCityAndIdDistrictAndIdWard(String city,
+    List<Address> findAllByCityAndDistrictAndWard(String city,
                                                    String district,
                                                    String ward,
                                                    Pageable pageable);
 
-    List<Address> findAllByIdCityAndIdDistrictAndIdWardAndIdStreet(String city,
+    List<Address> findAllByCityAndDistrictAndWardAndStreet(String city,
                                                             String district,
                                                             String ward,
                                                             String street,

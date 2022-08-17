@@ -16,7 +16,7 @@ private static final long serialVersionUID = 0L;
     super(builder);
   }
   private getListCallCenterRequestByPhone() {
-    phone_ = 0L;
+    phone_ = "";
     offset_ = 0;
     limit_ = 0;
   }
@@ -45,9 +45,10 @@ private static final long serialVersionUID = 0L;
           case 0:
             done = true;
             break;
-          case 8: {
+          case 10: {
+            java.lang.String s = input.readStringRequireUtf8();
 
-            phone_ = input.readInt64();
+            phone_ = s;
             break;
           }
           case 16: {
@@ -93,12 +94,37 @@ private static final long serialVersionUID = 0L;
   }
 
   public static final int PHONE_FIELD_NUMBER = 1;
-  private long phone_;
+  private volatile java.lang.Object phone_;
   /**
-   * <code>int64 phone = 1;</code>
+   * <code>string phone = 1;</code>
    */
-  public long getPhone() {
-    return phone_;
+  public java.lang.String getPhone() {
+    java.lang.Object ref = phone_;
+    if (ref instanceof java.lang.String) {
+      return (java.lang.String) ref;
+    } else {
+      com.google.protobuf.ByteString bs = 
+          (com.google.protobuf.ByteString) ref;
+      java.lang.String s = bs.toStringUtf8();
+      phone_ = s;
+      return s;
+    }
+  }
+  /**
+   * <code>string phone = 1;</code>
+   */
+  public com.google.protobuf.ByteString
+      getPhoneBytes() {
+    java.lang.Object ref = phone_;
+    if (ref instanceof java.lang.String) {
+      com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString.copyFromUtf8(
+              (java.lang.String) ref);
+      phone_ = b;
+      return b;
+    } else {
+      return (com.google.protobuf.ByteString) ref;
+    }
   }
 
   public static final int OFFSET_FIELD_NUMBER = 2;
@@ -133,8 +159,8 @@ private static final long serialVersionUID = 0L;
   @java.lang.Override
   public void writeTo(com.google.protobuf.CodedOutputStream output)
                       throws java.io.IOException {
-    if (phone_ != 0L) {
-      output.writeInt64(1, phone_);
+    if (!getPhoneBytes().isEmpty()) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 1, phone_);
     }
     if (offset_ != 0) {
       output.writeInt32(2, offset_);
@@ -151,9 +177,8 @@ private static final long serialVersionUID = 0L;
     if (size != -1) return size;
 
     size = 0;
-    if (phone_ != 0L) {
-      size += com.google.protobuf.CodedOutputStream
-        .computeInt64Size(1, phone_);
+    if (!getPhoneBytes().isEmpty()) {
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, phone_);
     }
     if (offset_ != 0) {
       size += com.google.protobuf.CodedOutputStream
@@ -179,8 +204,8 @@ private static final long serialVersionUID = 0L;
     tech2.microservice.getListCallCenterRequestByPhone other = (tech2.microservice.getListCallCenterRequestByPhone) obj;
 
     boolean result = true;
-    result = result && (getPhone()
-        == other.getPhone());
+    result = result && getPhone()
+        .equals(other.getPhone());
     result = result && (getOffset()
         == other.getOffset());
     result = result && (getLimit()
@@ -197,8 +222,7 @@ private static final long serialVersionUID = 0L;
     int hash = 41;
     hash = (19 * hash) + getDescriptor().hashCode();
     hash = (37 * hash) + PHONE_FIELD_NUMBER;
-    hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
-        getPhone());
+    hash = (53 * hash) + getPhone().hashCode();
     hash = (37 * hash) + OFFSET_FIELD_NUMBER;
     hash = (53 * hash) + getOffset();
     hash = (37 * hash) + LIMIT_FIELD_NUMBER;
@@ -336,7 +360,7 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public Builder clear() {
       super.clear();
-      phone_ = 0L;
+      phone_ = "";
 
       offset_ = 0;
 
@@ -419,8 +443,9 @@ private static final long serialVersionUID = 0L;
 
     public Builder mergeFrom(tech2.microservice.getListCallCenterRequestByPhone other) {
       if (other == tech2.microservice.getListCallCenterRequestByPhone.getDefaultInstance()) return this;
-      if (other.getPhone() != 0L) {
-        setPhone(other.getPhone());
+      if (!other.getPhone().isEmpty()) {
+        phone_ = other.phone_;
+        onChanged();
       }
       if (other.getOffset() != 0) {
         setOffset(other.getOffset());
@@ -457,28 +482,71 @@ private static final long serialVersionUID = 0L;
       return this;
     }
 
-    private long phone_ ;
+    private java.lang.Object phone_ = "";
     /**
-     * <code>int64 phone = 1;</code>
+     * <code>string phone = 1;</code>
      */
-    public long getPhone() {
-      return phone_;
+    public java.lang.String getPhone() {
+      java.lang.Object ref = phone_;
+      if (!(ref instanceof java.lang.String)) {
+        com.google.protobuf.ByteString bs =
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        phone_ = s;
+        return s;
+      } else {
+        return (java.lang.String) ref;
+      }
     }
     /**
-     * <code>int64 phone = 1;</code>
+     * <code>string phone = 1;</code>
      */
-    public Builder setPhone(long value) {
-      
+    public com.google.protobuf.ByteString
+        getPhoneBytes() {
+      java.lang.Object ref = phone_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        phone_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    /**
+     * <code>string phone = 1;</code>
+     */
+    public Builder setPhone(
+        java.lang.String value) {
+      if (value == null) {
+    throw new NullPointerException();
+  }
+  
       phone_ = value;
       onChanged();
       return this;
     }
     /**
-     * <code>int64 phone = 1;</code>
+     * <code>string phone = 1;</code>
      */
     public Builder clearPhone() {
       
-      phone_ = 0L;
+      phone_ = getDefaultInstance().getPhone();
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>string phone = 1;</code>
+     */
+    public Builder setPhoneBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+      
+      phone_ = value;
       onChanged();
       return this;
     }

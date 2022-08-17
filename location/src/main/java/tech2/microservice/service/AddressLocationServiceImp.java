@@ -7,12 +7,13 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import tech2.microservice.exception.DuplicateResourceException;
 import tech2.microservice.exception.NotFoundException;
-import tech2.microservice.model.*;
+import tech2.microservice.model.Address;
+import tech2.microservice.model.AddressKey;
+import tech2.microservice.model.Location;
+import tech2.microservice.model.LocationKey;
 import tech2.microservice.repository.AddressRepository;
 import tech2.microservice.repository.LocationRepository;
-
 
 import java.util.List;
 import java.util.Optional;
@@ -26,14 +27,33 @@ public class AddressLocationServiceImp implements AddressLocationService {
     private final AddressRepository addressRepository;
     private final LocationRepository locationRepository;
 
+    private Address findAddress(AddressKey addressKey) {
+        return addressRepository.findByCityAndDistrictAndWardAndStreetAndHome(
+                addressKey.getCity(),
+                addressKey.getDistrict(),
+                addressKey.getWard(),
+                addressKey.getStreet(),
+                addressKey.getHome()
+        );
+    }
+    @Override
+    public Boolean isExist(AddressKey addressKey) {
+        return addressRepository.existsByCityAndDistrictAndWardAndStreetAndHome(
+                addressKey.getCity(),
+                addressKey.getDistrict(),
+                addressKey.getWard(),
+                addressKey.getStreet(),
+                addressKey.getHome()
+        );
+    }
+
     @Override
     public Address getAddress(AddressKey addressKey) {
-        Optional<Address> address = addressRepository.findById(addressKey);
-        if (address.isPresent()) {
-            return address.get();
-        } else {
-            throw new NotFoundException("Not Found Address:" + addressKey);
+        Address address =  this.findAddress(addressKey);
+        if(address == null) {
+            throw new NotFoundException("This Address: " + addressKey + " Don't exist");
         }
+        return address;
     }
 
     @Override
@@ -47,36 +67,30 @@ public class AddressLocationServiceImp implements AddressLocationService {
                                        int page,
                                        int limit) {
         SearchAddress searchAddressKey = SearchAddress.parseSearchAddressFromString(searchAddress);
-        Pageable pageable = PageRequest.of(page,limit);
+        Pageable pageable = PageRequest.of(page, limit);
         return searchAddressKey.getSearchResult(addressRepository, pageable);
     }
 
     @Override
-    public Address createAddress(Address address) {
-        if (addressRepository.existsById(address.getId())) {
-            throw new DuplicateResourceException("This Address Already Exist");
+    public Address createAddress(AddressKey addressKey) {
+        Address address = this.findAddress(addressKey);
+        if (address != null) {
+            return address;
         }
+        address = Address.builder()
+                .city(addressKey.getCity())
+                .district(addressKey.getDistrict())
+                .ward(addressKey.getWard())
+                .street(addressKey.getStreet())
+                .home(addressKey.getHome())
+                .build();
         return addressRepository.save(address);
     }
 
     @Override
     public Address createAddressFromString(String strAddress) {
         SearchAddress searchAddressKey = SearchAddress.parseSearchAddressFromString(strAddress);
-        Optional<Address> optional = addressRepository.findById(searchAddressKey.getAddressKey());
-        if(optional.isEmpty())
-            return addressRepository.save(new Address(searchAddressKey.getAddressKey(),null));
-        else {
-            return optional.get();
-        }
-    }
-
-    @Override
-    public Location getLocationByGps(LocationKey locationKey) {
-        Optional<Location> locationOptional = locationRepository.findById(locationKey);
-        if (locationOptional.isPresent()) {
-            return locationOptional.get();
-        }
-        throw new NotFoundException("Not Found Location " + locationKey);
+        return this.createAddress(searchAddressKey.getAddressKey());
     }
 
 
@@ -89,34 +103,23 @@ public class AddressLocationServiceImp implements AddressLocationService {
     @Override
     public Location updateLocation(LocationKey locationKey) {
         Optional<Location> locationOptional = locationRepository.findById(locationKey);
-        Location location;
         if (locationOptional.isPresent()) {
-            location = locationOptional.get();
+            Location location = locationOptional.get();
             location.setCount(location.getCount() + 1);
-            locationRepository.save(location);
+            return locationRepository.save(location);
         } else {
-            location = locationRepository.save(new Location(locationKey, 0));
+            return locationRepository.save(new Location(locationKey, 0));
         }
-        return location;
     }
 
     @Override
     public Address updateAddressGps(AddressKey addressKey,
                                     LocationKey locationKey) {
         Address address = this.getAddress(addressKey);
-        Optional<Location> optional = locationRepository.findById(locationKey);
-        if (optional.isPresent()) {
-            Location location = optional.get();
-            location.setCount(location.getCount() + 1);
-            address.setLocation(location);
-            locationRepository.save(location);
-        } else {
-            Location location = this.createLocation(locationKey);
-            address.setLocation(location);
-        }
+        Location location =  this.createLocation(locationKey);
+        address.setLocation(location);
         return addressRepository.save(address);
     }
-
 
 }
 
@@ -160,8 +163,8 @@ class SearchAddress {
             public List<String> search(AddressRepository repository,
                                        Pageable pageable,
                                        AddressKey addressKey) {
-                List<Address> addressList = repository.findAllByIdCity(addressKey.getCity(), pageable);
-                return addressList.stream().map(Address::getId).map(AddressKey::getDistrict).collect(
+                List<Address> addressList = repository.findAllByCity(addressKey.getCity(), pageable);
+                return addressList.stream().map(Address::getDistrict).collect(
                         Collectors.toList());
 
             }
@@ -177,9 +180,9 @@ class SearchAddress {
             public List<String> search(AddressRepository repository,
                                        Pageable pageable,
                                        AddressKey addressKey) {
-                List<Address> addressList = repository.findAllByIdCityAndIdDistrict(addressKey.getCity(),
-                                                                                    addressKey.getDistrict(), pageable);
-                return addressList.stream().map(Address::getId).map(AddressKey::getWard).collect(Collectors.toList());
+                List<Address> addressList = repository.findAllByCityAndDistrict(addressKey.getCity(),
+                                                                                addressKey.getDistrict(), pageable);
+                return addressList.stream().map(Address::getWard).collect(Collectors.toList());
             }
         },
         WARD {
@@ -193,11 +196,11 @@ class SearchAddress {
             public List<String> search(AddressRepository repository,
                                        Pageable pageable,
                                        AddressKey addressKey) {
-                List<Address> addressList = repository.findAllByIdCityAndIdDistrictAndIdWard(addressKey.getCity(),
-                                                                                             addressKey.getDistrict(),
-                                                                                             addressKey.getWard(),
-                                                                                             pageable);
-                return addressList.stream().map(Address::getId).map(AddressKey::getStreet).collect(Collectors.toList());
+                List<Address> addressList = repository.findAllByCityAndDistrictAndWard(addressKey.getCity(),
+                                                                                       addressKey.getDistrict(),
+                                                                                       addressKey.getWard(),
+                                                                                       pageable);
+                return addressList.stream().map(Address::getStreet).collect(Collectors.toList());
             }
         },
         STREET {
@@ -211,13 +214,13 @@ class SearchAddress {
             public List<String> search(AddressRepository repository,
                                        Pageable pageable,
                                        AddressKey addressKey) {
-                List<Address> addressList = repository.findAllByIdCityAndIdDistrictAndIdWardAndIdStreet(
+                List<Address> addressList = repository.findAllByCityAndDistrictAndWardAndStreet(
                         addressKey.getCity(),
                         addressKey.getDistrict(),
                         addressKey.getWard(),
                         addressKey.getStreet(),
                         pageable);
-                return addressList.stream().map(Address::getId).map(AddressKey::getHome).collect(Collectors.toList());
+                return addressList.stream().map(Address::getStreet).collect(Collectors.toList());
             }
         };
 

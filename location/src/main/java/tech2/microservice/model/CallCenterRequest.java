@@ -8,10 +8,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.Instant;
 import java.util.Date;
 
@@ -26,12 +23,14 @@ public class CallCenterRequest {
     private Long id;
     private String phone;
     private String employeeId;
-    private String pickingAddress;
-    private String arrivingAddress;
+    @ManyToOne
+    private Address pickingAddress;
+    @ManyToOne
+    private Address arrivingAddress;
     @Builder.Default
     private boolean sending = false;
-    @CreatedDate
+    @CreationTimestamp
     private Instant createdAt;
-    @LastModifiedDate
+    @UpdateTimestamp
     private Instant updatedAt;
 }

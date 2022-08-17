@@ -6,6 +6,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import tech2.microservice.exception.NotFoundException;
+import tech2.microservice.model.AddressKey;
 import tech2.microservice.model.CallCenterRequest;
 import tech2.microservice.repository.RequestRepository;
 
@@ -17,9 +18,12 @@ import java.util.Optional;
 @Transactional
 public class RequestServiceImp implements  RequestService{
     private final RequestRepository requestRepository;
+    private final AddressLocationService addressLocationService;
 
     @Override
-    public CallCenterRequest createRequest(CallCenterRequest callCenterRequest) {
+    public CallCenterRequest createRequest(CallCenterRequest callCenterRequest,AddressKey arriving, AddressKey picking) {
+        callCenterRequest.setArrivingAddress(addressLocationService.createAddress(arriving));
+        callCenterRequest.setPickingAddress( addressLocationService.createAddress(picking));
         return requestRepository.save(callCenterRequest);
     }
 
@@ -50,6 +54,6 @@ public class RequestServiceImp implements  RequestService{
 
     @Override
     public void sendRequest(Long requestId) {
-        //TODO: CREATE REQUEST IN BOOKING SERVICE
+        //Todo: CREATE REQUEST IN BOOKING SERVICE
     }
 }
