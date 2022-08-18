@@ -10,9 +10,7 @@ public interface RequestService {
     CallCenterRequest createRequest(CallCenterRequest callCenterRequest,
                                     AddressKey arriving, AddressKey picking);
     CallCenterRequest getRequest(Long requestId);
-    List<CallCenterRequest> getRequests(int page , int size);
-    List<CallCenterRequest> getRequestByPhone(String phone,
-                                              int page, int size);
+    List<CallCenterRequest> getRequests(String phone,int page , int size);
 
     void sendRequest(Long requestId);
 }

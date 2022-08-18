@@ -67,7 +67,7 @@ public class AddressLocationServiceImp implements AddressLocationService {
                                        int page,
                                        int limit) {
         SearchAddress searchAddressKey = SearchAddress.parseSearchAddressFromString(searchAddress);
-        Pageable pageable = PageRequest.of(page, limit);
+        Pageable pageable = PageRequest.of(page-1, limit);
         return searchAddressKey.getSearchResult(addressRepository, pageable);
     }
 
@@ -138,7 +138,7 @@ class SearchAddress {
     public static SearchAddress parseSearchAddressFromString(String address) {
         SearchAddress searchAddress = new SearchAddress();
         AddressKey addressKey = new AddressKey();
-        String[] strArray = address.split(";");
+        String[] strArray = address.split(",");
 
         for (int i = 0; i < SearchAddressStrategy.STREET.ordinal(); i++) {
             if (i >= strArray.length || strArray[i].isEmpty()) break;

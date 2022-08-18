@@ -38,19 +38,15 @@ public class RequestServiceImp implements  RequestService{
     }
 
     @Override
-    public List<CallCenterRequest> getRequests(int page,
+    public List<CallCenterRequest> getRequests(String phone,int page,
                                                int size) {
-        Pageable pageable = PageRequest.of(page,size);
-        return requestRepository.findAll(pageable).stream().toList();
+        Pageable pageable = PageRequest.of(page-1,size);
+        if(phone.isEmpty())
+            return requestRepository.findAll(pageable).toList();
+        else
+            return requestRepository.findAllByPhone(phone,pageable);
     }
 
-    @Override
-    public List<CallCenterRequest> getRequestByPhone(String phone,
-                                                     int page,
-                                                     int size) {
-        Pageable pageable = PageRequest.of(page,size);
-        return requestRepository.findAllByPhone(phone,pageable);
-    }
 
     @Override
     public void sendRequest(Long requestId) {
