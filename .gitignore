@@ -13,5 +13,5 @@
 
 # Maven
 log/
-target/
-!target/generated-sources
+location/target/
+!location/target/generated-sources

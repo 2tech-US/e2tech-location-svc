@@ -46,6 +46,7 @@ public class ProtobufModelMapping {
     public static CallCenterRequest requestMapping(tech2.microservice.CallCenterRequestCreation grpcRequest) {
         return CallCenterRequest.builder()
                 .phone(grpcRequest.getPhone())
+                .type(grpcRequest.getType())
                 .employeeId(grpcRequest.getEmployeeId())
                 .arrivingAddress(null)
                 .pickingAddress(null)
@@ -57,6 +58,7 @@ public class ProtobufModelMapping {
         return tech2.microservice.CallCenterRequestResponse.newBuilder()
                 .setId(request.getId())
                 .setPhone(request.getPhone())
+                .setType(request.getType())
                 .setEmployeeId(request.getEmployeeId())
                 .setArrivingAddress(grpcAddressMapping(request.getArrivingAddress()))
                 .setPickingAddress(grpcAddressMapping(request.getPickingAddress()))

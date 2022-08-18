@@ -12,4 +12,5 @@ import java.util.List;
 public interface RequestRepository extends PagingAndSortingRepository<CallCenterRequest,Long> {
     List<CallCenterRequest> findAllByPhone(String phone,
                                   Pageable pageable);
+
 }

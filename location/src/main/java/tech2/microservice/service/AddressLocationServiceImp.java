@@ -140,7 +140,7 @@ class SearchAddress {
         AddressKey addressKey = new AddressKey();
         String[] strArray = address.split(",");
 
-        for (int i = 0; i < SearchAddressStrategy.STREET.ordinal(); i++) {
+        for (int i = 0; i <= SearchAddressStrategy.STREET.ordinal(); i++) {
             if (i >= strArray.length || strArray[i].isEmpty()) break;
             else {
                 searchAddress.setStrategy(SearchAddressStrategy.values()[i]);
@@ -164,8 +164,7 @@ class SearchAddress {
                                        Pageable pageable,
                                        AddressKey addressKey) {
                 List<Address> addressList = repository.findAllByCity(addressKey.getCity(), pageable);
-                return addressList.stream().map(Address::getDistrict).collect(
-                        Collectors.toList());
+                return addressList.stream().map(Address::getDistrict).distinct().toList();
 
             }
         },
@@ -180,9 +179,10 @@ class SearchAddress {
             public List<String> search(AddressRepository repository,
                                        Pageable pageable,
                                        AddressKey addressKey) {
+
                 List<Address> addressList = repository.findAllByCityAndDistrict(addressKey.getCity(),
                                                                                 addressKey.getDistrict(), pageable);
-                return addressList.stream().map(Address::getWard).collect(Collectors.toList());
+                return addressList.stream().map(Address::getWard).distinct().toList();
             }
         },
         WARD {
@@ -200,7 +200,7 @@ class SearchAddress {
                                                                                        addressKey.getDistrict(),
                                                                                        addressKey.getWard(),
                                                                                        pageable);
-                return addressList.stream().map(Address::getStreet).collect(Collectors.toList());
+                return addressList.stream().map(Address::getStreet).distinct().collect(Collectors.toList());
             }
         },
         STREET {
@@ -220,7 +220,7 @@ class SearchAddress {
                         addressKey.getWard(),
                         addressKey.getStreet(),
                         pageable);
-                return addressList.stream().map(Address::getStreet).collect(Collectors.toList());
+                return addressList.stream().map(Address::getHome).distinct().collect(Collectors.toList());
             }
         };
 

@@ -88,9 +88,10 @@ message updateLocationResponse{
 message CallCenterRequestCreation {
   int64 id = 1;
   string phone = 2 ;
-  string employeeId = 3;
-  AddressKey  pickingAddress = 4;
-  AddressKey arrivingAddress = 5;
+  string type = 3;
+  string employeeId = 4;
+  AddressKey  pickingAddress = 5;
+  AddressKey arrivingAddress = 6;
 }
 
 message CallCenterRequestResponse {
@@ -101,6 +102,7 @@ message CallCenterRequestResponse {
   Address arrivingAddress = 5;
   google.protobuf.Timestamp createAt = 6;
   bool sending = 7;
+  string type = 8;
 }
 
 

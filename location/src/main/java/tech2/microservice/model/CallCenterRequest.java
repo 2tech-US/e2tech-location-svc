@@ -1,16 +1,14 @@
 package tech2.microservice.model;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
 import java.time.Instant;
-import java.util.Date;
 
 @Data
 @Entity
@@ -23,6 +21,7 @@ public class CallCenterRequest {
     private Long id;
     private String phone;
     private String employeeId;
+    private String type;
     @ManyToOne
     private Address pickingAddress;
     @ManyToOne

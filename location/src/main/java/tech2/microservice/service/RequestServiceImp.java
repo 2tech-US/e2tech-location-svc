@@ -3,6 +3,7 @@ package tech2.microservice.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import tech2.microservice.exception.NotFoundException;
@@ -38,9 +39,16 @@ public class RequestServiceImp implements  RequestService{
     }
 
     @Override
+    public List<String> getRecentPhoneRequest(int page,
+                                              int size) {
+        Pageable pageable = PageRequest.of(page-1, size, Sort.by("createdAt").descending());
+        return requestRepository.findAll(pageable).stream().map(CallCenterRequest::getPhone).distinct().toList();
+    }
+
+    @Override
     public List<CallCenterRequest> getRequests(String phone,int page,
                                                int size) {
-        Pageable pageable = PageRequest.of(page-1,size);
+        Pageable pageable = PageRequest.of(page-1, size, Sort.by("createdAt").descending());
         if(phone.isEmpty())
             return requestRepository.findAll(pageable).toList();
         else
