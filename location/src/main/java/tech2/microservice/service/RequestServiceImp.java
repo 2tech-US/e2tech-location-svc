@@ -60,4 +60,9 @@ public class RequestServiceImp implements  RequestService{
     public void sendRequest(Long requestId) {
         //Todo: CREATE REQUEST IN BOOKING SERVICE
     }
+
+    @Override
+    public long countItem() {
+        return requestRepository.count();
+    }
 }

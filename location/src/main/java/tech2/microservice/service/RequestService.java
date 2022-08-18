@@ -15,4 +15,6 @@ public interface RequestService {
     List<CallCenterRequest> getRequests(String phone,int page , int size);
 
     void sendRequest(Long requestId);
+
+    long countItem();
 }

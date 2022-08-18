@@ -56,7 +56,7 @@ public class GrpcLocationService extends LocationServiceGrpc.LocationServiceImpl
                                                                           request.getOffset(),
                                                                           request.getLimit());
         responseObserver.onNext(searchAddressResponse.newBuilder()
-                                        .addAllResult(iterable)
+                                        .addAllItems(iterable)
                                         .setStatus(HttpStatus.OK.value())
                                         .build());
         responseObserver.onCompleted();
@@ -125,7 +125,8 @@ public class GrpcLocationService extends LocationServiceGrpc.LocationServiceImpl
         Iterable<CallCenterRequestResponse>  listRequestResponse = listRequest.stream().map(
                 ProtobufModelMapping::grpcRequestMapping).toList();
         responseObserver.onNext(getListRequestResponse.newBuilder()
-                                        .addAllRequests(listRequestResponse)
+                                        .addAllItems(listRequestResponse)
+                                        .setTotal((int) requestService.countItem())
                                         .setStatus(HttpStatus.OK.value())
                                         .build());
         responseObserver.onCompleted();
