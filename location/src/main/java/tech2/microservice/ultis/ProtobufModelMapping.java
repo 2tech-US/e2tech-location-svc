@@ -59,6 +59,7 @@ public class ProtobufModelMapping {
                 .setId(request.getId())
                 .setPhone(request.getPhone())
                 .setType(request.getType())
+                .setSending(request.isSending())
                 .setEmployeeId(request.getEmployeeId())
                 .setArrivingAddress(grpcAddressMapping(request.getArrivingAddress()))
                 .setPickingAddress(grpcAddressMapping(request.getPickingAddress()))
