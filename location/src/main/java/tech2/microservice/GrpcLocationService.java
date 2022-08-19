@@ -1,9 +1,9 @@
 package tech2.microservice;
 
+import io.grpc.netty.shaded.io.netty.handler.codec.http.HttpResponseStatus;
 import io.grpc.stub.StreamObserver;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpStatus;
 import tech2.microservice.exception.NotFoundException;
 import tech2.microservice.model.AddressKey;
 import tech2.microservice.model.CallCenterRequest;
@@ -27,7 +27,7 @@ public class GrpcLocationService extends LocationServiceGrpc.LocationServiceImpl
         tech2.microservice.model.Address address = addressLocationService.createAddress(addressKey);
         responseObserver.onNext(
                 getAddressResponse.newBuilder()
-                        .setStatus(HttpStatus.OK.value())
+                        .setStatus(HttpResponseStatus.OK.code())
                         .setAddress(ProtobufModelMapping.grpcAddressMapping(address))
                         .build()
         );
@@ -42,7 +42,7 @@ public class GrpcLocationService extends LocationServiceGrpc.LocationServiceImpl
         if(address == null)
             throw  new NotFoundException("Not Found Address " + addressKey);
         responseObserver.onNext(getAddressResponse.newBuilder()
-                                        .setStatus(HttpStatus.OK.value())
+                                        .setStatus(HttpResponseStatus.OK.code())
                                         .setAddress(ProtobufModelMapping.grpcAddressMapping(address))
                                         .build());
         responseObserver.onCompleted();
@@ -57,7 +57,7 @@ public class GrpcLocationService extends LocationServiceGrpc.LocationServiceImpl
                                                                           request.getLimit());
         responseObserver.onNext(searchAddressResponse.newBuilder()
                                         .addAllItems(iterable)
-                                        .setStatus(HttpStatus.OK.value())
+                                        .setStatus(HttpResponseStatus.OK.code())
                                         .build());
         responseObserver.onCompleted();
     }
@@ -72,7 +72,7 @@ public class GrpcLocationService extends LocationServiceGrpc.LocationServiceImpl
         tech2.microservice.model.Address address = addressLocationService.updateAddressGps(addressKey, locationKey);
         responseObserver.onNext(updateAddressResponse.newBuilder()
                                         .setAddress(ProtobufModelMapping.grpcAddressMapping(address))
-                                        .setStatus(HttpStatus.OK.value())
+                                        .setStatus(HttpResponseStatus.OK.code())
                                         .build());
         responseObserver.onCompleted();
     }
@@ -85,7 +85,7 @@ public class GrpcLocationService extends LocationServiceGrpc.LocationServiceImpl
         Location location = addressLocationService.updateLocation(locationKey);
         responseObserver.onNext(updateLocationResponse.newBuilder()
                                         .setLocation(ProtobufModelMapping.grpcLocationMapping(location))
-                                        .setStatus(HttpStatus.OK.value())
+                                        .setStatus(HttpResponseStatus.OK.code())
                                         .build());
         responseObserver.onCompleted();
     }
@@ -101,7 +101,7 @@ public class GrpcLocationService extends LocationServiceGrpc.LocationServiceImpl
 
         responseObserver.onNext(createCallCenterRequestResponse.newBuilder()
                                         .setRequest(ProtobufModelMapping.grpcRequestMapping(result))
-                                        .setStatus(HttpStatus.OK.value())
+                                        .setStatus(HttpResponseStatus.OK.code())
                                         .build());
         responseObserver.onCompleted();
     }
@@ -112,7 +112,7 @@ public class GrpcLocationService extends LocationServiceGrpc.LocationServiceImpl
         CallCenterRequest result = requestService.getRequest(request.getRequestId());
         responseObserver.onNext(getCallCenterRequestResponse.newBuilder()
                                         .setRequest(ProtobufModelMapping.grpcRequestMapping(result))
-                                        .setStatus(HttpStatus.OK.value())
+                                        .setStatus(HttpResponseStatus.OK.code())
                                         .build());
         responseObserver.onCompleted();
 
@@ -127,7 +127,7 @@ public class GrpcLocationService extends LocationServiceGrpc.LocationServiceImpl
         responseObserver.onNext(getListRequestResponse.newBuilder()
                                         .addAllItems(listRequestResponse)
                                         .setTotal((int) requestService.countItem())
-                                        .setStatus(HttpStatus.OK.value())
+                                        .setStatus(HttpResponseStatus.OK.code())
                                         .build());
         responseObserver.onCompleted();
     }

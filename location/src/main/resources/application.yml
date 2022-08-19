@@ -2,8 +2,6 @@ grpc:
   server:
     port: 50055
 
-server:
-  port: 8081
 spring:
   application:
     name: location
