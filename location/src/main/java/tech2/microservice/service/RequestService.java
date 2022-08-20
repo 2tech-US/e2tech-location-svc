@@ -11,10 +11,10 @@ public interface RequestService {
                                     AddressKey arriving, AddressKey picking);
     CallCenterRequest getRequest(Long requestId);
 
-    List<String> getRecentPhoneRequest(int page, int size);
+    List<String> getRecentPhoneRequest(int quantity);
     List<CallCenterRequest> getRequests(String phone,String state,int page , int size);
 
-    void sendRequest(Long requestId);
+    CallCenterRequest sendRequest(Long requestId);
 
     long countItem(String phone, String state);
 }

@@ -46,10 +46,9 @@ public class RequestServiceImp implements RequestService {
     }
 
     @Override
-    public List<String> getRecentPhoneRequest(int page,
-                                              int size) {
-        Pageable pageable = PageRequest.of(page - 1, size, Sort.by("createdAt").descending());
-        return requestRepository.findAll(pageable).stream().map(CallCenterRequest::getPhone).distinct().toList();
+    public List<String> getRecentPhoneRequest(int size) {
+        Pageable pageable = PageRequest.of(0,size,Sort.by("createdAt").descending());
+        return requestRepository.findRecentPhoneCall(pageable);
     }
 
     @Override
@@ -58,54 +57,52 @@ public class RequestServiceImp implements RequestService {
                                                int page,
                                                int size) {
         Pageable pageable = PageRequest.of(page - 1, size, Sort.by("createdAt").descending());
-        List<CallCenterRequest> callCenterRequests;
-        if (phone.isEmpty())
-            callCenterRequests = requestRepository.findAllBySent(false, pageable);
-        else
-            callCenterRequests = requestRepository.findAllByPhoneAndSent(phone, false, pageable);
-
-        if (state.equalsIgnoreCase(STATE_LOCATED)) {
-            callCenterRequests = callCenterRequests.stream()
-                    .filter(request -> request.getArriving().getLocationId() != null && request.getPicking().getLocationId() != null)
-                    .collect(Collectors.toList());
-        } else if (state.equalsIgnoreCase(STATE_NON_LOCATED)) {
-            callCenterRequests = callCenterRequests.stream()
-                    .filter(request -> request.getArriving().getLocationId() == null || request.getPicking().getLocationId() == null)
-                    .collect(Collectors.toList());
+        if(phone.isEmpty()) {
+            if(state.equalsIgnoreCase(STATE_LOCATED)) {
+                return requestRepository.findAllLocatedRequest(pageable);
+            }else if(state.equalsIgnoreCase(STATE_NON_LOCATED)) {
+                return requestRepository.findAllNonLocatedRequest(pageable);
+            }
+            return requestRepository.findAllByPhone(phone,pageable);
+        } else {
+            if(state.equalsIgnoreCase(STATE_LOCATED)) {
+                return requestRepository.findAllLocatedRequestByPhone(phone,pageable);
+            } else if (state.equalsIgnoreCase(STATE_NON_LOCATED)) {
+                return requestRepository.findAllNotLocatedRequestByPhone(phone,pageable);
+            }
+            return requestRepository.findAll(pageable).toList();
         }
-        return callCenterRequests;
     }
 
 
     @Override
-    public void sendRequest(Long requestId) {
+    public CallCenterRequest sendRequest(Long requestId) {
         CallCenterRequest callCenterRequest = this.getRequest(requestId);
         if (callCenterRequest.getArriving().getLocationId() == null || callCenterRequest.getPicking().getLocationId() == null) {
             throw new NotLocatedException("This request has not been located yet");
         }
         callCenterRequest.setSent(true);
         //Todo: CREATE REQUEST IN BOOKING SERVICE
-        this.requestRepository.save(callCenterRequest);
+        return this.requestRepository.save(callCenterRequest);
     }
 
     @Override
     public long countItem(String phone,
                           String state) {
-        List<CallCenterRequest> requests;
-        if (!phone.isEmpty()) {
-            requests = requestRepository.findAllByPhoneAndSent(phone, false, null);
+        if(phone.isEmpty()) {
+            if(state.equalsIgnoreCase(STATE_LOCATED)) {
+                return requestRepository.countLocatedRequest();
+            }else if(state.equalsIgnoreCase(STATE_NON_LOCATED)) {
+                return requestRepository.countNonLocatedRequest();
+            }
+            return requestRepository.count();
         } else {
-            requests = requestRepository.findAllBySent(false, null);
+            if(state.equalsIgnoreCase(STATE_LOCATED)) {
+                return requestRepository.countLocatedRequestByPhone(phone);
+            } else if (state.equalsIgnoreCase(STATE_NON_LOCATED)) {
+                return requestRepository.countNonLocatedRequestByPhone(phone);
+            }
+            return requestRepository.countByPhone(phone);
         }
-        if (state.equalsIgnoreCase(STATE_LOCATED)) {
-            requests = requests.stream()
-                    .filter(request -> request.getArriving().getLocationId() != null && request.getPicking().getLocationId() != null)
-                    .collect(Collectors.toList());
-        } else if (state.equalsIgnoreCase(STATE_NON_LOCATED)) {
-            requests = requests.stream()
-                    .filter(request -> request.getArriving().getLocationId() == null || request.getPicking().getLocationId() == null)
-                    .collect(Collectors.toList());
-        }
-        return requests.size();
     }
 }

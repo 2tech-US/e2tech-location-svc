@@ -17,7 +17,6 @@ import tech2.microservice.repository.LocationRepository;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -36,6 +35,7 @@ public class AddressLocationServiceImp implements AddressLocationService {
                 addressKey.getHome()
         );
     }
+
     @Override
     public Boolean isExist(AddressKey addressKey) {
         return addressRepository.existsByCityAndDistrictAndWardAndStreetAndHome(
@@ -49,8 +49,8 @@ public class AddressLocationServiceImp implements AddressLocationService {
 
     @Override
     public Address getAddress(AddressKey addressKey) {
-        Address address =  this.findAddress(addressKey);
-        if(address == null) {
+        Address address = this.findAddress(addressKey);
+        if (address == null) {
             throw new NotFoundException("This Address: " + addressKey + " Don't exist");
         }
         return address;
@@ -67,7 +67,7 @@ public class AddressLocationServiceImp implements AddressLocationService {
                                        int page,
                                        int limit) {
         SearchAddress searchAddressKey = SearchAddress.parseSearchAddressFromString(searchAddress);
-        Pageable pageable = PageRequest.of(page-1, limit);
+        Pageable pageable = PageRequest.of(page - 1, limit);
         return searchAddressKey.getSearchResult(addressRepository, pageable);
     }
 
@@ -116,7 +116,7 @@ public class AddressLocationServiceImp implements AddressLocationService {
     public Address updateAddressGps(AddressKey addressKey,
                                     LocationKey locationKey) {
         Address address = this.getAddress(addressKey);
-        Location location =  this.createLocation(locationKey);
+        Location location = this.createLocation(locationKey);
         address.setLocation(location);
         return addressRepository.save(address);
     }
@@ -163,8 +163,7 @@ class SearchAddress {
             public List<String> search(AddressRepository repository,
                                        Pageable pageable,
                                        AddressKey addressKey) {
-                List<Address> addressList = repository.findAllByCity(addressKey.getCity(), pageable);
-                return addressList.stream().map(Address::getDistrict).distinct().toList();
+                return repository.findDistinctDistrictByCity(addressKey.getCity(), pageable);
 
             }
         },
@@ -179,10 +178,9 @@ class SearchAddress {
             public List<String> search(AddressRepository repository,
                                        Pageable pageable,
                                        AddressKey addressKey) {
-
-                List<Address> addressList = repository.findAllByCityAndDistrict(addressKey.getCity(),
-                                                                                addressKey.getDistrict(), pageable);
-                return addressList.stream().map(Address::getWard).distinct().toList();
+                return repository.findDistinctWardByCityAndByDistrict(addressKey.getCity(),
+                                                                      addressKey.getDistrict(),
+                                                                      pageable);
             }
         },
         WARD {
@@ -196,11 +194,10 @@ class SearchAddress {
             public List<String> search(AddressRepository repository,
                                        Pageable pageable,
                                        AddressKey addressKey) {
-                List<Address> addressList = repository.findAllByCityAndDistrictAndWard(addressKey.getCity(),
-                                                                                       addressKey.getDistrict(),
-                                                                                       addressKey.getWard(),
-                                                                                       pageable);
-                return addressList.stream().map(Address::getStreet).distinct().collect(Collectors.toList());
+                return repository.findDistinctStreetByCityAndByDistrictAndWard(addressKey.getCity(),
+                                                                               addressKey.getDistrict(),
+                                                                               addressKey.getWard(),
+                                                                               pageable);
             }
         },
         STREET {
@@ -214,13 +211,11 @@ class SearchAddress {
             public List<String> search(AddressRepository repository,
                                        Pageable pageable,
                                        AddressKey addressKey) {
-                List<Address> addressList = repository.findAllByCityAndDistrictAndWardAndStreet(
-                        addressKey.getCity(),
-                        addressKey.getDistrict(),
-                        addressKey.getWard(),
-                        addressKey.getStreet(),
-                        pageable);
-                return addressList.stream().map(Address::getHome).distinct().collect(Collectors.toList());
+                return repository.findDistinctHomeByCityAndByDistrictAndWardAndStreet(addressKey.getCity(),
+                                                                                      addressKey.getDistrict(),
+                                                                                      addressKey.getWard(),
+                                                                                      addressKey.getStreet(),
+                                                                                      pageable);
             }
         };
 
@@ -230,6 +225,5 @@ class SearchAddress {
         public abstract List<String> search(AddressRepository repository,
                                             Pageable pageable,
                                             AddressKey addressKey);
-
     }
 }

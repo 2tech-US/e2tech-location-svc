@@ -29,7 +29,7 @@ public class GrpcLocationService extends LocationServiceGrpc.LocationServiceImpl
         responseObserver.onNext(
                 getAddressResponse.newBuilder()
                         .setStatus(HttpResponseStatus.OK.code())
-                        .setAddress(ProtobufModelMapping.grpcAddressMapping(address))
+                        .setItem(ProtobufModelMapping.grpcAddressMapping(address))
                         .build()
         );
         responseObserver.onCompleted();
@@ -44,7 +44,7 @@ public class GrpcLocationService extends LocationServiceGrpc.LocationServiceImpl
             throw new NotFoundException("Not Found Address " + addressKey);
         responseObserver.onNext(getAddressResponse.newBuilder()
                                         .setStatus(HttpResponseStatus.OK.code())
-                                        .setAddress(ProtobufModelMapping.grpcAddressMapping(address))
+                                        .setItem(ProtobufModelMapping.grpcAddressMapping(address))
                                         .build());
         responseObserver.onCompleted();
     }
@@ -72,7 +72,7 @@ public class GrpcLocationService extends LocationServiceGrpc.LocationServiceImpl
                 request.getLocation());
         tech2.microservice.model.Address address = addressLocationService.updateAddressGps(addressKey, locationKey);
         responseObserver.onNext(updateAddressResponse.newBuilder()
-                                        .setAddress(ProtobufModelMapping.grpcAddressMapping(address))
+                                        .setItem(ProtobufModelMapping.grpcAddressMapping(address))
                                         .setStatus(HttpResponseStatus.OK.code())
                                         .build());
         responseObserver.onCompleted();
@@ -85,7 +85,7 @@ public class GrpcLocationService extends LocationServiceGrpc.LocationServiceImpl
                 request.getLocation());
         Location location = addressLocationService.updateLocation(locationKey);
         responseObserver.onNext(updateLocationResponse.newBuilder()
-                                        .setLocation(ProtobufModelMapping.grpcLocationMapping(location))
+                                        .setItem(ProtobufModelMapping.grpcLocationMapping(location))
                                         .setStatus(HttpResponseStatus.OK.code())
                                         .build());
         responseObserver.onCompleted();
@@ -103,7 +103,7 @@ public class GrpcLocationService extends LocationServiceGrpc.LocationServiceImpl
                                                                         requestCreation.getPickingAddress()));
 
         responseObserver.onNext(createCallCenterRequestResponse.newBuilder()
-                                        .setRequest(ProtobufModelMapping.grpcRequestMapping(result))
+                                        .setItem(ProtobufModelMapping.grpcRequestMapping(result))
                                         .setStatus(HttpResponseStatus.OK.code())
                                         .build());
         responseObserver.onCompleted();
@@ -114,7 +114,7 @@ public class GrpcLocationService extends LocationServiceGrpc.LocationServiceImpl
                            StreamObserver<getCallCenterRequestResponse> responseObserver) {
         CallCenterRequest result = requestService.getRequest(request.getRequestId());
         responseObserver.onNext(getCallCenterRequestResponse.newBuilder()
-                                        .setRequest(ProtobufModelMapping.grpcRequestMapping(result))
+                                        .setItem(ProtobufModelMapping.grpcRequestMapping(result))
                                         .setStatus(HttpResponseStatus.OK.code())
                                         .build());
         responseObserver.onCompleted();
@@ -131,6 +131,28 @@ public class GrpcLocationService extends LocationServiceGrpc.LocationServiceImpl
         responseObserver.onNext(getListRequestResponse.newBuilder()
                                         .addAllItems(listRequestResponse)
                                         .setTotal((int) requestService.countItem(request.getPhone(),request.getState()))
+                                        .setStatus(HttpResponseStatus.OK.code())
+                                        .build());
+        responseObserver.onCompleted();
+    }
+
+    @Override
+    public void sendCallCenterRequest(getCallCenterRequest request,
+                                      StreamObserver<getCallCenterRequestResponse> responseObserver) {
+        CallCenterRequest result = requestService.sendRequest(request.getRequestId());
+        responseObserver.onNext(getCallCenterRequestResponse.newBuilder()
+                                        .setItem(ProtobufModelMapping.grpcRequestMapping(result))
+                                        .setStatus(HttpResponseStatus.OK.code())
+                                        .build());
+        responseObserver.onCompleted();
+    }
+
+    @Override
+    public void getRecentPhoneCall(getRecentPhoneCallRequest request,
+                                   StreamObserver<searchAddressResponse> responseObserver) {
+        Iterable<String> recentPhones = requestService.getRecentPhoneRequest(request.getLimit());
+        responseObserver.onNext(searchAddressResponse.newBuilder()
+                                        .addAllItems(recentPhones)
                                         .setStatus(HttpResponseStatus.OK.code())
                                         .build());
         responseObserver.onCompleted();
