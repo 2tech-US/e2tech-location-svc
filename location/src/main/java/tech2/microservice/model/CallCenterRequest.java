@@ -23,11 +23,11 @@ public class CallCenterRequest {
     private String employeeId;
     private String type;
     @ManyToOne
-    private Address pickingAddress;
+    private Address picking;
     @ManyToOne
-    private Address arrivingAddress;
+    private Address arriving;
     @Builder.Default
-    private boolean sending = false;
+    private boolean sent = false;
     @CreationTimestamp
     private Instant createdAt;
     @UpdateTimestamp

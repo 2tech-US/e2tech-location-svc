@@ -15,4 +15,9 @@ public class GlobalExceptionHandler {
     public Status handleDuplicateResourceException(DuplicateResourceException e) {
         return Status.ALREADY_EXISTS.withDescription("Not Found " + e.getMessage());
     }
+
+    @GrpcExceptionHandler
+    public Status NotLocatedException(NotLocatedException e) {
+        return Status.PERMISSION_DENIED.withDescription("Not Found " + e.getMessage());
+    }
 }

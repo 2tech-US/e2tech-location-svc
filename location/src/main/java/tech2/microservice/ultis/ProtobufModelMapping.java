@@ -48,8 +48,8 @@ public class ProtobufModelMapping {
                 .phone(grpcRequest.getPhone())
                 .type(grpcRequest.getType())
                 .employeeId(grpcRequest.getEmployeeId())
-                .arrivingAddress(null)
-                .pickingAddress(null)
+                .arriving(null)
+                .picking(null)
                 .build();
     }
 
@@ -59,10 +59,10 @@ public class ProtobufModelMapping {
                 .setId(request.getId())
                 .setPhone(request.getPhone())
                 .setType(request.getType())
-                .setSending(request.isSending())
+                .setSending(request.isSent())
                 .setEmployeeId(request.getEmployeeId())
-                .setArrivingAddress(grpcAddressMapping(request.getArrivingAddress()))
-                .setPickingAddress(grpcAddressMapping(request.getPickingAddress()))
+                .setArrivingAddress(grpcAddressMapping(request.getArriving()))
+                .setPickingAddress(grpcAddressMapping(request.getPicking()))
                 .setCreateAt(
                         com.google.protobuf.Timestamp.newBuilder()
                                 .setSeconds(request.getCreatedAt().getEpochSecond())

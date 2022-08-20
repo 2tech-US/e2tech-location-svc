@@ -12,9 +12,9 @@ public interface RequestService {
     CallCenterRequest getRequest(Long requestId);
 
     List<String> getRecentPhoneRequest(int page, int size);
-    List<CallCenterRequest> getRequests(String phone,int page , int size);
+    List<CallCenterRequest> getRequests(String phone,String state,int page , int size);
 
     void sendRequest(Long requestId);
 
-    long countItem();
+    long countItem(String phone, String state);
 }

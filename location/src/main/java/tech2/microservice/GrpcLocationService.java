@@ -13,6 +13,7 @@ import tech2.microservice.service.RequestService;
 import tech2.microservice.ultis.ProtobufModelMapping;
 
 import java.util.List;
+
 @Slf4j
 @net.devh.boot.grpc.server.service.GrpcService
 @RequiredArgsConstructor
@@ -39,8 +40,8 @@ public class GrpcLocationService extends LocationServiceGrpc.LocationServiceImpl
                            StreamObserver<getAddressResponse> responseObserver) {
         AddressKey addressKey = ProtobufModelMapping.addressKeyMapping(request.getAddressKey());
         tech2.microservice.model.Address address = addressLocationService.getAddress(addressKey);
-        if(address == null)
-            throw  new NotFoundException("Not Found Address " + addressKey);
+        if (address == null)
+            throw new NotFoundException("Not Found Address " + addressKey);
         responseObserver.onNext(getAddressResponse.newBuilder()
                                         .setStatus(HttpResponseStatus.OK.code())
                                         .setAddress(ProtobufModelMapping.grpcAddressMapping(address))
@@ -50,7 +51,7 @@ public class GrpcLocationService extends LocationServiceGrpc.LocationServiceImpl
 
     @Override
     public void searchAddress(searchAddressRequest request,
-                               StreamObserver<searchAddressResponse> responseObserver) {
+                              StreamObserver<searchAddressResponse> responseObserver) {
         String searchAddress = request.getSearchAddress();
         Iterable<String> iterable = addressLocationService.getListAddress(searchAddress,
                                                                           request.getOffset(),
@@ -96,8 +97,10 @@ public class GrpcLocationService extends LocationServiceGrpc.LocationServiceImpl
 
         CallCenterRequestCreation requestCreation = request.getRequest();
         CallCenterRequest result = requestService.createRequest(ProtobufModelMapping.requestMapping(requestCreation),
-                                     ProtobufModelMapping.addressKeyMapping(requestCreation.getArrivingAddress()),
-                                     ProtobufModelMapping.addressKeyMapping(requestCreation.getPickingAddress()));
+                                                                ProtobufModelMapping.addressKeyMapping(
+                                                                        requestCreation.getArrivingAddress()),
+                                                                ProtobufModelMapping.addressKeyMapping(
+                                                                        requestCreation.getPickingAddress()));
 
         responseObserver.onNext(createCallCenterRequestResponse.newBuilder()
                                         .setRequest(ProtobufModelMapping.grpcRequestMapping(result))
@@ -121,12 +124,13 @@ public class GrpcLocationService extends LocationServiceGrpc.LocationServiceImpl
     @Override
     public void getListRequest(getListCallCenterRequest request,
                                StreamObserver<getListRequestResponse> responseObserver) {
-        List<CallCenterRequest> listRequest = requestService.getRequests(request.getPhone(),request.getOffset(), request.getLimit());
-        Iterable<CallCenterRequestResponse>  listRequestResponse = listRequest.stream().map(
+        List<CallCenterRequest> listRequest = requestService.getRequests(request.getPhone(), request.getState(),
+                                                                         request.getOffset(), request.getLimit());
+        Iterable<CallCenterRequestResponse> listRequestResponse = listRequest.stream().map(
                 ProtobufModelMapping::grpcRequestMapping).toList();
         responseObserver.onNext(getListRequestResponse.newBuilder()
                                         .addAllItems(listRequestResponse)
-                                        .setTotal((int) requestService.countItem())
+                                        .setTotal((int) requestService.countItem(request.getPhone(),request.getState()))
                                         .setStatus(HttpResponseStatus.OK.code())
                                         .build());
         responseObserver.onCompleted();
