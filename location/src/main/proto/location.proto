@@ -138,6 +138,12 @@ message getListRequestResponse {
   int32 total= 4;
 }
 
+message locateCallCenterRequest{
+  int64 requestId = 1;
+  LocationKey pickingLocation = 2;
+  LocationKey arrivingLocation = 3;
+}
+
 message getRecentPhoneCallRequest{
   int32 offset =1;
   int32 limit =2;
@@ -154,6 +160,7 @@ service LocationService {
 
   rpc createRequest(createCallCenterRequest) returns (createCallCenterRequestResponse) {}
   rpc getRequest(getCallCenterRequest) returns (getCallCenterRequestResponse) {}
+  rpc locateRequest(locateCallCenterRequest) returns (getCallCenterRequestResponse) {}
   rpc getListRequest(getListCallCenterRequest) returns (getListRequestResponse) {}
   rpc sendCallCenterRequest(getCallCenterRequest) returns  (getCallCenterRequestResponse) {}
 
