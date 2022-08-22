@@ -16,4 +16,24 @@ public interface getListCallCenterRequestOrBuilder extends
    * <code>int32 limit = 2;</code>
    */
   int getLimit();
+
+  /**
+   * <code>string phone = 3;</code>
+   */
+  java.lang.String getPhone();
+  /**
+   * <code>string phone = 3;</code>
+   */
+  com.google.protobuf.ByteString
+      getPhoneBytes();
+
+  /**
+   * <code>string state = 4;</code>
+   */
+  java.lang.String getState();
+  /**
+   * <code>string state = 4;</code>
+   */
+  com.google.protobuf.ByteString
+      getStateBytes();
 }

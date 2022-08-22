@@ -6,6 +6,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import tech2.microservice.GrpcBookingClient;
+import tech2.microservice.exception.CreateRequestException;
 import tech2.microservice.exception.NotFoundException;
 import tech2.microservice.exception.NotLocatedException;
 import tech2.microservice.model.AddressKey;
@@ -14,7 +16,6 @@ import tech2.microservice.repository.RequestRepository;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -25,6 +26,8 @@ public class RequestServiceImp implements RequestService {
 
     private final RequestRepository requestRepository;
     private final AddressLocationService addressLocationService;
+
+    private final GrpcBookingClient bookingClient;
 
     @Override
     public CallCenterRequest createRequest(CallCenterRequest callCenterRequest,
@@ -47,7 +50,7 @@ public class RequestServiceImp implements RequestService {
 
     @Override
     public List<String> getRecentPhoneRequest(int size) {
-        Pageable pageable = PageRequest.of(0,size,Sort.by("createdAt").descending());
+        Pageable pageable = PageRequest.of(0, size, Sort.by("createdAt").descending());
         return requestRepository.findRecentPhoneCall(pageable);
     }
 
@@ -57,20 +60,20 @@ public class RequestServiceImp implements RequestService {
                                                int page,
                                                int size) {
         Pageable pageable = PageRequest.of(page - 1, size, Sort.by("createdAt").descending());
-        if(phone.isEmpty()) {
-            if(state.equalsIgnoreCase(STATE_LOCATED)) {
-                return requestRepository.findAllLocatedRequest(pageable);
-            }else if(state.equalsIgnoreCase(STATE_NON_LOCATED)) {
-                return requestRepository.findAllNonLocatedRequest(pageable);
-            }
-            return requestRepository.findAllByPhone(phone,pageable);
-        } else {
-            if(state.equalsIgnoreCase(STATE_LOCATED)) {
-                return requestRepository.findAllLocatedRequestByPhone(phone,pageable);
+        if (phone.isEmpty()) {
+            if (state.equalsIgnoreCase(STATE_LOCATED)) {
+                return requestRepository.findAllLocatedRequest(false, pageable);
             } else if (state.equalsIgnoreCase(STATE_NON_LOCATED)) {
-                return requestRepository.findAllNotLocatedRequestByPhone(phone,pageable);
+                return requestRepository.findAllNonLocatedRequest(false, pageable);
             }
-            return requestRepository.findAll(pageable).toList();
+            return requestRepository.findAllBySent(false, pageable);
+        } else {
+            if (state.equalsIgnoreCase(STATE_LOCATED)) {
+                return requestRepository.findAllLocatedRequestByPhone(phone, false, pageable);
+            } else if (state.equalsIgnoreCase(STATE_NON_LOCATED)) {
+                return requestRepository.findAllNotLocatedRequestByPhone(phone, false, pageable);
+            }
+            return requestRepository.findAllByPhoneAndSent(phone, false, pageable);
         }
     }
 
@@ -81,28 +84,43 @@ public class RequestServiceImp implements RequestService {
         if (callCenterRequest.getArriving().getLocationId() == null || callCenterRequest.getPicking().getLocationId() == null) {
             throw new NotLocatedException("This request has not been located yet");
         }
-        callCenterRequest.setSent(true);
-        //Todo: CREATE REQUEST IN BOOKING SERVICE
-        return this.requestRepository.save(callCenterRequest);
+        if (!callCenterRequest.isSent()) {
+            bookingClient.sendRequest(callCenterRequest);
+            callCenterRequest.setSent(true);
+            return this.requestRepository.save(callCenterRequest);
+        }
+        return callCenterRequest;
+    }
+
+    @Override
+    public void cancelRequest(Long requestId) {
+        CallCenterRequest request = this.getRequest(requestId);
+        if (!request.isSent()) {
+            //todo: move in block database
+            requestRepository.delete(request);
+        } else {
+            //todo: cancel in booking service
+        }
     }
 
     @Override
     public long countItem(String phone,
                           String state) {
-        if(phone.isEmpty()) {
-            if(state.equalsIgnoreCase(STATE_LOCATED)) {
-                return requestRepository.countLocatedRequest();
-            }else if(state.equalsIgnoreCase(STATE_NON_LOCATED)) {
-                return requestRepository.countNonLocatedRequest();
-            }
-            return requestRepository.count();
-        } else {
-            if(state.equalsIgnoreCase(STATE_LOCATED)) {
-                return requestRepository.countLocatedRequestByPhone(phone);
+        if (phone.isEmpty()) {
+            if (state.equalsIgnoreCase(STATE_LOCATED)) {
+                return requestRepository.countLocatedRequest(false);
             } else if (state.equalsIgnoreCase(STATE_NON_LOCATED)) {
-                return requestRepository.countNonLocatedRequestByPhone(phone);
+                return requestRepository.countNonLocatedRequest(false);
             }
-            return requestRepository.countByPhone(phone);
+            return requestRepository.countBySent(false);
+        } else {
+            if (state.equalsIgnoreCase(STATE_LOCATED)) {
+                return requestRepository.countLocatedRequestByPhone(phone, false);
+            } else if (state.equalsIgnoreCase(STATE_NON_LOCATED)) {
+                return requestRepository.countNonLocatedRequestByPhone(phone, false);
+            }
+            return requestRepository.countByPhoneAndSent(phone, false);
         }
     }
+
 }

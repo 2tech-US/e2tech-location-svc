@@ -23,15 +23,15 @@ public interface updateLocationResponseOrBuilder extends
       getErrorBytes();
 
   /**
-   * <code>.tech2.microservice.Location location = 3;</code>
+   * <code>.tech2.microservice.Location item = 3;</code>
    */
-  boolean hasLocation();
+  boolean hasItem();
   /**
-   * <code>.tech2.microservice.Location location = 3;</code>
+   * <code>.tech2.microservice.Location item = 3;</code>
    */
-  tech2.microservice.Location getLocation();
+  tech2.microservice.Location getItem();
   /**
-   * <code>.tech2.microservice.Location location = 3;</code>
+   * <code>.tech2.microservice.Location item = 3;</code>
    */
-  tech2.microservice.LocationOrBuilder getLocationOrBuilder();
+  tech2.microservice.LocationOrBuilder getItemOrBuilder();
 }

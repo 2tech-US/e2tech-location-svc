@@ -23,15 +23,15 @@ public interface getAddressResponseOrBuilder extends
       getErrorBytes();
 
   /**
-   * <code>.tech2.microservice.Address address = 3;</code>
+   * <code>.tech2.microservice.Address item = 3;</code>
    */
-  boolean hasAddress();
+  boolean hasItem();
   /**
-   * <code>.tech2.microservice.Address address = 3;</code>
+   * <code>.tech2.microservice.Address item = 3;</code>
    */
-  tech2.microservice.Address getAddress();
+  tech2.microservice.Address getItem();
   /**
-   * <code>.tech2.microservice.Address address = 3;</code>
+   * <code>.tech2.microservice.Address item = 3;</code>
    */
-  tech2.microservice.AddressOrBuilder getAddressOrBuilder();
+  tech2.microservice.AddressOrBuilder getItemOrBuilder();
 }

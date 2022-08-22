@@ -18,7 +18,8 @@ private static final long serialVersionUID = 0L;
   private getListRequestResponse() {
     status_ = 0L;
     error_ = "";
-    requests_ = java.util.Collections.emptyList();
+    items_ = java.util.Collections.emptyList();
+    total_ = 0;
   }
 
   @java.lang.Override
@@ -58,11 +59,16 @@ private static final long serialVersionUID = 0L;
           }
           case 26: {
             if (!((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
-              requests_ = new java.util.ArrayList<tech2.microservice.CallCenterRequestResponse>();
+              items_ = new java.util.ArrayList<tech2.microservice.CallCenterRequestResponse>();
               mutable_bitField0_ |= 0x00000004;
             }
-            requests_.add(
+            items_.add(
                 input.readMessage(tech2.microservice.CallCenterRequestResponse.parser(), extensionRegistry));
+            break;
+          }
+          case 32: {
+
+            total_ = input.readInt32();
             break;
           }
           default: {
@@ -81,7 +87,7 @@ private static final long serialVersionUID = 0L;
           e).setUnfinishedMessage(this);
     } finally {
       if (((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
-        requests_ = java.util.Collections.unmodifiableList(requests_);
+        items_ = java.util.Collections.unmodifiableList(items_);
       }
       this.unknownFields = unknownFields.build();
       makeExtensionsImmutable();
@@ -144,39 +150,48 @@ private static final long serialVersionUID = 0L;
     }
   }
 
-  public static final int REQUESTS_FIELD_NUMBER = 3;
-  private java.util.List<tech2.microservice.CallCenterRequestResponse> requests_;
+  public static final int ITEMS_FIELD_NUMBER = 3;
+  private java.util.List<tech2.microservice.CallCenterRequestResponse> items_;
   /**
-   * <code>repeated .tech2.microservice.CallCenterRequestResponse requests = 3;</code>
+   * <code>repeated .tech2.microservice.CallCenterRequestResponse items = 3;</code>
    */
-  public java.util.List<tech2.microservice.CallCenterRequestResponse> getRequestsList() {
-    return requests_;
+  public java.util.List<tech2.microservice.CallCenterRequestResponse> getItemsList() {
+    return items_;
   }
   /**
-   * <code>repeated .tech2.microservice.CallCenterRequestResponse requests = 3;</code>
+   * <code>repeated .tech2.microservice.CallCenterRequestResponse items = 3;</code>
    */
   public java.util.List<? extends tech2.microservice.CallCenterRequestResponseOrBuilder> 
-      getRequestsOrBuilderList() {
-    return requests_;
+      getItemsOrBuilderList() {
+    return items_;
   }
   /**
-   * <code>repeated .tech2.microservice.CallCenterRequestResponse requests = 3;</code>
+   * <code>repeated .tech2.microservice.CallCenterRequestResponse items = 3;</code>
    */
-  public int getRequestsCount() {
-    return requests_.size();
+  public int getItemsCount() {
+    return items_.size();
   }
   /**
-   * <code>repeated .tech2.microservice.CallCenterRequestResponse requests = 3;</code>
+   * <code>repeated .tech2.microservice.CallCenterRequestResponse items = 3;</code>
    */
-  public tech2.microservice.CallCenterRequestResponse getRequests(int index) {
-    return requests_.get(index);
+  public tech2.microservice.CallCenterRequestResponse getItems(int index) {
+    return items_.get(index);
   }
   /**
-   * <code>repeated .tech2.microservice.CallCenterRequestResponse requests = 3;</code>
+   * <code>repeated .tech2.microservice.CallCenterRequestResponse items = 3;</code>
    */
-  public tech2.microservice.CallCenterRequestResponseOrBuilder getRequestsOrBuilder(
+  public tech2.microservice.CallCenterRequestResponseOrBuilder getItemsOrBuilder(
       int index) {
-    return requests_.get(index);
+    return items_.get(index);
+  }
+
+  public static final int TOTAL_FIELD_NUMBER = 4;
+  private int total_;
+  /**
+   * <code>int32 total = 4;</code>
+   */
+  public int getTotal() {
+    return total_;
   }
 
   private byte memoizedIsInitialized = -1;
@@ -199,8 +214,11 @@ private static final long serialVersionUID = 0L;
     if (!getErrorBytes().isEmpty()) {
       com.google.protobuf.GeneratedMessageV3.writeString(output, 2, error_);
     }
-    for (int i = 0; i < requests_.size(); i++) {
-      output.writeMessage(3, requests_.get(i));
+    for (int i = 0; i < items_.size(); i++) {
+      output.writeMessage(3, items_.get(i));
+    }
+    if (total_ != 0) {
+      output.writeInt32(4, total_);
     }
     unknownFields.writeTo(output);
   }
@@ -218,9 +236,13 @@ private static final long serialVersionUID = 0L;
     if (!getErrorBytes().isEmpty()) {
       size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, error_);
     }
-    for (int i = 0; i < requests_.size(); i++) {
+    for (int i = 0; i < items_.size(); i++) {
       size += com.google.protobuf.CodedOutputStream
-        .computeMessageSize(3, requests_.get(i));
+        .computeMessageSize(3, items_.get(i));
+    }
+    if (total_ != 0) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeInt32Size(4, total_);
     }
     size += unknownFields.getSerializedSize();
     memoizedSize = size;
@@ -242,8 +264,10 @@ private static final long serialVersionUID = 0L;
         == other.getStatus());
     result = result && getError()
         .equals(other.getError());
-    result = result && getRequestsList()
-        .equals(other.getRequestsList());
+    result = result && getItemsList()
+        .equals(other.getItemsList());
+    result = result && (getTotal()
+        == other.getTotal());
     result = result && unknownFields.equals(other.unknownFields);
     return result;
   }
@@ -260,10 +284,12 @@ private static final long serialVersionUID = 0L;
         getStatus());
     hash = (37 * hash) + ERROR_FIELD_NUMBER;
     hash = (53 * hash) + getError().hashCode();
-    if (getRequestsCount() > 0) {
-      hash = (37 * hash) + REQUESTS_FIELD_NUMBER;
-      hash = (53 * hash) + getRequestsList().hashCode();
+    if (getItemsCount() > 0) {
+      hash = (37 * hash) + ITEMS_FIELD_NUMBER;
+      hash = (53 * hash) + getItemsList().hashCode();
     }
+    hash = (37 * hash) + TOTAL_FIELD_NUMBER;
+    hash = (53 * hash) + getTotal();
     hash = (29 * hash) + unknownFields.hashCode();
     memoizedHashCode = hash;
     return hash;
@@ -392,7 +418,7 @@ private static final long serialVersionUID = 0L;
     private void maybeForceBuilderInitialization() {
       if (com.google.protobuf.GeneratedMessageV3
               .alwaysUseFieldBuilders) {
-        getRequestsFieldBuilder();
+        getItemsFieldBuilder();
       }
     }
     @java.lang.Override
@@ -402,12 +428,14 @@ private static final long serialVersionUID = 0L;
 
       error_ = "";
 
-      if (requestsBuilder_ == null) {
-        requests_ = java.util.Collections.emptyList();
+      if (itemsBuilder_ == null) {
+        items_ = java.util.Collections.emptyList();
         bitField0_ = (bitField0_ & ~0x00000004);
       } else {
-        requestsBuilder_.clear();
+        itemsBuilder_.clear();
       }
+      total_ = 0;
+
       return this;
     }
 
@@ -438,15 +466,16 @@ private static final long serialVersionUID = 0L;
       int to_bitField0_ = 0;
       result.status_ = status_;
       result.error_ = error_;
-      if (requestsBuilder_ == null) {
+      if (itemsBuilder_ == null) {
         if (((bitField0_ & 0x00000004) == 0x00000004)) {
-          requests_ = java.util.Collections.unmodifiableList(requests_);
+          items_ = java.util.Collections.unmodifiableList(items_);
           bitField0_ = (bitField0_ & ~0x00000004);
         }
-        result.requests_ = requests_;
+        result.items_ = items_;
       } else {
-        result.requests_ = requestsBuilder_.build();
+        result.items_ = itemsBuilder_.build();
       }
+      result.total_ = total_;
       result.bitField0_ = to_bitField0_;
       onBuilt();
       return result;
@@ -503,31 +532,34 @@ private static final long serialVersionUID = 0L;
         error_ = other.error_;
         onChanged();
       }
-      if (requestsBuilder_ == null) {
-        if (!other.requests_.isEmpty()) {
-          if (requests_.isEmpty()) {
-            requests_ = other.requests_;
+      if (itemsBuilder_ == null) {
+        if (!other.items_.isEmpty()) {
+          if (items_.isEmpty()) {
+            items_ = other.items_;
             bitField0_ = (bitField0_ & ~0x00000004);
           } else {
-            ensureRequestsIsMutable();
-            requests_.addAll(other.requests_);
+            ensureItemsIsMutable();
+            items_.addAll(other.items_);
           }
           onChanged();
         }
       } else {
-        if (!other.requests_.isEmpty()) {
-          if (requestsBuilder_.isEmpty()) {
-            requestsBuilder_.dispose();
-            requestsBuilder_ = null;
-            requests_ = other.requests_;
+        if (!other.items_.isEmpty()) {
+          if (itemsBuilder_.isEmpty()) {
+            itemsBuilder_.dispose();
+            itemsBuilder_ = null;
+            items_ = other.items_;
             bitField0_ = (bitField0_ & ~0x00000004);
-            requestsBuilder_ = 
+            itemsBuilder_ = 
               com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
-                 getRequestsFieldBuilder() : null;
+                 getItemsFieldBuilder() : null;
           } else {
-            requestsBuilder_.addAllMessages(other.requests_);
+            itemsBuilder_.addAllMessages(other.items_);
           }
         }
+      }
+      if (other.getTotal() != 0) {
+        setTotal(other.getTotal());
       }
       this.mergeUnknownFields(other.unknownFields);
       onChanged();
@@ -654,244 +686,270 @@ private static final long serialVersionUID = 0L;
       return this;
     }
 
-    private java.util.List<tech2.microservice.CallCenterRequestResponse> requests_ =
+    private java.util.List<tech2.microservice.CallCenterRequestResponse> items_ =
       java.util.Collections.emptyList();
-    private void ensureRequestsIsMutable() {
+    private void ensureItemsIsMutable() {
       if (!((bitField0_ & 0x00000004) == 0x00000004)) {
-        requests_ = new java.util.ArrayList<tech2.microservice.CallCenterRequestResponse>(requests_);
+        items_ = new java.util.ArrayList<tech2.microservice.CallCenterRequestResponse>(items_);
         bitField0_ |= 0x00000004;
        }
     }
 
     private com.google.protobuf.RepeatedFieldBuilderV3<
-        tech2.microservice.CallCenterRequestResponse, tech2.microservice.CallCenterRequestResponse.Builder, tech2.microservice.CallCenterRequestResponseOrBuilder> requestsBuilder_;
+        tech2.microservice.CallCenterRequestResponse, tech2.microservice.CallCenterRequestResponse.Builder, tech2.microservice.CallCenterRequestResponseOrBuilder> itemsBuilder_;
 
     /**
-     * <code>repeated .tech2.microservice.CallCenterRequestResponse requests = 3;</code>
+     * <code>repeated .tech2.microservice.CallCenterRequestResponse items = 3;</code>
      */
-    public java.util.List<tech2.microservice.CallCenterRequestResponse> getRequestsList() {
-      if (requestsBuilder_ == null) {
-        return java.util.Collections.unmodifiableList(requests_);
+    public java.util.List<tech2.microservice.CallCenterRequestResponse> getItemsList() {
+      if (itemsBuilder_ == null) {
+        return java.util.Collections.unmodifiableList(items_);
       } else {
-        return requestsBuilder_.getMessageList();
+        return itemsBuilder_.getMessageList();
       }
     }
     /**
-     * <code>repeated .tech2.microservice.CallCenterRequestResponse requests = 3;</code>
+     * <code>repeated .tech2.microservice.CallCenterRequestResponse items = 3;</code>
      */
-    public int getRequestsCount() {
-      if (requestsBuilder_ == null) {
-        return requests_.size();
+    public int getItemsCount() {
+      if (itemsBuilder_ == null) {
+        return items_.size();
       } else {
-        return requestsBuilder_.getCount();
+        return itemsBuilder_.getCount();
       }
     }
     /**
-     * <code>repeated .tech2.microservice.CallCenterRequestResponse requests = 3;</code>
+     * <code>repeated .tech2.microservice.CallCenterRequestResponse items = 3;</code>
      */
-    public tech2.microservice.CallCenterRequestResponse getRequests(int index) {
-      if (requestsBuilder_ == null) {
-        return requests_.get(index);
+    public tech2.microservice.CallCenterRequestResponse getItems(int index) {
+      if (itemsBuilder_ == null) {
+        return items_.get(index);
       } else {
-        return requestsBuilder_.getMessage(index);
+        return itemsBuilder_.getMessage(index);
       }
     }
     /**
-     * <code>repeated .tech2.microservice.CallCenterRequestResponse requests = 3;</code>
+     * <code>repeated .tech2.microservice.CallCenterRequestResponse items = 3;</code>
      */
-    public Builder setRequests(
+    public Builder setItems(
         int index, tech2.microservice.CallCenterRequestResponse value) {
-      if (requestsBuilder_ == null) {
+      if (itemsBuilder_ == null) {
         if (value == null) {
           throw new NullPointerException();
         }
-        ensureRequestsIsMutable();
-        requests_.set(index, value);
+        ensureItemsIsMutable();
+        items_.set(index, value);
         onChanged();
       } else {
-        requestsBuilder_.setMessage(index, value);
+        itemsBuilder_.setMessage(index, value);
       }
       return this;
     }
     /**
-     * <code>repeated .tech2.microservice.CallCenterRequestResponse requests = 3;</code>
+     * <code>repeated .tech2.microservice.CallCenterRequestResponse items = 3;</code>
      */
-    public Builder setRequests(
+    public Builder setItems(
         int index, tech2.microservice.CallCenterRequestResponse.Builder builderForValue) {
-      if (requestsBuilder_ == null) {
-        ensureRequestsIsMutable();
-        requests_.set(index, builderForValue.build());
+      if (itemsBuilder_ == null) {
+        ensureItemsIsMutable();
+        items_.set(index, builderForValue.build());
         onChanged();
       } else {
-        requestsBuilder_.setMessage(index, builderForValue.build());
+        itemsBuilder_.setMessage(index, builderForValue.build());
       }
       return this;
     }
     /**
-     * <code>repeated .tech2.microservice.CallCenterRequestResponse requests = 3;</code>
+     * <code>repeated .tech2.microservice.CallCenterRequestResponse items = 3;</code>
      */
-    public Builder addRequests(tech2.microservice.CallCenterRequestResponse value) {
-      if (requestsBuilder_ == null) {
+    public Builder addItems(tech2.microservice.CallCenterRequestResponse value) {
+      if (itemsBuilder_ == null) {
         if (value == null) {
           throw new NullPointerException();
         }
-        ensureRequestsIsMutable();
-        requests_.add(value);
+        ensureItemsIsMutable();
+        items_.add(value);
         onChanged();
       } else {
-        requestsBuilder_.addMessage(value);
+        itemsBuilder_.addMessage(value);
       }
       return this;
     }
     /**
-     * <code>repeated .tech2.microservice.CallCenterRequestResponse requests = 3;</code>
+     * <code>repeated .tech2.microservice.CallCenterRequestResponse items = 3;</code>
      */
-    public Builder addRequests(
+    public Builder addItems(
         int index, tech2.microservice.CallCenterRequestResponse value) {
-      if (requestsBuilder_ == null) {
+      if (itemsBuilder_ == null) {
         if (value == null) {
           throw new NullPointerException();
         }
-        ensureRequestsIsMutable();
-        requests_.add(index, value);
+        ensureItemsIsMutable();
+        items_.add(index, value);
         onChanged();
       } else {
-        requestsBuilder_.addMessage(index, value);
+        itemsBuilder_.addMessage(index, value);
       }
       return this;
     }
     /**
-     * <code>repeated .tech2.microservice.CallCenterRequestResponse requests = 3;</code>
+     * <code>repeated .tech2.microservice.CallCenterRequestResponse items = 3;</code>
      */
-    public Builder addRequests(
+    public Builder addItems(
         tech2.microservice.CallCenterRequestResponse.Builder builderForValue) {
-      if (requestsBuilder_ == null) {
-        ensureRequestsIsMutable();
-        requests_.add(builderForValue.build());
+      if (itemsBuilder_ == null) {
+        ensureItemsIsMutable();
+        items_.add(builderForValue.build());
         onChanged();
       } else {
-        requestsBuilder_.addMessage(builderForValue.build());
+        itemsBuilder_.addMessage(builderForValue.build());
       }
       return this;
     }
     /**
-     * <code>repeated .tech2.microservice.CallCenterRequestResponse requests = 3;</code>
+     * <code>repeated .tech2.microservice.CallCenterRequestResponse items = 3;</code>
      */
-    public Builder addRequests(
+    public Builder addItems(
         int index, tech2.microservice.CallCenterRequestResponse.Builder builderForValue) {
-      if (requestsBuilder_ == null) {
-        ensureRequestsIsMutable();
-        requests_.add(index, builderForValue.build());
+      if (itemsBuilder_ == null) {
+        ensureItemsIsMutable();
+        items_.add(index, builderForValue.build());
         onChanged();
       } else {
-        requestsBuilder_.addMessage(index, builderForValue.build());
+        itemsBuilder_.addMessage(index, builderForValue.build());
       }
       return this;
     }
     /**
-     * <code>repeated .tech2.microservice.CallCenterRequestResponse requests = 3;</code>
+     * <code>repeated .tech2.microservice.CallCenterRequestResponse items = 3;</code>
      */
-    public Builder addAllRequests(
+    public Builder addAllItems(
         java.lang.Iterable<? extends tech2.microservice.CallCenterRequestResponse> values) {
-      if (requestsBuilder_ == null) {
-        ensureRequestsIsMutable();
+      if (itemsBuilder_ == null) {
+        ensureItemsIsMutable();
         com.google.protobuf.AbstractMessageLite.Builder.addAll(
-            values, requests_);
+            values, items_);
         onChanged();
       } else {
-        requestsBuilder_.addAllMessages(values);
+        itemsBuilder_.addAllMessages(values);
       }
       return this;
     }
     /**
-     * <code>repeated .tech2.microservice.CallCenterRequestResponse requests = 3;</code>
+     * <code>repeated .tech2.microservice.CallCenterRequestResponse items = 3;</code>
      */
-    public Builder clearRequests() {
-      if (requestsBuilder_ == null) {
-        requests_ = java.util.Collections.emptyList();
+    public Builder clearItems() {
+      if (itemsBuilder_ == null) {
+        items_ = java.util.Collections.emptyList();
         bitField0_ = (bitField0_ & ~0x00000004);
         onChanged();
       } else {
-        requestsBuilder_.clear();
+        itemsBuilder_.clear();
       }
       return this;
     }
     /**
-     * <code>repeated .tech2.microservice.CallCenterRequestResponse requests = 3;</code>
+     * <code>repeated .tech2.microservice.CallCenterRequestResponse items = 3;</code>
      */
-    public Builder removeRequests(int index) {
-      if (requestsBuilder_ == null) {
-        ensureRequestsIsMutable();
-        requests_.remove(index);
+    public Builder removeItems(int index) {
+      if (itemsBuilder_ == null) {
+        ensureItemsIsMutable();
+        items_.remove(index);
         onChanged();
       } else {
-        requestsBuilder_.remove(index);
+        itemsBuilder_.remove(index);
       }
       return this;
     }
     /**
-     * <code>repeated .tech2.microservice.CallCenterRequestResponse requests = 3;</code>
+     * <code>repeated .tech2.microservice.CallCenterRequestResponse items = 3;</code>
      */
-    public tech2.microservice.CallCenterRequestResponse.Builder getRequestsBuilder(
+    public tech2.microservice.CallCenterRequestResponse.Builder getItemsBuilder(
         int index) {
-      return getRequestsFieldBuilder().getBuilder(index);
+      return getItemsFieldBuilder().getBuilder(index);
     }
     /**
-     * <code>repeated .tech2.microservice.CallCenterRequestResponse requests = 3;</code>
+     * <code>repeated .tech2.microservice.CallCenterRequestResponse items = 3;</code>
      */
-    public tech2.microservice.CallCenterRequestResponseOrBuilder getRequestsOrBuilder(
+    public tech2.microservice.CallCenterRequestResponseOrBuilder getItemsOrBuilder(
         int index) {
-      if (requestsBuilder_ == null) {
-        return requests_.get(index);  } else {
-        return requestsBuilder_.getMessageOrBuilder(index);
+      if (itemsBuilder_ == null) {
+        return items_.get(index);  } else {
+        return itemsBuilder_.getMessageOrBuilder(index);
       }
     }
     /**
-     * <code>repeated .tech2.microservice.CallCenterRequestResponse requests = 3;</code>
+     * <code>repeated .tech2.microservice.CallCenterRequestResponse items = 3;</code>
      */
     public java.util.List<? extends tech2.microservice.CallCenterRequestResponseOrBuilder> 
-         getRequestsOrBuilderList() {
-      if (requestsBuilder_ != null) {
-        return requestsBuilder_.getMessageOrBuilderList();
+         getItemsOrBuilderList() {
+      if (itemsBuilder_ != null) {
+        return itemsBuilder_.getMessageOrBuilderList();
       } else {
-        return java.util.Collections.unmodifiableList(requests_);
+        return java.util.Collections.unmodifiableList(items_);
       }
     }
     /**
-     * <code>repeated .tech2.microservice.CallCenterRequestResponse requests = 3;</code>
+     * <code>repeated .tech2.microservice.CallCenterRequestResponse items = 3;</code>
      */
-    public tech2.microservice.CallCenterRequestResponse.Builder addRequestsBuilder() {
-      return getRequestsFieldBuilder().addBuilder(
+    public tech2.microservice.CallCenterRequestResponse.Builder addItemsBuilder() {
+      return getItemsFieldBuilder().addBuilder(
           tech2.microservice.CallCenterRequestResponse.getDefaultInstance());
     }
     /**
-     * <code>repeated .tech2.microservice.CallCenterRequestResponse requests = 3;</code>
+     * <code>repeated .tech2.microservice.CallCenterRequestResponse items = 3;</code>
      */
-    public tech2.microservice.CallCenterRequestResponse.Builder addRequestsBuilder(
+    public tech2.microservice.CallCenterRequestResponse.Builder addItemsBuilder(
         int index) {
-      return getRequestsFieldBuilder().addBuilder(
+      return getItemsFieldBuilder().addBuilder(
           index, tech2.microservice.CallCenterRequestResponse.getDefaultInstance());
     }
     /**
-     * <code>repeated .tech2.microservice.CallCenterRequestResponse requests = 3;</code>
+     * <code>repeated .tech2.microservice.CallCenterRequestResponse items = 3;</code>
      */
     public java.util.List<tech2.microservice.CallCenterRequestResponse.Builder> 
-         getRequestsBuilderList() {
-      return getRequestsFieldBuilder().getBuilderList();
+         getItemsBuilderList() {
+      return getItemsFieldBuilder().getBuilderList();
     }
     private com.google.protobuf.RepeatedFieldBuilderV3<
         tech2.microservice.CallCenterRequestResponse, tech2.microservice.CallCenterRequestResponse.Builder, tech2.microservice.CallCenterRequestResponseOrBuilder> 
-        getRequestsFieldBuilder() {
-      if (requestsBuilder_ == null) {
-        requestsBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
+        getItemsFieldBuilder() {
+      if (itemsBuilder_ == null) {
+        itemsBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
             tech2.microservice.CallCenterRequestResponse, tech2.microservice.CallCenterRequestResponse.Builder, tech2.microservice.CallCenterRequestResponseOrBuilder>(
-                requests_,
+                items_,
                 ((bitField0_ & 0x00000004) == 0x00000004),
                 getParentForChildren(),
                 isClean());
-        requests_ = null;
+        items_ = null;
       }
-      return requestsBuilder_;
+      return itemsBuilder_;
+    }
+
+    private int total_ ;
+    /**
+     * <code>int32 total = 4;</code>
+     */
+    public int getTotal() {
+      return total_;
+    }
+    /**
+     * <code>int32 total = 4;</code>
+     */
+    public Builder setTotal(int value) {
+      
+      total_ = value;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>int32 total = 4;</code>
+     */
+    public Builder clearTotal() {
+      
+      total_ = 0;
+      onChanged();
+      return this;
     }
     @java.lang.Override
     public final Builder setUnknownFields(

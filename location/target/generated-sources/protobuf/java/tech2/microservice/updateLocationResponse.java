@@ -57,13 +57,13 @@ private static final long serialVersionUID = 0L;
           }
           case 26: {
             tech2.microservice.Location.Builder subBuilder = null;
-            if (location_ != null) {
-              subBuilder = location_.toBuilder();
+            if (item_ != null) {
+              subBuilder = item_.toBuilder();
             }
-            location_ = input.readMessage(tech2.microservice.Location.parser(), extensionRegistry);
+            item_ = input.readMessage(tech2.microservice.Location.parser(), extensionRegistry);
             if (subBuilder != null) {
-              subBuilder.mergeFrom(location_);
-              location_ = subBuilder.buildPartial();
+              subBuilder.mergeFrom(item_);
+              item_ = subBuilder.buildPartial();
             }
 
             break;
@@ -143,25 +143,25 @@ private static final long serialVersionUID = 0L;
     }
   }
 
-  public static final int LOCATION_FIELD_NUMBER = 3;
-  private tech2.microservice.Location location_;
+  public static final int ITEM_FIELD_NUMBER = 3;
+  private tech2.microservice.Location item_;
   /**
-   * <code>.tech2.microservice.Location location = 3;</code>
+   * <code>.tech2.microservice.Location item = 3;</code>
    */
-  public boolean hasLocation() {
-    return location_ != null;
+  public boolean hasItem() {
+    return item_ != null;
   }
   /**
-   * <code>.tech2.microservice.Location location = 3;</code>
+   * <code>.tech2.microservice.Location item = 3;</code>
    */
-  public tech2.microservice.Location getLocation() {
-    return location_ == null ? tech2.microservice.Location.getDefaultInstance() : location_;
+  public tech2.microservice.Location getItem() {
+    return item_ == null ? tech2.microservice.Location.getDefaultInstance() : item_;
   }
   /**
-   * <code>.tech2.microservice.Location location = 3;</code>
+   * <code>.tech2.microservice.Location item = 3;</code>
    */
-  public tech2.microservice.LocationOrBuilder getLocationOrBuilder() {
-    return getLocation();
+  public tech2.microservice.LocationOrBuilder getItemOrBuilder() {
+    return getItem();
   }
 
   private byte memoizedIsInitialized = -1;
@@ -184,8 +184,8 @@ private static final long serialVersionUID = 0L;
     if (!getErrorBytes().isEmpty()) {
       com.google.protobuf.GeneratedMessageV3.writeString(output, 2, error_);
     }
-    if (location_ != null) {
-      output.writeMessage(3, getLocation());
+    if (item_ != null) {
+      output.writeMessage(3, getItem());
     }
     unknownFields.writeTo(output);
   }
@@ -203,9 +203,9 @@ private static final long serialVersionUID = 0L;
     if (!getErrorBytes().isEmpty()) {
       size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, error_);
     }
-    if (location_ != null) {
+    if (item_ != null) {
       size += com.google.protobuf.CodedOutputStream
-        .computeMessageSize(3, getLocation());
+        .computeMessageSize(3, getItem());
     }
     size += unknownFields.getSerializedSize();
     memoizedSize = size;
@@ -227,10 +227,10 @@ private static final long serialVersionUID = 0L;
         == other.getStatus());
     result = result && getError()
         .equals(other.getError());
-    result = result && (hasLocation() == other.hasLocation());
-    if (hasLocation()) {
-      result = result && getLocation()
-          .equals(other.getLocation());
+    result = result && (hasItem() == other.hasItem());
+    if (hasItem()) {
+      result = result && getItem()
+          .equals(other.getItem());
     }
     result = result && unknownFields.equals(other.unknownFields);
     return result;
@@ -248,9 +248,9 @@ private static final long serialVersionUID = 0L;
         getStatus());
     hash = (37 * hash) + ERROR_FIELD_NUMBER;
     hash = (53 * hash) + getError().hashCode();
-    if (hasLocation()) {
-      hash = (37 * hash) + LOCATION_FIELD_NUMBER;
-      hash = (53 * hash) + getLocation().hashCode();
+    if (hasItem()) {
+      hash = (37 * hash) + ITEM_FIELD_NUMBER;
+      hash = (53 * hash) + getItem().hashCode();
     }
     hash = (29 * hash) + unknownFields.hashCode();
     memoizedHashCode = hash;
@@ -389,11 +389,11 @@ private static final long serialVersionUID = 0L;
 
       error_ = "";
 
-      if (locationBuilder_ == null) {
-        location_ = null;
+      if (itemBuilder_ == null) {
+        item_ = null;
       } else {
-        location_ = null;
-        locationBuilder_ = null;
+        item_ = null;
+        itemBuilder_ = null;
       }
       return this;
     }
@@ -423,10 +423,10 @@ private static final long serialVersionUID = 0L;
       tech2.microservice.updateLocationResponse result = new tech2.microservice.updateLocationResponse(this);
       result.status_ = status_;
       result.error_ = error_;
-      if (locationBuilder_ == null) {
-        result.location_ = location_;
+      if (itemBuilder_ == null) {
+        result.item_ = item_;
       } else {
-        result.location_ = locationBuilder_.build();
+        result.item_ = itemBuilder_.build();
       }
       onBuilt();
       return result;
@@ -483,8 +483,8 @@ private static final long serialVersionUID = 0L;
         error_ = other.error_;
         onChanged();
       }
-      if (other.hasLocation()) {
-        mergeLocation(other.getLocation());
+      if (other.hasItem()) {
+        mergeItem(other.getItem());
       }
       this.mergeUnknownFields(other.unknownFields);
       onChanged();
@@ -610,121 +610,121 @@ private static final long serialVersionUID = 0L;
       return this;
     }
 
-    private tech2.microservice.Location location_ = null;
+    private tech2.microservice.Location item_ = null;
     private com.google.protobuf.SingleFieldBuilderV3<
-        tech2.microservice.Location, tech2.microservice.Location.Builder, tech2.microservice.LocationOrBuilder> locationBuilder_;
+        tech2.microservice.Location, tech2.microservice.Location.Builder, tech2.microservice.LocationOrBuilder> itemBuilder_;
     /**
-     * <code>.tech2.microservice.Location location = 3;</code>
+     * <code>.tech2.microservice.Location item = 3;</code>
      */
-    public boolean hasLocation() {
-      return locationBuilder_ != null || location_ != null;
+    public boolean hasItem() {
+      return itemBuilder_ != null || item_ != null;
     }
     /**
-     * <code>.tech2.microservice.Location location = 3;</code>
+     * <code>.tech2.microservice.Location item = 3;</code>
      */
-    public tech2.microservice.Location getLocation() {
-      if (locationBuilder_ == null) {
-        return location_ == null ? tech2.microservice.Location.getDefaultInstance() : location_;
+    public tech2.microservice.Location getItem() {
+      if (itemBuilder_ == null) {
+        return item_ == null ? tech2.microservice.Location.getDefaultInstance() : item_;
       } else {
-        return locationBuilder_.getMessage();
+        return itemBuilder_.getMessage();
       }
     }
     /**
-     * <code>.tech2.microservice.Location location = 3;</code>
+     * <code>.tech2.microservice.Location item = 3;</code>
      */
-    public Builder setLocation(tech2.microservice.Location value) {
-      if (locationBuilder_ == null) {
+    public Builder setItem(tech2.microservice.Location value) {
+      if (itemBuilder_ == null) {
         if (value == null) {
           throw new NullPointerException();
         }
-        location_ = value;
+        item_ = value;
         onChanged();
       } else {
-        locationBuilder_.setMessage(value);
+        itemBuilder_.setMessage(value);
       }
 
       return this;
     }
     /**
-     * <code>.tech2.microservice.Location location = 3;</code>
+     * <code>.tech2.microservice.Location item = 3;</code>
      */
-    public Builder setLocation(
+    public Builder setItem(
         tech2.microservice.Location.Builder builderForValue) {
-      if (locationBuilder_ == null) {
-        location_ = builderForValue.build();
+      if (itemBuilder_ == null) {
+        item_ = builderForValue.build();
         onChanged();
       } else {
-        locationBuilder_.setMessage(builderForValue.build());
+        itemBuilder_.setMessage(builderForValue.build());
       }
 
       return this;
     }
     /**
-     * <code>.tech2.microservice.Location location = 3;</code>
+     * <code>.tech2.microservice.Location item = 3;</code>
      */
-    public Builder mergeLocation(tech2.microservice.Location value) {
-      if (locationBuilder_ == null) {
-        if (location_ != null) {
-          location_ =
-            tech2.microservice.Location.newBuilder(location_).mergeFrom(value).buildPartial();
+    public Builder mergeItem(tech2.microservice.Location value) {
+      if (itemBuilder_ == null) {
+        if (item_ != null) {
+          item_ =
+            tech2.microservice.Location.newBuilder(item_).mergeFrom(value).buildPartial();
         } else {
-          location_ = value;
+          item_ = value;
         }
         onChanged();
       } else {
-        locationBuilder_.mergeFrom(value);
+        itemBuilder_.mergeFrom(value);
       }
 
       return this;
     }
     /**
-     * <code>.tech2.microservice.Location location = 3;</code>
+     * <code>.tech2.microservice.Location item = 3;</code>
      */
-    public Builder clearLocation() {
-      if (locationBuilder_ == null) {
-        location_ = null;
+    public Builder clearItem() {
+      if (itemBuilder_ == null) {
+        item_ = null;
         onChanged();
       } else {
-        location_ = null;
-        locationBuilder_ = null;
+        item_ = null;
+        itemBuilder_ = null;
       }
 
       return this;
     }
     /**
-     * <code>.tech2.microservice.Location location = 3;</code>
+     * <code>.tech2.microservice.Location item = 3;</code>
      */
-    public tech2.microservice.Location.Builder getLocationBuilder() {
+    public tech2.microservice.Location.Builder getItemBuilder() {
       
       onChanged();
-      return getLocationFieldBuilder().getBuilder();
+      return getItemFieldBuilder().getBuilder();
     }
     /**
-     * <code>.tech2.microservice.Location location = 3;</code>
+     * <code>.tech2.microservice.Location item = 3;</code>
      */
-    public tech2.microservice.LocationOrBuilder getLocationOrBuilder() {
-      if (locationBuilder_ != null) {
-        return locationBuilder_.getMessageOrBuilder();
+    public tech2.microservice.LocationOrBuilder getItemOrBuilder() {
+      if (itemBuilder_ != null) {
+        return itemBuilder_.getMessageOrBuilder();
       } else {
-        return location_ == null ?
-            tech2.microservice.Location.getDefaultInstance() : location_;
+        return item_ == null ?
+            tech2.microservice.Location.getDefaultInstance() : item_;
       }
     }
     /**
-     * <code>.tech2.microservice.Location location = 3;</code>
+     * <code>.tech2.microservice.Location item = 3;</code>
      */
     private com.google.protobuf.SingleFieldBuilderV3<
         tech2.microservice.Location, tech2.microservice.Location.Builder, tech2.microservice.LocationOrBuilder> 
-        getLocationFieldBuilder() {
-      if (locationBuilder_ == null) {
-        locationBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+        getItemFieldBuilder() {
+      if (itemBuilder_ == null) {
+        itemBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
             tech2.microservice.Location, tech2.microservice.Location.Builder, tech2.microservice.LocationOrBuilder>(
-                getLocation(),
+                getItem(),
                 getParentForChildren(),
                 isClean());
-        location_ = null;
+        item_ = null;
       }
-      return locationBuilder_;
+      return itemBuilder_;
     }
     @java.lang.Override
     public final Builder setUnknownFields(
