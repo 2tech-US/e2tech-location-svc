@@ -1,6 +1,5 @@
 package tech2.microservice.service;
 
-import org.springframework.data.domain.Pageable;
 import tech2.microservice.model.AddressKey;
 import tech2.microservice.model.CallCenterRequest;
 
@@ -15,6 +14,8 @@ public interface RequestService {
     List<CallCenterRequest> getRequests(String phone,String state,int page , int size);
 
     CallCenterRequest sendRequest(Long requestId);
+
+    void cancelRequest(Long requestId);
 
     long countItem(String phone, String state);
 }

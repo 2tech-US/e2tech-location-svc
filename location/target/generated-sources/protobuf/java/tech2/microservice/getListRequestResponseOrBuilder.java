@@ -23,26 +23,31 @@ public interface getListRequestResponseOrBuilder extends
       getErrorBytes();
 
   /**
-   * <code>repeated .tech2.microservice.CallCenterRequestResponse requests = 3;</code>
+   * <code>repeated .tech2.microservice.CallCenterRequestResponse items = 3;</code>
    */
   java.util.List<tech2.microservice.CallCenterRequestResponse> 
-      getRequestsList();
+      getItemsList();
   /**
-   * <code>repeated .tech2.microservice.CallCenterRequestResponse requests = 3;</code>
+   * <code>repeated .tech2.microservice.CallCenterRequestResponse items = 3;</code>
    */
-  tech2.microservice.CallCenterRequestResponse getRequests(int index);
+  tech2.microservice.CallCenterRequestResponse getItems(int index);
   /**
-   * <code>repeated .tech2.microservice.CallCenterRequestResponse requests = 3;</code>
+   * <code>repeated .tech2.microservice.CallCenterRequestResponse items = 3;</code>
    */
-  int getRequestsCount();
+  int getItemsCount();
   /**
-   * <code>repeated .tech2.microservice.CallCenterRequestResponse requests = 3;</code>
+   * <code>repeated .tech2.microservice.CallCenterRequestResponse items = 3;</code>
    */
   java.util.List<? extends tech2.microservice.CallCenterRequestResponseOrBuilder> 
-      getRequestsOrBuilderList();
+      getItemsOrBuilderList();
   /**
-   * <code>repeated .tech2.microservice.CallCenterRequestResponse requests = 3;</code>
+   * <code>repeated .tech2.microservice.CallCenterRequestResponse items = 3;</code>
    */
-  tech2.microservice.CallCenterRequestResponseOrBuilder getRequestsOrBuilder(
+  tech2.microservice.CallCenterRequestResponseOrBuilder getItemsOrBuilder(
       int index);
+
+  /**
+   * <code>int32 total = 4;</code>
+   */
+  int getTotal();
 }

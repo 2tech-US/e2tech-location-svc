@@ -57,13 +57,13 @@ private static final long serialVersionUID = 0L;
           }
           case 26: {
             tech2.microservice.Address.Builder subBuilder = null;
-            if (address_ != null) {
-              subBuilder = address_.toBuilder();
+            if (item_ != null) {
+              subBuilder = item_.toBuilder();
             }
-            address_ = input.readMessage(tech2.microservice.Address.parser(), extensionRegistry);
+            item_ = input.readMessage(tech2.microservice.Address.parser(), extensionRegistry);
             if (subBuilder != null) {
-              subBuilder.mergeFrom(address_);
-              address_ = subBuilder.buildPartial();
+              subBuilder.mergeFrom(item_);
+              item_ = subBuilder.buildPartial();
             }
 
             break;
@@ -143,25 +143,25 @@ private static final long serialVersionUID = 0L;
     }
   }
 
-  public static final int ADDRESS_FIELD_NUMBER = 3;
-  private tech2.microservice.Address address_;
+  public static final int ITEM_FIELD_NUMBER = 3;
+  private tech2.microservice.Address item_;
   /**
-   * <code>.tech2.microservice.Address address = 3;</code>
+   * <code>.tech2.microservice.Address item = 3;</code>
    */
-  public boolean hasAddress() {
-    return address_ != null;
+  public boolean hasItem() {
+    return item_ != null;
   }
   /**
-   * <code>.tech2.microservice.Address address = 3;</code>
+   * <code>.tech2.microservice.Address item = 3;</code>
    */
-  public tech2.microservice.Address getAddress() {
-    return address_ == null ? tech2.microservice.Address.getDefaultInstance() : address_;
+  public tech2.microservice.Address getItem() {
+    return item_ == null ? tech2.microservice.Address.getDefaultInstance() : item_;
   }
   /**
-   * <code>.tech2.microservice.Address address = 3;</code>
+   * <code>.tech2.microservice.Address item = 3;</code>
    */
-  public tech2.microservice.AddressOrBuilder getAddressOrBuilder() {
-    return getAddress();
+  public tech2.microservice.AddressOrBuilder getItemOrBuilder() {
+    return getItem();
   }
 
   private byte memoizedIsInitialized = -1;
@@ -184,8 +184,8 @@ private static final long serialVersionUID = 0L;
     if (!getErrorBytes().isEmpty()) {
       com.google.protobuf.GeneratedMessageV3.writeString(output, 2, error_);
     }
-    if (address_ != null) {
-      output.writeMessage(3, getAddress());
+    if (item_ != null) {
+      output.writeMessage(3, getItem());
     }
     unknownFields.writeTo(output);
   }
@@ -203,9 +203,9 @@ private static final long serialVersionUID = 0L;
     if (!getErrorBytes().isEmpty()) {
       size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, error_);
     }
-    if (address_ != null) {
+    if (item_ != null) {
       size += com.google.protobuf.CodedOutputStream
-        .computeMessageSize(3, getAddress());
+        .computeMessageSize(3, getItem());
     }
     size += unknownFields.getSerializedSize();
     memoizedSize = size;
@@ -227,10 +227,10 @@ private static final long serialVersionUID = 0L;
         == other.getStatus());
     result = result && getError()
         .equals(other.getError());
-    result = result && (hasAddress() == other.hasAddress());
-    if (hasAddress()) {
-      result = result && getAddress()
-          .equals(other.getAddress());
+    result = result && (hasItem() == other.hasItem());
+    if (hasItem()) {
+      result = result && getItem()
+          .equals(other.getItem());
     }
     result = result && unknownFields.equals(other.unknownFields);
     return result;
@@ -248,9 +248,9 @@ private static final long serialVersionUID = 0L;
         getStatus());
     hash = (37 * hash) + ERROR_FIELD_NUMBER;
     hash = (53 * hash) + getError().hashCode();
-    if (hasAddress()) {
-      hash = (37 * hash) + ADDRESS_FIELD_NUMBER;
-      hash = (53 * hash) + getAddress().hashCode();
+    if (hasItem()) {
+      hash = (37 * hash) + ITEM_FIELD_NUMBER;
+      hash = (53 * hash) + getItem().hashCode();
     }
     hash = (29 * hash) + unknownFields.hashCode();
     memoizedHashCode = hash;
@@ -389,11 +389,11 @@ private static final long serialVersionUID = 0L;
 
       error_ = "";
 
-      if (addressBuilder_ == null) {
-        address_ = null;
+      if (itemBuilder_ == null) {
+        item_ = null;
       } else {
-        address_ = null;
-        addressBuilder_ = null;
+        item_ = null;
+        itemBuilder_ = null;
       }
       return this;
     }
@@ -423,10 +423,10 @@ private static final long serialVersionUID = 0L;
       tech2.microservice.updateAddressResponse result = new tech2.microservice.updateAddressResponse(this);
       result.status_ = status_;
       result.error_ = error_;
-      if (addressBuilder_ == null) {
-        result.address_ = address_;
+      if (itemBuilder_ == null) {
+        result.item_ = item_;
       } else {
-        result.address_ = addressBuilder_.build();
+        result.item_ = itemBuilder_.build();
       }
       onBuilt();
       return result;
@@ -483,8 +483,8 @@ private static final long serialVersionUID = 0L;
         error_ = other.error_;
         onChanged();
       }
-      if (other.hasAddress()) {
-        mergeAddress(other.getAddress());
+      if (other.hasItem()) {
+        mergeItem(other.getItem());
       }
       this.mergeUnknownFields(other.unknownFields);
       onChanged();
@@ -610,121 +610,121 @@ private static final long serialVersionUID = 0L;
       return this;
     }
 
-    private tech2.microservice.Address address_ = null;
+    private tech2.microservice.Address item_ = null;
     private com.google.protobuf.SingleFieldBuilderV3<
-        tech2.microservice.Address, tech2.microservice.Address.Builder, tech2.microservice.AddressOrBuilder> addressBuilder_;
+        tech2.microservice.Address, tech2.microservice.Address.Builder, tech2.microservice.AddressOrBuilder> itemBuilder_;
     /**
-     * <code>.tech2.microservice.Address address = 3;</code>
+     * <code>.tech2.microservice.Address item = 3;</code>
      */
-    public boolean hasAddress() {
-      return addressBuilder_ != null || address_ != null;
+    public boolean hasItem() {
+      return itemBuilder_ != null || item_ != null;
     }
     /**
-     * <code>.tech2.microservice.Address address = 3;</code>
+     * <code>.tech2.microservice.Address item = 3;</code>
      */
-    public tech2.microservice.Address getAddress() {
-      if (addressBuilder_ == null) {
-        return address_ == null ? tech2.microservice.Address.getDefaultInstance() : address_;
+    public tech2.microservice.Address getItem() {
+      if (itemBuilder_ == null) {
+        return item_ == null ? tech2.microservice.Address.getDefaultInstance() : item_;
       } else {
-        return addressBuilder_.getMessage();
+        return itemBuilder_.getMessage();
       }
     }
     /**
-     * <code>.tech2.microservice.Address address = 3;</code>
+     * <code>.tech2.microservice.Address item = 3;</code>
      */
-    public Builder setAddress(tech2.microservice.Address value) {
-      if (addressBuilder_ == null) {
+    public Builder setItem(tech2.microservice.Address value) {
+      if (itemBuilder_ == null) {
         if (value == null) {
           throw new NullPointerException();
         }
-        address_ = value;
+        item_ = value;
         onChanged();
       } else {
-        addressBuilder_.setMessage(value);
+        itemBuilder_.setMessage(value);
       }
 
       return this;
     }
     /**
-     * <code>.tech2.microservice.Address address = 3;</code>
+     * <code>.tech2.microservice.Address item = 3;</code>
      */
-    public Builder setAddress(
+    public Builder setItem(
         tech2.microservice.Address.Builder builderForValue) {
-      if (addressBuilder_ == null) {
-        address_ = builderForValue.build();
+      if (itemBuilder_ == null) {
+        item_ = builderForValue.build();
         onChanged();
       } else {
-        addressBuilder_.setMessage(builderForValue.build());
+        itemBuilder_.setMessage(builderForValue.build());
       }
 
       return this;
     }
     /**
-     * <code>.tech2.microservice.Address address = 3;</code>
+     * <code>.tech2.microservice.Address item = 3;</code>
      */
-    public Builder mergeAddress(tech2.microservice.Address value) {
-      if (addressBuilder_ == null) {
-        if (address_ != null) {
-          address_ =
-            tech2.microservice.Address.newBuilder(address_).mergeFrom(value).buildPartial();
+    public Builder mergeItem(tech2.microservice.Address value) {
+      if (itemBuilder_ == null) {
+        if (item_ != null) {
+          item_ =
+            tech2.microservice.Address.newBuilder(item_).mergeFrom(value).buildPartial();
         } else {
-          address_ = value;
+          item_ = value;
         }
         onChanged();
       } else {
-        addressBuilder_.mergeFrom(value);
+        itemBuilder_.mergeFrom(value);
       }
 
       return this;
     }
     /**
-     * <code>.tech2.microservice.Address address = 3;</code>
+     * <code>.tech2.microservice.Address item = 3;</code>
      */
-    public Builder clearAddress() {
-      if (addressBuilder_ == null) {
-        address_ = null;
+    public Builder clearItem() {
+      if (itemBuilder_ == null) {
+        item_ = null;
         onChanged();
       } else {
-        address_ = null;
-        addressBuilder_ = null;
+        item_ = null;
+        itemBuilder_ = null;
       }
 
       return this;
     }
     /**
-     * <code>.tech2.microservice.Address address = 3;</code>
+     * <code>.tech2.microservice.Address item = 3;</code>
      */
-    public tech2.microservice.Address.Builder getAddressBuilder() {
+    public tech2.microservice.Address.Builder getItemBuilder() {
       
       onChanged();
-      return getAddressFieldBuilder().getBuilder();
+      return getItemFieldBuilder().getBuilder();
     }
     /**
-     * <code>.tech2.microservice.Address address = 3;</code>
+     * <code>.tech2.microservice.Address item = 3;</code>
      */
-    public tech2.microservice.AddressOrBuilder getAddressOrBuilder() {
-      if (addressBuilder_ != null) {
-        return addressBuilder_.getMessageOrBuilder();
+    public tech2.microservice.AddressOrBuilder getItemOrBuilder() {
+      if (itemBuilder_ != null) {
+        return itemBuilder_.getMessageOrBuilder();
       } else {
-        return address_ == null ?
-            tech2.microservice.Address.getDefaultInstance() : address_;
+        return item_ == null ?
+            tech2.microservice.Address.getDefaultInstance() : item_;
       }
     }
     /**
-     * <code>.tech2.microservice.Address address = 3;</code>
+     * <code>.tech2.microservice.Address item = 3;</code>
      */
     private com.google.protobuf.SingleFieldBuilderV3<
         tech2.microservice.Address, tech2.microservice.Address.Builder, tech2.microservice.AddressOrBuilder> 
-        getAddressFieldBuilder() {
-      if (addressBuilder_ == null) {
-        addressBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+        getItemFieldBuilder() {
+      if (itemBuilder_ == null) {
+        itemBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
             tech2.microservice.Address, tech2.microservice.Address.Builder, tech2.microservice.AddressOrBuilder>(
-                getAddress(),
+                getItem(),
                 getParentForChildren(),
                 isClean());
-        address_ = null;
+        item_ = null;
       }
-      return addressBuilder_;
+      return itemBuilder_;
     }
     @java.lang.Override
     public final Builder setUnknownFields(

@@ -57,12 +57,6 @@ public class AddressLocationServiceImp implements AddressLocationService {
     }
 
     @Override
-    public Address getAddressFromString(String strAddress) {
-        SearchAddress searchAddressKey = SearchAddress.parseSearchAddressFromString(strAddress);
-        return this.getAddress(searchAddressKey.getAddressKey());
-    }
-
-    @Override
     public List<String> getListAddress(String searchAddress,
                                        int page,
                                        int limit) {
@@ -86,13 +80,6 @@ public class AddressLocationServiceImp implements AddressLocationService {
                 .build();
         return addressRepository.save(address);
     }
-
-    @Override
-    public Address createAddressFromString(String strAddress) {
-        SearchAddress searchAddressKey = SearchAddress.parseSearchAddressFromString(strAddress);
-        return this.createAddress(searchAddressKey.getAddressKey());
-    }
-
 
     @Override
     public Location createLocation(LocationKey locationKey) {

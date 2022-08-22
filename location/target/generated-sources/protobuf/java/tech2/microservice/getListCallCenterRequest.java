@@ -18,6 +18,8 @@ private static final long serialVersionUID = 0L;
   private getListCallCenterRequest() {
     offset_ = 0;
     limit_ = 0;
+    phone_ = "";
+    state_ = "";
   }
 
   @java.lang.Override
@@ -52,6 +54,18 @@ private static final long serialVersionUID = 0L;
           case 16: {
 
             limit_ = input.readInt32();
+            break;
+          }
+          case 26: {
+            java.lang.String s = input.readStringRequireUtf8();
+
+            phone_ = s;
+            break;
+          }
+          case 34: {
+            java.lang.String s = input.readStringRequireUtf8();
+
+            state_ = s;
             break;
           }
           default: {
@@ -104,6 +118,74 @@ private static final long serialVersionUID = 0L;
     return limit_;
   }
 
+  public static final int PHONE_FIELD_NUMBER = 3;
+  private volatile java.lang.Object phone_;
+  /**
+   * <code>string phone = 3;</code>
+   */
+  public java.lang.String getPhone() {
+    java.lang.Object ref = phone_;
+    if (ref instanceof java.lang.String) {
+      return (java.lang.String) ref;
+    } else {
+      com.google.protobuf.ByteString bs = 
+          (com.google.protobuf.ByteString) ref;
+      java.lang.String s = bs.toStringUtf8();
+      phone_ = s;
+      return s;
+    }
+  }
+  /**
+   * <code>string phone = 3;</code>
+   */
+  public com.google.protobuf.ByteString
+      getPhoneBytes() {
+    java.lang.Object ref = phone_;
+    if (ref instanceof java.lang.String) {
+      com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString.copyFromUtf8(
+              (java.lang.String) ref);
+      phone_ = b;
+      return b;
+    } else {
+      return (com.google.protobuf.ByteString) ref;
+    }
+  }
+
+  public static final int STATE_FIELD_NUMBER = 4;
+  private volatile java.lang.Object state_;
+  /**
+   * <code>string state = 4;</code>
+   */
+  public java.lang.String getState() {
+    java.lang.Object ref = state_;
+    if (ref instanceof java.lang.String) {
+      return (java.lang.String) ref;
+    } else {
+      com.google.protobuf.ByteString bs = 
+          (com.google.protobuf.ByteString) ref;
+      java.lang.String s = bs.toStringUtf8();
+      state_ = s;
+      return s;
+    }
+  }
+  /**
+   * <code>string state = 4;</code>
+   */
+  public com.google.protobuf.ByteString
+      getStateBytes() {
+    java.lang.Object ref = state_;
+    if (ref instanceof java.lang.String) {
+      com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString.copyFromUtf8(
+              (java.lang.String) ref);
+      state_ = b;
+      return b;
+    } else {
+      return (com.google.protobuf.ByteString) ref;
+    }
+  }
+
   private byte memoizedIsInitialized = -1;
   @java.lang.Override
   public final boolean isInitialized() {
@@ -124,6 +206,12 @@ private static final long serialVersionUID = 0L;
     if (limit_ != 0) {
       output.writeInt32(2, limit_);
     }
+    if (!getPhoneBytes().isEmpty()) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 3, phone_);
+    }
+    if (!getStateBytes().isEmpty()) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 4, state_);
+    }
     unknownFields.writeTo(output);
   }
 
@@ -140,6 +228,12 @@ private static final long serialVersionUID = 0L;
     if (limit_ != 0) {
       size += com.google.protobuf.CodedOutputStream
         .computeInt32Size(2, limit_);
+    }
+    if (!getPhoneBytes().isEmpty()) {
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, phone_);
+    }
+    if (!getStateBytes().isEmpty()) {
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(4, state_);
     }
     size += unknownFields.getSerializedSize();
     memoizedSize = size;
@@ -161,6 +255,10 @@ private static final long serialVersionUID = 0L;
         == other.getOffset());
     result = result && (getLimit()
         == other.getLimit());
+    result = result && getPhone()
+        .equals(other.getPhone());
+    result = result && getState()
+        .equals(other.getState());
     result = result && unknownFields.equals(other.unknownFields);
     return result;
   }
@@ -176,6 +274,10 @@ private static final long serialVersionUID = 0L;
     hash = (53 * hash) + getOffset();
     hash = (37 * hash) + LIMIT_FIELD_NUMBER;
     hash = (53 * hash) + getLimit();
+    hash = (37 * hash) + PHONE_FIELD_NUMBER;
+    hash = (53 * hash) + getPhone().hashCode();
+    hash = (37 * hash) + STATE_FIELD_NUMBER;
+    hash = (53 * hash) + getState().hashCode();
     hash = (29 * hash) + unknownFields.hashCode();
     memoizedHashCode = hash;
     return hash;
@@ -313,6 +415,10 @@ private static final long serialVersionUID = 0L;
 
       limit_ = 0;
 
+      phone_ = "";
+
+      state_ = "";
+
       return this;
     }
 
@@ -341,6 +447,8 @@ private static final long serialVersionUID = 0L;
       tech2.microservice.getListCallCenterRequest result = new tech2.microservice.getListCallCenterRequest(this);
       result.offset_ = offset_;
       result.limit_ = limit_;
+      result.phone_ = phone_;
+      result.state_ = state_;
       onBuilt();
       return result;
     }
@@ -394,6 +502,14 @@ private static final long serialVersionUID = 0L;
       }
       if (other.getLimit() != 0) {
         setLimit(other.getLimit());
+      }
+      if (!other.getPhone().isEmpty()) {
+        phone_ = other.phone_;
+        onChanged();
+      }
+      if (!other.getState().isEmpty()) {
+        state_ = other.state_;
+        onChanged();
       }
       this.mergeUnknownFields(other.unknownFields);
       onChanged();
@@ -472,6 +588,144 @@ private static final long serialVersionUID = 0L;
     public Builder clearLimit() {
       
       limit_ = 0;
+      onChanged();
+      return this;
+    }
+
+    private java.lang.Object phone_ = "";
+    /**
+     * <code>string phone = 3;</code>
+     */
+    public java.lang.String getPhone() {
+      java.lang.Object ref = phone_;
+      if (!(ref instanceof java.lang.String)) {
+        com.google.protobuf.ByteString bs =
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        phone_ = s;
+        return s;
+      } else {
+        return (java.lang.String) ref;
+      }
+    }
+    /**
+     * <code>string phone = 3;</code>
+     */
+    public com.google.protobuf.ByteString
+        getPhoneBytes() {
+      java.lang.Object ref = phone_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        phone_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    /**
+     * <code>string phone = 3;</code>
+     */
+    public Builder setPhone(
+        java.lang.String value) {
+      if (value == null) {
+    throw new NullPointerException();
+  }
+  
+      phone_ = value;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>string phone = 3;</code>
+     */
+    public Builder clearPhone() {
+      
+      phone_ = getDefaultInstance().getPhone();
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>string phone = 3;</code>
+     */
+    public Builder setPhoneBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+      
+      phone_ = value;
+      onChanged();
+      return this;
+    }
+
+    private java.lang.Object state_ = "";
+    /**
+     * <code>string state = 4;</code>
+     */
+    public java.lang.String getState() {
+      java.lang.Object ref = state_;
+      if (!(ref instanceof java.lang.String)) {
+        com.google.protobuf.ByteString bs =
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        state_ = s;
+        return s;
+      } else {
+        return (java.lang.String) ref;
+      }
+    }
+    /**
+     * <code>string state = 4;</code>
+     */
+    public com.google.protobuf.ByteString
+        getStateBytes() {
+      java.lang.Object ref = state_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        state_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    /**
+     * <code>string state = 4;</code>
+     */
+    public Builder setState(
+        java.lang.String value) {
+      if (value == null) {
+    throw new NullPointerException();
+  }
+  
+      state_ = value;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>string state = 4;</code>
+     */
+    public Builder clearState() {
+      
+      state_ = getDefaultInstance().getState();
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>string state = 4;</code>
+     */
+    public Builder setStateBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+      
+      state_ = value;
       onChanged();
       return this;
     }

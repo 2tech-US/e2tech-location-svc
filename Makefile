@@ -8,7 +8,6 @@ up:
 	make postgres
 	sleep 1
 	make createdb
-	make migrateup
 down:
 	docker stop e2tech
 	docker rm e2tech

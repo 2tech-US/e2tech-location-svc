@@ -157,4 +157,14 @@ public class GrpcLocationService extends LocationServiceGrpc.LocationServiceImpl
                                         .build());
         responseObserver.onCompleted();
     }
+
+    @Override
+    public void cancelRequest(getCallCenterRequest request,
+                              StreamObserver<getCallCenterRequestResponse> responseObserver) {
+        requestService.cancelRequest(request.getRequestId());
+        responseObserver.onNext(getCallCenterRequestResponse.newBuilder()
+                                        .setStatus(HttpResponseStatus.OK.code())
+                                        .build());
+        responseObserver.onCompleted();
+    }
 }
