@@ -18,7 +18,6 @@ private static final long serialVersionUID = 0L;
   private CallCenterRequestCreation() {
     id_ = 0L;
     phone_ = "";
-    type_ = "";
     employeeId_ = "";
   }
 
@@ -60,16 +59,10 @@ private static final long serialVersionUID = 0L;
           case 26: {
             java.lang.String s = input.readStringRequireUtf8();
 
-            type_ = s;
-            break;
-          }
-          case 34: {
-            java.lang.String s = input.readStringRequireUtf8();
-
             employeeId_ = s;
             break;
           }
-          case 42: {
+          case 34: {
             tech2.microservice.AddressKey.Builder subBuilder = null;
             if (pickingAddress_ != null) {
               subBuilder = pickingAddress_.toBuilder();
@@ -82,7 +75,7 @@ private static final long serialVersionUID = 0L;
 
             break;
           }
-          case 50: {
+          case 42: {
             tech2.microservice.AddressKey.Builder subBuilder = null;
             if (arrivingAddress_ != null) {
               subBuilder = arrivingAddress_.toBuilder();
@@ -170,44 +163,10 @@ private static final long serialVersionUID = 0L;
     }
   }
 
-  public static final int TYPE_FIELD_NUMBER = 3;
-  private volatile java.lang.Object type_;
-  /**
-   * <code>string type = 3;</code>
-   */
-  public java.lang.String getType() {
-    java.lang.Object ref = type_;
-    if (ref instanceof java.lang.String) {
-      return (java.lang.String) ref;
-    } else {
-      com.google.protobuf.ByteString bs = 
-          (com.google.protobuf.ByteString) ref;
-      java.lang.String s = bs.toStringUtf8();
-      type_ = s;
-      return s;
-    }
-  }
-  /**
-   * <code>string type = 3;</code>
-   */
-  public com.google.protobuf.ByteString
-      getTypeBytes() {
-    java.lang.Object ref = type_;
-    if (ref instanceof java.lang.String) {
-      com.google.protobuf.ByteString b = 
-          com.google.protobuf.ByteString.copyFromUtf8(
-              (java.lang.String) ref);
-      type_ = b;
-      return b;
-    } else {
-      return (com.google.protobuf.ByteString) ref;
-    }
-  }
-
-  public static final int EMPLOYEEID_FIELD_NUMBER = 4;
+  public static final int EMPLOYEEID_FIELD_NUMBER = 3;
   private volatile java.lang.Object employeeId_;
   /**
-   * <code>string employeeId = 4;</code>
+   * <code>string employeeId = 3;</code>
    */
   public java.lang.String getEmployeeId() {
     java.lang.Object ref = employeeId_;
@@ -222,7 +181,7 @@ private static final long serialVersionUID = 0L;
     }
   }
   /**
-   * <code>string employeeId = 4;</code>
+   * <code>string employeeId = 3;</code>
    */
   public com.google.protobuf.ByteString
       getEmployeeIdBytes() {
@@ -238,43 +197,43 @@ private static final long serialVersionUID = 0L;
     }
   }
 
-  public static final int PICKINGADDRESS_FIELD_NUMBER = 5;
+  public static final int PICKINGADDRESS_FIELD_NUMBER = 4;
   private tech2.microservice.AddressKey pickingAddress_;
   /**
-   * <code>.tech2.microservice.AddressKey pickingAddress = 5;</code>
+   * <code>.tech2.microservice.AddressKey pickingAddress = 4;</code>
    */
   public boolean hasPickingAddress() {
     return pickingAddress_ != null;
   }
   /**
-   * <code>.tech2.microservice.AddressKey pickingAddress = 5;</code>
+   * <code>.tech2.microservice.AddressKey pickingAddress = 4;</code>
    */
   public tech2.microservice.AddressKey getPickingAddress() {
     return pickingAddress_ == null ? tech2.microservice.AddressKey.getDefaultInstance() : pickingAddress_;
   }
   /**
-   * <code>.tech2.microservice.AddressKey pickingAddress = 5;</code>
+   * <code>.tech2.microservice.AddressKey pickingAddress = 4;</code>
    */
   public tech2.microservice.AddressKeyOrBuilder getPickingAddressOrBuilder() {
     return getPickingAddress();
   }
 
-  public static final int ARRIVINGADDRESS_FIELD_NUMBER = 6;
+  public static final int ARRIVINGADDRESS_FIELD_NUMBER = 5;
   private tech2.microservice.AddressKey arrivingAddress_;
   /**
-   * <code>.tech2.microservice.AddressKey arrivingAddress = 6;</code>
+   * <code>.tech2.microservice.AddressKey arrivingAddress = 5;</code>
    */
   public boolean hasArrivingAddress() {
     return arrivingAddress_ != null;
   }
   /**
-   * <code>.tech2.microservice.AddressKey arrivingAddress = 6;</code>
+   * <code>.tech2.microservice.AddressKey arrivingAddress = 5;</code>
    */
   public tech2.microservice.AddressKey getArrivingAddress() {
     return arrivingAddress_ == null ? tech2.microservice.AddressKey.getDefaultInstance() : arrivingAddress_;
   }
   /**
-   * <code>.tech2.microservice.AddressKey arrivingAddress = 6;</code>
+   * <code>.tech2.microservice.AddressKey arrivingAddress = 5;</code>
    */
   public tech2.microservice.AddressKeyOrBuilder getArrivingAddressOrBuilder() {
     return getArrivingAddress();
@@ -300,17 +259,14 @@ private static final long serialVersionUID = 0L;
     if (!getPhoneBytes().isEmpty()) {
       com.google.protobuf.GeneratedMessageV3.writeString(output, 2, phone_);
     }
-    if (!getTypeBytes().isEmpty()) {
-      com.google.protobuf.GeneratedMessageV3.writeString(output, 3, type_);
-    }
     if (!getEmployeeIdBytes().isEmpty()) {
-      com.google.protobuf.GeneratedMessageV3.writeString(output, 4, employeeId_);
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 3, employeeId_);
     }
     if (pickingAddress_ != null) {
-      output.writeMessage(5, getPickingAddress());
+      output.writeMessage(4, getPickingAddress());
     }
     if (arrivingAddress_ != null) {
-      output.writeMessage(6, getArrivingAddress());
+      output.writeMessage(5, getArrivingAddress());
     }
     unknownFields.writeTo(output);
   }
@@ -328,19 +284,16 @@ private static final long serialVersionUID = 0L;
     if (!getPhoneBytes().isEmpty()) {
       size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, phone_);
     }
-    if (!getTypeBytes().isEmpty()) {
-      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, type_);
-    }
     if (!getEmployeeIdBytes().isEmpty()) {
-      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(4, employeeId_);
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, employeeId_);
     }
     if (pickingAddress_ != null) {
       size += com.google.protobuf.CodedOutputStream
-        .computeMessageSize(5, getPickingAddress());
+        .computeMessageSize(4, getPickingAddress());
     }
     if (arrivingAddress_ != null) {
       size += com.google.protobuf.CodedOutputStream
-        .computeMessageSize(6, getArrivingAddress());
+        .computeMessageSize(5, getArrivingAddress());
     }
     size += unknownFields.getSerializedSize();
     memoizedSize = size;
@@ -362,8 +315,6 @@ private static final long serialVersionUID = 0L;
         == other.getId());
     result = result && getPhone()
         .equals(other.getPhone());
-    result = result && getType()
-        .equals(other.getType());
     result = result && getEmployeeId()
         .equals(other.getEmployeeId());
     result = result && (hasPickingAddress() == other.hasPickingAddress());
@@ -392,8 +343,6 @@ private static final long serialVersionUID = 0L;
         getId());
     hash = (37 * hash) + PHONE_FIELD_NUMBER;
     hash = (53 * hash) + getPhone().hashCode();
-    hash = (37 * hash) + TYPE_FIELD_NUMBER;
-    hash = (53 * hash) + getType().hashCode();
     hash = (37 * hash) + EMPLOYEEID_FIELD_NUMBER;
     hash = (53 * hash) + getEmployeeId().hashCode();
     if (hasPickingAddress()) {
@@ -541,8 +490,6 @@ private static final long serialVersionUID = 0L;
 
       phone_ = "";
 
-      type_ = "";
-
       employeeId_ = "";
 
       if (pickingAddressBuilder_ == null) {
@@ -585,7 +532,6 @@ private static final long serialVersionUID = 0L;
       tech2.microservice.CallCenterRequestCreation result = new tech2.microservice.CallCenterRequestCreation(this);
       result.id_ = id_;
       result.phone_ = phone_;
-      result.type_ = type_;
       result.employeeId_ = employeeId_;
       if (pickingAddressBuilder_ == null) {
         result.pickingAddress_ = pickingAddress_;
@@ -650,10 +596,6 @@ private static final long serialVersionUID = 0L;
       }
       if (!other.getPhone().isEmpty()) {
         phone_ = other.phone_;
-        onChanged();
-      }
-      if (!other.getType().isEmpty()) {
-        type_ = other.type_;
         onChanged();
       }
       if (!other.getEmployeeId().isEmpty()) {
@@ -790,78 +732,9 @@ private static final long serialVersionUID = 0L;
       return this;
     }
 
-    private java.lang.Object type_ = "";
-    /**
-     * <code>string type = 3;</code>
-     */
-    public java.lang.String getType() {
-      java.lang.Object ref = type_;
-      if (!(ref instanceof java.lang.String)) {
-        com.google.protobuf.ByteString bs =
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        type_ = s;
-        return s;
-      } else {
-        return (java.lang.String) ref;
-      }
-    }
-    /**
-     * <code>string type = 3;</code>
-     */
-    public com.google.protobuf.ByteString
-        getTypeBytes() {
-      java.lang.Object ref = type_;
-      if (ref instanceof String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        type_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-    /**
-     * <code>string type = 3;</code>
-     */
-    public Builder setType(
-        java.lang.String value) {
-      if (value == null) {
-    throw new NullPointerException();
-  }
-  
-      type_ = value;
-      onChanged();
-      return this;
-    }
-    /**
-     * <code>string type = 3;</code>
-     */
-    public Builder clearType() {
-      
-      type_ = getDefaultInstance().getType();
-      onChanged();
-      return this;
-    }
-    /**
-     * <code>string type = 3;</code>
-     */
-    public Builder setTypeBytes(
-        com.google.protobuf.ByteString value) {
-      if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-      
-      type_ = value;
-      onChanged();
-      return this;
-    }
-
     private java.lang.Object employeeId_ = "";
     /**
-     * <code>string employeeId = 4;</code>
+     * <code>string employeeId = 3;</code>
      */
     public java.lang.String getEmployeeId() {
       java.lang.Object ref = employeeId_;
@@ -876,7 +749,7 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>string employeeId = 4;</code>
+     * <code>string employeeId = 3;</code>
      */
     public com.google.protobuf.ByteString
         getEmployeeIdBytes() {
@@ -892,7 +765,7 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>string employeeId = 4;</code>
+     * <code>string employeeId = 3;</code>
      */
     public Builder setEmployeeId(
         java.lang.String value) {
@@ -905,7 +778,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>string employeeId = 4;</code>
+     * <code>string employeeId = 3;</code>
      */
     public Builder clearEmployeeId() {
       
@@ -914,7 +787,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>string employeeId = 4;</code>
+     * <code>string employeeId = 3;</code>
      */
     public Builder setEmployeeIdBytes(
         com.google.protobuf.ByteString value) {
@@ -932,13 +805,13 @@ private static final long serialVersionUID = 0L;
     private com.google.protobuf.SingleFieldBuilderV3<
         tech2.microservice.AddressKey, tech2.microservice.AddressKey.Builder, tech2.microservice.AddressKeyOrBuilder> pickingAddressBuilder_;
     /**
-     * <code>.tech2.microservice.AddressKey pickingAddress = 5;</code>
+     * <code>.tech2.microservice.AddressKey pickingAddress = 4;</code>
      */
     public boolean hasPickingAddress() {
       return pickingAddressBuilder_ != null || pickingAddress_ != null;
     }
     /**
-     * <code>.tech2.microservice.AddressKey pickingAddress = 5;</code>
+     * <code>.tech2.microservice.AddressKey pickingAddress = 4;</code>
      */
     public tech2.microservice.AddressKey getPickingAddress() {
       if (pickingAddressBuilder_ == null) {
@@ -948,7 +821,7 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>.tech2.microservice.AddressKey pickingAddress = 5;</code>
+     * <code>.tech2.microservice.AddressKey pickingAddress = 4;</code>
      */
     public Builder setPickingAddress(tech2.microservice.AddressKey value) {
       if (pickingAddressBuilder_ == null) {
@@ -964,7 +837,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.tech2.microservice.AddressKey pickingAddress = 5;</code>
+     * <code>.tech2.microservice.AddressKey pickingAddress = 4;</code>
      */
     public Builder setPickingAddress(
         tech2.microservice.AddressKey.Builder builderForValue) {
@@ -978,7 +851,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.tech2.microservice.AddressKey pickingAddress = 5;</code>
+     * <code>.tech2.microservice.AddressKey pickingAddress = 4;</code>
      */
     public Builder mergePickingAddress(tech2.microservice.AddressKey value) {
       if (pickingAddressBuilder_ == null) {
@@ -996,7 +869,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.tech2.microservice.AddressKey pickingAddress = 5;</code>
+     * <code>.tech2.microservice.AddressKey pickingAddress = 4;</code>
      */
     public Builder clearPickingAddress() {
       if (pickingAddressBuilder_ == null) {
@@ -1010,7 +883,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.tech2.microservice.AddressKey pickingAddress = 5;</code>
+     * <code>.tech2.microservice.AddressKey pickingAddress = 4;</code>
      */
     public tech2.microservice.AddressKey.Builder getPickingAddressBuilder() {
       
@@ -1018,7 +891,7 @@ private static final long serialVersionUID = 0L;
       return getPickingAddressFieldBuilder().getBuilder();
     }
     /**
-     * <code>.tech2.microservice.AddressKey pickingAddress = 5;</code>
+     * <code>.tech2.microservice.AddressKey pickingAddress = 4;</code>
      */
     public tech2.microservice.AddressKeyOrBuilder getPickingAddressOrBuilder() {
       if (pickingAddressBuilder_ != null) {
@@ -1029,7 +902,7 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>.tech2.microservice.AddressKey pickingAddress = 5;</code>
+     * <code>.tech2.microservice.AddressKey pickingAddress = 4;</code>
      */
     private com.google.protobuf.SingleFieldBuilderV3<
         tech2.microservice.AddressKey, tech2.microservice.AddressKey.Builder, tech2.microservice.AddressKeyOrBuilder> 
@@ -1049,13 +922,13 @@ private static final long serialVersionUID = 0L;
     private com.google.protobuf.SingleFieldBuilderV3<
         tech2.microservice.AddressKey, tech2.microservice.AddressKey.Builder, tech2.microservice.AddressKeyOrBuilder> arrivingAddressBuilder_;
     /**
-     * <code>.tech2.microservice.AddressKey arrivingAddress = 6;</code>
+     * <code>.tech2.microservice.AddressKey arrivingAddress = 5;</code>
      */
     public boolean hasArrivingAddress() {
       return arrivingAddressBuilder_ != null || arrivingAddress_ != null;
     }
     /**
-     * <code>.tech2.microservice.AddressKey arrivingAddress = 6;</code>
+     * <code>.tech2.microservice.AddressKey arrivingAddress = 5;</code>
      */
     public tech2.microservice.AddressKey getArrivingAddress() {
       if (arrivingAddressBuilder_ == null) {
@@ -1065,7 +938,7 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>.tech2.microservice.AddressKey arrivingAddress = 6;</code>
+     * <code>.tech2.microservice.AddressKey arrivingAddress = 5;</code>
      */
     public Builder setArrivingAddress(tech2.microservice.AddressKey value) {
       if (arrivingAddressBuilder_ == null) {
@@ -1081,7 +954,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.tech2.microservice.AddressKey arrivingAddress = 6;</code>
+     * <code>.tech2.microservice.AddressKey arrivingAddress = 5;</code>
      */
     public Builder setArrivingAddress(
         tech2.microservice.AddressKey.Builder builderForValue) {
@@ -1095,7 +968,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.tech2.microservice.AddressKey arrivingAddress = 6;</code>
+     * <code>.tech2.microservice.AddressKey arrivingAddress = 5;</code>
      */
     public Builder mergeArrivingAddress(tech2.microservice.AddressKey value) {
       if (arrivingAddressBuilder_ == null) {
@@ -1113,7 +986,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.tech2.microservice.AddressKey arrivingAddress = 6;</code>
+     * <code>.tech2.microservice.AddressKey arrivingAddress = 5;</code>
      */
     public Builder clearArrivingAddress() {
       if (arrivingAddressBuilder_ == null) {
@@ -1127,7 +1000,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.tech2.microservice.AddressKey arrivingAddress = 6;</code>
+     * <code>.tech2.microservice.AddressKey arrivingAddress = 5;</code>
      */
     public tech2.microservice.AddressKey.Builder getArrivingAddressBuilder() {
       
@@ -1135,7 +1008,7 @@ private static final long serialVersionUID = 0L;
       return getArrivingAddressFieldBuilder().getBuilder();
     }
     /**
-     * <code>.tech2.microservice.AddressKey arrivingAddress = 6;</code>
+     * <code>.tech2.microservice.AddressKey arrivingAddress = 5;</code>
      */
     public tech2.microservice.AddressKeyOrBuilder getArrivingAddressOrBuilder() {
       if (arrivingAddressBuilder_ != null) {
@@ -1146,7 +1019,7 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>.tech2.microservice.AddressKey arrivingAddress = 6;</code>
+     * <code>.tech2.microservice.AddressKey arrivingAddress = 5;</code>
      */
     private com.google.protobuf.SingleFieldBuilderV3<
         tech2.microservice.AddressKey, tech2.microservice.AddressKey.Builder, tech2.microservice.AddressKeyOrBuilder> 

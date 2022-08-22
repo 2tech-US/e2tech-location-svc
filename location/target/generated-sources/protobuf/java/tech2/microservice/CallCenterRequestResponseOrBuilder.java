@@ -75,14 +75,4 @@ public interface CallCenterRequestResponseOrBuilder extends
    * <code>bool sending = 7;</code>
    */
   boolean getSending();
-
-  /**
-   * <code>string type = 8;</code>
-   */
-  java.lang.String getType();
-  /**
-   * <code>string type = 8;</code>
-   */
-  com.google.protobuf.ByteString
-      getTypeBytes();
 }

@@ -22,66 +22,55 @@ public interface RequestRepository extends PagingAndSortingRepository<CallCenter
     List<String> findRecentPhoneCall(Pageable pageable);
 
     Long countByPhone(String phone);
-    Long countBySent(boolean sent);
-
-    Long countByPhoneAndSent(String phone,boolean sent);
     @Query("select count(*) " +
             "from CallCenterRequest r " +
-            "where r.sent = ?1 " +
-            "and ( r.picking.location is null " +
-            "   or r.arriving.location is null )")
-    Long countNonLocatedRequest(boolean sent);
+            "where r.picking.location is null " +
+            "or r.arriving.location is null")
+    Long countNonLocatedRequest();
 
     @Query("select count(*) " +
             "from CallCenterRequest r " +
-            "where r.sent =?1 " +
-            "and r.picking.location is not null " +
+            "where r.picking.location is not null " +
             "and r.arriving.location is not null")
-    Long countLocatedRequest(boolean sent);
+    Long countLocatedRequest();
     @Query("select count(*) " +
             "from CallCenterRequest r " +
             "where r.phone = ?1 " +
-            "and r.sent =?2 " +
             "and (r.picking.location is null " +
-            "   or r.arriving.location is  null)")
-    Long countNonLocatedRequestByPhone(String phone,boolean sent);
+            "    or r.arriving.location is  null)")
+    Long countNonLocatedRequestByPhone(String phone);
 
     @Query("select count(*) " +
             "from CallCenterRequest r " +
             "where r.phone = ?1 " +
-            "and r.sent = ?2" +
             "and (r.picking.location is not null " +
             "    and r.arriving.location is not null)")
-    Long countLocatedRequestByPhone(String phone,boolean sent);
+    Long countLocatedRequestByPhone(String phone);
 
     @Query("select r " +
             "from CallCenterRequest r " +
             "where r.phone = ?1 " +
-            "and r.sent = ?2 " +
             "and (r.picking.location is null " +
             "    or r.arriving.location is null)")
-    List<CallCenterRequest> findAllNotLocatedRequestByPhone(String phone,boolean sent,Pageable pageable);
+    List<CallCenterRequest> findAllNotLocatedRequestByPhone(String phone,Pageable pageable);
 
     @Query("select r " +
             "from CallCenterRequest r " +
-            "where r.phone = ?1" +
-            "and r.sent = ?2 " +
+            "where r.phone = ?1 " +
             "and (r.picking.location is not null " +
             "    and r.arriving.location is not null)")
-    List<CallCenterRequest> findAllLocatedRequestByPhone(String phone,boolean sent,Pageable pageable);
+    List<CallCenterRequest> findAllLocatedRequestByPhone(String phone,Pageable pageable);
 
     @Query("select r " +
             "from CallCenterRequest r " +
-            "where r.sent = ?1 " +
-            "and ( r.picking.location is null " +
-            "     or r.arriving.location is null)")
-    List<CallCenterRequest> findAllNonLocatedRequest(boolean sent, Pageable pageable);
+            "where r.picking.location is null " +
+            "or r.arriving.location is null")
+    List<CallCenterRequest> findAllNonLocatedRequest(Pageable pageable);
 
     @Query("select r " +
             "from CallCenterRequest r " +
-            "where r.sent = ?1 " +
-            "and r.picking.location is not null " +
+            "where r.picking.location is not null " +
             "and r.arriving.location is not null")
-    List<CallCenterRequest> findAllLocatedRequest(boolean sent, Pageable pageable);
+    List<CallCenterRequest> findAllLocatedRequest(Pageable pageable);
 
 }

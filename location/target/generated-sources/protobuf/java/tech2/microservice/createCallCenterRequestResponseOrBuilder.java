@@ -23,15 +23,15 @@ public interface createCallCenterRequestResponseOrBuilder extends
       getErrorBytes();
 
   /**
-   * <code>.tech2.microservice.CallCenterRequestResponse item = 3;</code>
+   * <code>.tech2.microservice.CallCenterRequestResponse request = 3;</code>
    */
-  boolean hasItem();
+  boolean hasRequest();
   /**
-   * <code>.tech2.microservice.CallCenterRequestResponse item = 3;</code>
+   * <code>.tech2.microservice.CallCenterRequestResponse request = 3;</code>
    */
-  tech2.microservice.CallCenterRequestResponse getItem();
+  tech2.microservice.CallCenterRequestResponse getRequest();
   /**
-   * <code>.tech2.microservice.CallCenterRequestResponse item = 3;</code>
+   * <code>.tech2.microservice.CallCenterRequestResponse request = 3;</code>
    */
-  tech2.microservice.CallCenterRequestResponseOrBuilder getItemOrBuilder();
+  tech2.microservice.CallCenterRequestResponseOrBuilder getRequestOrBuilder();
 }

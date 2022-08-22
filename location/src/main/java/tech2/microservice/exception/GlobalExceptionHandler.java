@@ -17,18 +17,13 @@ public class GlobalExceptionHandler {
     }
 
     @GrpcExceptionHandler
-    public Status handleCreateRequestException(CreateRequestException e) {
-        return Status.DEADLINE_EXCEEDED.withDescription(e.getMessage());
-    }
-
-    @GrpcExceptionHandler
     public Status handleDuplicateResourceException(DuplicateResourceException e) {
-        return Status.ALREADY_EXISTS.withDescription(e.getMessage());
+        return Status.ALREADY_EXISTS.withDescription("Not Found " + e.getMessage());
     }
 
     @GrpcExceptionHandler
     public Status NotLocatedException(NotLocatedException e) {
-        return Status.PERMISSION_DENIED.withDescription( e.getMessage());
+        return Status.PERMISSION_DENIED.withDescription("Not Found " + e.getMessage());
     }
 
     @GrpcExceptionHandler
@@ -44,7 +39,7 @@ public class GlobalExceptionHandler {
     @GrpcExceptionHandler
     public Status handleTransactionSystemException(TransactionSystemException e) {
         StringBuilder message = new StringBuilder();
-        Throwable cause = e.getRootCause();
+        Throwable cause = ((TransactionSystemException) e).getRootCause();
         if (cause instanceof ConstraintViolationException) {
             Set<ConstraintViolation<?>> violations = ((ConstraintViolationException) cause).getConstraintViolations();
             for (ConstraintViolation<?> violation : violations) {

@@ -23,48 +23,38 @@ public interface CallCenterRequestCreationOrBuilder extends
       getPhoneBytes();
 
   /**
-   * <code>string type = 3;</code>
-   */
-  java.lang.String getType();
-  /**
-   * <code>string type = 3;</code>
-   */
-  com.google.protobuf.ByteString
-      getTypeBytes();
-
-  /**
-   * <code>string employeeId = 4;</code>
+   * <code>string employeeId = 3;</code>
    */
   java.lang.String getEmployeeId();
   /**
-   * <code>string employeeId = 4;</code>
+   * <code>string employeeId = 3;</code>
    */
   com.google.protobuf.ByteString
       getEmployeeIdBytes();
 
   /**
-   * <code>.tech2.microservice.AddressKey pickingAddress = 5;</code>
+   * <code>.tech2.microservice.AddressKey pickingAddress = 4;</code>
    */
   boolean hasPickingAddress();
   /**
-   * <code>.tech2.microservice.AddressKey pickingAddress = 5;</code>
+   * <code>.tech2.microservice.AddressKey pickingAddress = 4;</code>
    */
   tech2.microservice.AddressKey getPickingAddress();
   /**
-   * <code>.tech2.microservice.AddressKey pickingAddress = 5;</code>
+   * <code>.tech2.microservice.AddressKey pickingAddress = 4;</code>
    */
   tech2.microservice.AddressKeyOrBuilder getPickingAddressOrBuilder();
 
   /**
-   * <code>.tech2.microservice.AddressKey arrivingAddress = 6;</code>
+   * <code>.tech2.microservice.AddressKey arrivingAddress = 5;</code>
    */
   boolean hasArrivingAddress();
   /**
-   * <code>.tech2.microservice.AddressKey arrivingAddress = 6;</code>
+   * <code>.tech2.microservice.AddressKey arrivingAddress = 5;</code>
    */
   tech2.microservice.AddressKey getArrivingAddress();
   /**
-   * <code>.tech2.microservice.AddressKey arrivingAddress = 6;</code>
+   * <code>.tech2.microservice.AddressKey arrivingAddress = 5;</code>
    */
   tech2.microservice.AddressKeyOrBuilder getArrivingAddressOrBuilder();
 }
